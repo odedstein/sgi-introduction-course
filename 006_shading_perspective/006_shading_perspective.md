@@ -90,7 +90,14 @@ Lights in MATLAB can be either _local_ lights, which are point lights at the
 specified position emanating light in all directions (constructed with
 parameters `'Style','local'`), or they can be _infinite_ lights, which model
 light sources infinitely far away (like the sun) (constructed with
-parameters `'Style','infinite'`)
+parameters `'Style','infinite'`).
+
+Additionally, lights can have a specific color (similar to colored lightbulbs
+in real life) instead of the default white color.
+This color can be specified using the parameters `'Style','[R,G,B]'`, where
+`R`, `G`, `B` are RBG values between 0 and 1.
+gptoolbox's `add_lights` function offers a default lighting scene with
+pastel-colored lights.
 
 
 ## Material
