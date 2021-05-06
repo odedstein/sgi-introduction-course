@@ -119,6 +119,9 @@ Surfaces with zero mean curvature are minimal surfaces, which means that they
 locally minimize their area.
 If you modify the surface a little bit, you will always increase the area of
 the surface, hence locally minimal.
+Zero mean curvature does not tell us that the surface is flat: if
+κ<sub>1</sub> = -κ<sub>2</sub>, the mean curvature is zero even if the
+individual principal curvatures are not.
 
 Again, since mean curvature is only really well-defined for smooth surfaces,
 we have to compute some approximation for discrete surfaces such as triangle

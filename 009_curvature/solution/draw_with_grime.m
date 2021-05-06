@@ -2,7 +2,7 @@ function t = draw_with_grime(V,F)
 %DRAW_WITH_GRIME Draws the input mesh with a grime effect applied to
 %crevices of the surface.
 %
-% t = tangents(V,F);
+% t = draw_with_grime(V,F);
 %
 % Inputs:
 %  V,F  triangle mesh
