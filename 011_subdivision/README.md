@@ -1,4 +1,4 @@
-# Normals
+# Subdivision
 
 [writeup / notes](011_subdivision.md)
 

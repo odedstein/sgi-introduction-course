@@ -1,4 +1,4 @@
-# Normals
+# Curvature
 
 [writeup / notes](009_curvature.md)
 
