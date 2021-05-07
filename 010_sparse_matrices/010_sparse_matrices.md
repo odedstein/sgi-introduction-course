@@ -1,4 +1,4 @@
-# Sparse matricces
+# Sparse matrices
 In this exercise we will learn what sparse matrices are, and how to construct
 them with MATLAB.
 Sparse matrices are an important tool for many linear algebra applications, and

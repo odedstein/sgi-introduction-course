@@ -91,6 +91,8 @@ To plot continuous functions, we usually want a number there that is as large
 as possible.
 To plot discrete functions with discrete color intervals, you can change the
 number appropriately.
+gptoolbox also has the ability to add explicit isolines to your plot via the
+`isolines` command.
 
 A full list of all available colormaps can be seen by typing `help cbrewer`.
 The colormaps correspond to the ones on
