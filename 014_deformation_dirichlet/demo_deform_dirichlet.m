@@ -1,6 +1,6 @@
 clc; clear all; close all;
  
-[V,F] = readOBJ('spot.obj');
+[V,F] = readOBJ('./data/spot.obj');
 
 fixed_idx = [1837, 2274, 1144];
 fixed_location = V(fixed_idx,:);
