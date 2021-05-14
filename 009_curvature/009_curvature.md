@@ -270,7 +270,7 @@ If you are learning geometry processing, try writing the following function:
 `discrete_gaussian_curvature` function.
 
 If you already know geometry processing well and are familiar with the concept
-of normals of (or have already completed above exercise),
+of curvature (or have already completed above exercise),
 try writing the following function which tests your mastery of curvature:
 * `draw_with_grime`, which takes a triangle mesh and plots it in a way that
 simulates dirt and grime in the crevices of the object.

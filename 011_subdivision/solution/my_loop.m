@@ -1,7 +1,7 @@
-function [Vu,Fu,S] = loop(V,F,k)
-%LOOP  Perform loop subdivision on the mesh V,F, k times.
+function [Vu,Fu,S] = my_loop(V,F,k)
+%MY_LOOP  Perform loop subdivision on the mesh V,F, k times.
 %
-% [Vu,Fu] = loop(V,F,k);
+% [Vu,Fu] = my_loop(V,F,k);
 %
 % Inputs:
 %  V,F  a coarse input mesh

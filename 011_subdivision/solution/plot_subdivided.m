@@ -2,7 +2,7 @@ function plot_subdivided(V,F,u,k)
 %PLOT_SUBDIVIDED Plot the function u on the mesh V,F which has subdivided,
 %with Loop subdivision, k times
 %
-% four_cornplot_subdivideders(V,F,u,k);
+% plot_subdivided(V,F,u,k);
 %
 % Inputs:
 %  V,F  the input mesh to be subdivided

@@ -181,11 +181,11 @@ That process is smooth, just like the subdivision itself:
 ## Exercises
 
 If you are learning geometry processing, try writing the following functions:
-* `upsample`, which matches the behavior of `gptoolbox`'s `upsample` function.
-* `loop`, which matches the behavior of `gptoolbox`'s `loop` function.
+* `my_upsample`, which matches the behavior of `gptoolbox`'s `upsample` function.
+* `my_loop`, which matches the behavior of `gptoolbox`'s `loop` function.
 
 If you already know geometry processing well and are familiar with the concept
-of normals of (or have already completed above exercise),
+of subdivision (or have already completed above exercise),
 try writing the following functions which tests your mastery of subdivision:
 * `plot_subdivided`, which takes a coarse mesh plus a function on that mesh,
 and plots a subdivided, fine version.

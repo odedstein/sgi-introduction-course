@@ -10,7 +10,6 @@ This tutorial is meant to accompany the first day of
 Of course, you can also complete the exercises independently of the course!
 
 
-
 # Starting MATLAB and performing a few basic operations
 
 In this very first exercise we will learn how to start MATLAB, and try a few

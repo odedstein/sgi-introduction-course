@@ -1,8 +1,8 @@
-function [Vu,Fu] = upsample(V,F,k)
-%UPSAMPLE  Upsample a given mesh by replacing every triangle with four
+function [Vu,Fu] = my_upsample(V,F,k)
+%MY_UPSAMPLE  Upsample a given mesh by replacing every triangle with four
 %triangles, keeping all the original vertices in place.
 %
-% [Vu,Fu] = upsample(V,F,k);
+% [Vu,Fu] = my_upsample(V,F,k);
 %
 % Inputs:
 %  V,F  a coarse input mesh
