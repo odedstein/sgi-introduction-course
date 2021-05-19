@@ -277,7 +277,7 @@ ans =
 ```
 
 Matrices in MATLAB are transposed with the `'` operator.
-This operator also conjugates the omplex entries of the matrix.
+This operator also conjugates the complex entries of the matrix.
 ```MATLAB
 >> A = [1,1; 0,2]
 
