@@ -461,6 +461,7 @@ i =
      6
 ```
 
+<!-- Maybe add an example of a for loop with a:b syntax in the vec spot for people with less programming experience? -->
 
 ## This is where the fun begins!
 
@@ -468,7 +469,7 @@ You have now verified that your MATLAB installation works correctly, and have
 learned the most basic elements of the MATLAB programming language.
 You are ready to play around a bit.
 
-There are many more MATLAB functions that you will in order to actually use
+There are many more MATLAB functions that you will need to actually use
 MATLAB for linear algebra.
 This tutorial will hint at functions you should use.
 Whenever you see a hint, look up the function name using MATLAB's help function,
