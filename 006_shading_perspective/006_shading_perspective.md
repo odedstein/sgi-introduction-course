@@ -189,7 +189,7 @@ In order to make objects appear more visually pleasing, one can display them
 with a shadow.
 The gptoolbock command for this is `add_shadow`
 ```MATLAB
-
+>> add_shadow([t],lights);
 ```
 ![spot, with added shadow](assets/spot_shadow.png)
 
@@ -264,7 +264,7 @@ end
 You can call this function before you plot a surface to perform all the shading
 operations we learned in this exercise:
 ```MATLAB
->> t = tsurf(F, V, 'CData', u, params{:});
+>> t = tsurf(F, V, 'CData', u, shadingParams{:});
 >> default_shading(t);
 ```
 
