@@ -14,7 +14,7 @@ define
 and involves a fair bit of differential geometry.
 For triangle surface meshes, piecewise triangular surfaces, however,
 the boundary is the _set of all points on triangle edges that are only part of
-one trianglee_, as opposed to the points on interior edges, which are always on
+one triangle_, as opposed to the points on interior edges, which are always on
 two triangles.[^1]
 
 Consider the following simple mesh:
