@@ -58,6 +58,7 @@ Consider the following small mesh of a square:
 
 ![a small mesh of a square](assets/small_square.png)
 ```MATLAB
+>> V =  [0, 0;  0, 0.5; 0, 1; 0.5, 0; 0.5, 0.5; 0.5, 1;  1, 0;  1, 0.5;  1, 1]
 V =
 
             0            0
@@ -69,7 +70,7 @@ V =
             1            0
             1          0.5
             1            1
-
+>> F = [1, 4, 2; 4, 5, 2; 2, 5, 3; 5, 6, 3; 4, 7, 5; 7, 8, 5; 5, 8, 6; 8, 9, 6]
 F =
 
      1     4     2
