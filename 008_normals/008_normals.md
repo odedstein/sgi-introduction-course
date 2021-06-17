@@ -81,8 +81,8 @@ ans =
 
 ```
 
-The resulting projected vector is guaranteed to be the closest vector to the
-original vector with respect to the norm.
+The resulting projected vector, in this case `u1`, is guaranteed to be the closest vector to to the
+original `u1` that is orthogonal to `u2` with respect to the norm.
 
 
 Given non-parallel vectors `u1`, `u2` (which means two vectors that are not
@@ -153,10 +153,10 @@ Here is a picture of a triangle and its normal vector:
 
 ![a triangle with its normal vector](assets/triangle_with_normal.png)
 
-In gptoolbox the `normals` command returns the unnormalized normals of any mesh.
-Each of the rows returned by `normal` corresponds the unnormalized normal
-vector of the face with the respective index.
-In order to normalize them, one can divide by `normrow`:
+In gptoolbox the `normals` command returns the unnormalized normals (so the 
+normals are potentially non-unit vectors) of any mesh. Each of the rows returned 
+by `normal` corresponds the unnormalized normalvector of the face with the 
+respective index. In order to normalize them, one can divide by `normrow`:
 ```MATLAB
 >> N = normals(V,F);
 >> N = N ./ normrow(N);
