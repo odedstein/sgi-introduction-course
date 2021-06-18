@@ -109,7 +109,7 @@ the exact middle of the old edge:
 
 Now that we have placed the new, green vertices, we need to move the old, red
 vertices to produce a smooth subdivision scheme.
-Remember, if we do not do this, out subdivision is a simple upsampling
+Remember, if we do not do this, our subdivision is a simple upsampling
 procedure that adds vertices to our surface without actually changing its
 appearance.
 We move an interior red vertex to the following weighted average of its own
