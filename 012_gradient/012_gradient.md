@@ -22,6 +22,7 @@ The gradient generalizes the notion of a derivative of a function
 ![f from R to R](assets/frtor.png)
 to a function
 ![f from Omega to R](assets/fomegator.png).
+<!-- In one demension, this is true, but it might be confusing since most students are introduced to gradient for multivariable calculus. We might want to add something addressing the higher dimensional case where the gradient takes a real-valued function f:R^n -> R and maps it to a vector field, so the second map would be from Omega^0(R^n) [the space of zero forms on R^n] to R^n. -->
 
 The gradient vector field is tangent to the surface and is the _linearization_
 of the function there.
