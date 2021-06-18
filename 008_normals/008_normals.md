@@ -154,7 +154,8 @@ Here is a picture of a triangle and its normal vector:
 ![a triangle with its normal vector](assets/triangle_with_normal.png)
 
 In gptoolbox the `normals` command returns the unnormalized normals (so the 
-normals are potentially non-unit vectors) of any mesh. Each of the rows returned 
+normals are potentially not of length one) of any mesh.
+Each of the rows returned 
 by `normal` corresponds the unnormalized normalvector of the face with the 
 respective index. In order to normalize them, one can divide by `normrow`:
 ```MATLAB

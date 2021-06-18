@@ -72,9 +72,7 @@ MATLAB's default colormap is the
 You might want to employ different colormaps for a variety of reasons.
 This can be easily done by specifying a matrix where each row corresponds to
 a different RGB value of a colormap and then invoking the `colormap` commamd.
-<!-- CM has not been introduced here. It would be helpful if you included an example. I have added a grayscale map for people to test. -->
 ```MATLAB
->> CM = [linspace(0,1,256)',linspace(0,1,256)',linspace(0,1,256)'];
 >> colormap(CM);
 ```
 
@@ -83,9 +81,8 @@ particularly great resource for varied, colorful and easily legible colormaps.
 They can be automatically generated in MATLAB with the integrated `cbrewer`
 command:
 
-<!-- THERE WAS MISSING CODE HERE! -->
 ```MATLAB
->> colormap(cbrewer('Blues',50,'pchip'));
+>> colormap(cbrewer('Blues',50));
 ```
 ![cbrewer color map](assets/cbrewermap.png)
 

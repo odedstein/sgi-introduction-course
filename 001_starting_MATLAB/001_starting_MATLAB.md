@@ -461,7 +461,47 @@ i =
      6
 ```
 
-<!-- Maybe add an example of a for loop with a:b syntax in the vec spot for people with less programming experience? -->
+To get more of the usual for loop experience which loops from `a` to `b`,
+inclusively, we can use the colon syntax from earlier.
+```MATLAB
+>> for i=0:6
+i
+end
+
+i =
+
+     0
+
+
+i =
+
+     1
+
+
+i =
+
+     2
+
+
+i =
+
+     3
+
+
+i =
+
+     4
+
+
+i =
+
+     5
+
+
+i =
+
+     6
+```
 
 ## This is where the fun begins!
 
