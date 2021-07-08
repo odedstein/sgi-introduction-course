@@ -7,4 +7,6 @@ Complete the exercises in order from 001 to 999!
 The courses are as follows:
 * 1st day: 0xx, by Oded
 * 2nd day: 1xx, by Derek
-* 3rd day: 3xx, by Silvia
+* 3rd day: 2xx, by Silvia
+
+We thank Peter Rock and Leticia Mattos Da Silva for their help in designing the course.
