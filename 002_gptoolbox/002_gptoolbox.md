@@ -47,6 +47,8 @@ If any of this did not work correctly, please contact the course organizer now.
 It will be difficult to continue the course without making sure this basic step
 works.
 
+Try to install it via Add-Ons Explorer Tab directly in Matlab
+![image](https://user-images.githubusercontent.com/11828200/125365486-35295e80-e329-11eb-820b-8e6f49027c77.png)
 
 ## Compiling the MEX functions (Optional)
 
