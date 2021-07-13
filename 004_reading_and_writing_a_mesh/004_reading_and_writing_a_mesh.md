@@ -14,6 +14,7 @@ Here, we will take a look at the OBJ format.
 To read an OBJ mesh, use the command
 ```MATLAB
 >> [V,F] = readOBJ('data/bunny.obj');
+>> tsurf(F,V);
 ```
 The resulting variables `V,F` will contain the vertex and face lists.
 In this case, we read the Stanford bunny, which looks like this:
