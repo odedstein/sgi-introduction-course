@@ -182,7 +182,7 @@ location at which we want to plot each per-face vector)
 If all triangles are consistently oriented so that the _up_ side of each
 triangle faces _outside_ of the shape, then all normals will point away from
 the shape, as can be seen in above image.
-Inconsistent orientation of trinagles can easily be detected by looking at the
+Inconsistent orientation of triangles can easily be detected by looking at the
 normals.
 Because of that, users will sometimes refere to orientations
 that restore triangle orientation as _fixing normals_.
