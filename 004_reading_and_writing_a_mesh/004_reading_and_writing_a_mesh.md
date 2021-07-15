@@ -17,6 +17,8 @@ To read an OBJ mesh, use the command
 ```
 The resulting variables `V,F` will contain the vertex and face lists.
 In this case, we read the Stanford bunny, which looks like this:
+> Remember the visualization commands from [exercise 003!](../003_a_triangle_mesh/003_a_triangle_mesh.md)
+
 ![The Stanford bunny, loaded from an OBJ file](assets/bunnyread.png)
 
 The OBJ file format also supports supplying texture coordinates (using 2D vertex
