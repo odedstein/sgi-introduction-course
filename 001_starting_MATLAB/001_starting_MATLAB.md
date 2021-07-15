@@ -49,6 +49,7 @@ ans =
          0.36
 
 ```
+You could have different numbers such as 0.3600, or 0.360 based on your settings. 
 
 If that works, let's see whether the graphics work correctly.
 Try to display the iconic MATLAB surface `peaks`:
