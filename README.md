@@ -14,7 +14,7 @@ We thank Peter Rock and Leticia Mattos Da Silva for their help in designing the 
 
 ## Download Course Material 
 
-You can download this material as a zip file or run in your **cmd** 
+You can download this material as a zip file, or by running the following command in your shell:
 
 ```
 git clone https://github.com/odedstein/sgi-introduction-course.git
