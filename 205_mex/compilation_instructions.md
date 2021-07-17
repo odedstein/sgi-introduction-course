@@ -31,7 +31,7 @@ To-do
 
 ## Windows
 
-*Special thanks to Dr. Rahul Arora for providing these instructions* 
+*Special thanks to Dr. Rahul Arora for providing these instructions and to Natasha Diederen for help troubleshooting* 
 
 1. Download Visual Studio 2019. In the installer, ensure that you choose the "Desktop development with C++" workload. See https://docs.microsoft.com/en-us/cpp/build/vscpp-step-0-installation?view=msvc-160
 This will take a while. You can perform steps 2 to 4 while VS2019 is being downloaded and installed.
@@ -59,9 +59,10 @@ mkdir build
 cd build
 cmake ..
 ```
-9. This may result in an error. If yes, delete `FindMATLAB` and try again:
+9. This may result in an error. If yes, delete `FindMATLAB` and `FindBLAS` and try again:
 ```
 rm C:\dev\gptoolbox\mex\external\libigl\external\cgal\Installation\cmake\modules\FindMATLAB.cmake
+rm C:\dev\gptoolbox\mex\external\libigl\external\cgal\Installation\cmake\modules\FindBLAS.cmake
 cmake ..
 ```
 10. Now, build the mex code:
