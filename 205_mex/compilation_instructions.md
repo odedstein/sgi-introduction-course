@@ -70,6 +70,7 @@ cmake ..
 cmake --build . --config Release
 ```
 The above step will take a while (up to 30 minutes on a standard laptop). 
+
 11. Copy all executable files to the base folder
 ```
 cd ..
