@@ -26,6 +26,8 @@ You should be greeted by a screen that looks like this:
 
 You can issue commands in MATLAB's interactive shell (which you have before you
 now), and you can write functions and scripts as well.
+_Throughout this tutorial, monospaced text preceded by `>> ` will usually
+refer to commands you interactively enter into your MATLAB console._
 We will try all of these now.
 
 First, try some basic arithmetic:
