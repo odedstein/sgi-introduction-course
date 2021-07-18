@@ -16,10 +16,12 @@ You may be prompted for your password or to sign some user agreement.
 ```sh
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
-2. Install `boost` and `cmake` by running
+2. Install `boost` , `cmake`, `gmp` and `mpfr` (you may already have some of these installed, but let's do it just in case) by running
 ```sh
 brew install boost
 brew install cmake
+brew install gmp
+brew install mpfr
 ```
 3. Navigate to wherever the `mex` folder inside your copy of `gptoolbox` is by using the terminal command
 ```sh
@@ -50,7 +52,7 @@ To-do
 
 1. Download Visual Studio 2019. In the installer, ensure that you choose the "Desktop development with C++" workload. See https://docs.microsoft.com/en-us/cpp/build/vscpp-step-0-installation?view=msvc-160
 This will take a while. You can perform steps 2 to 4 while VS2019 is being downloaded and installed.
-2. Download boost from https://www.boost.org/users/download/ and extract it. I'm assuming you're downloading boost 1.74 and extracting to C:/dev/. Please edit the variables below based on the version and location you choose.
+2. Download boost from https://www.boost.org/users/download/ and extract it. I'm assuming you're downloading boost 1.74 and extracting to C:/dev/. **Please edit the variables below based on the version and location you choose.**
 Then, set the environment variable `BOOST_ROOT` to `C:\dev\boost_1_74_0`. See this guide to understand how to set environment variables on Windows: https://www.architectryan.com/2018/08/31/how-to-change-environment-variables-on-windows-10/. I recommend creating a user variable, instead of a system variable.
 3. Download `cmake` from https://cmake.org/download/ and add it to path. That is, add `;C:\Program Files\CMake\bin` to the Path environment variable. If there is no user variable called `Path`, create one and set it to `C:\Program Files\CMake\bin`.
 4. Download `git` from https://git-scm.com/downloads and add it to the path. That is, append `;C:\Program Files\Git\cmd` to the `Path` environment variable.
