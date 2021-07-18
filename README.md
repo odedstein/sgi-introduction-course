@@ -6,20 +6,32 @@ Complete the exercises in order from 001 to 999!
 
 The courses are as follows:
 * 1st day: 0xx, by [Oded Stein](https://odedstein.com/)
-* 2nd day: 1xx, by [Derek Hsue-Ti Liu](https://www.dgp.toronto.edu/~hsuehtil/)
-* 3rd day: 2xx, by [Silvia Sellan](http://dgp.toronto.edu/~sgsellan/)
+* 2nd day: 1xx, by [Derek Hsueh-Ti Liu](https://www.dgp.toronto.edu/~hsuehtil/)
+* 3rd day: 2xx, by [Silvia Sellán](http://dgp.toronto.edu/~sgsellan/)
 
 We thank Peter Rock and Leticia Mattos Da Silva for their help in designing the course.
 
 
 ## Download Course Material 
 
-You can download this material as a zip file, or by running the following command in your shell:
+In order to complete this course, please download the git repository and save
+it on your computer.
+You can do this by going to the
+[base of the repository](https://github.com/odedstein/sgi-introduction-course),
+and either:
 
+* Install the repository as a zip file.
+To do this, click on the green button on the page labeled `Code`, and then
+click `Download ZIP`.
+Unpack the ZIP file somewhere on your computer, and navigate to that directory
+in MATLAB.
+* If you are familiar with git, open your system's console, and run the
+following command in the directory you want this tutorial to be downloaded to:
 ```
 git clone https://github.com/odedstein/sgi-introduction-course.git
 ```
+Now, navigate to this directory in MATLAB.
 
-directly in the folder where you would like to download this repository. 
+You are now ready to do your first exercise!
 
 
