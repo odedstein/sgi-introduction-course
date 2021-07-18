@@ -96,3 +96,8 @@ which satisfies
 
 ![](assets/conditions.png)
 
+where the derivatives are taken with respect to `t`. Your first two tasks are
+
+1. By hand, figure out an expression for `a`, `b`, `c` and `d` in terms of the two points and two vectors considered.
+
+2. Fill out the funcionality of `exercises/cubic_hermite` to find, given two points and two vectors and a value of `t`, the value `P(t)` of the cubic Hermite polynomial they define at time `t`.
