@@ -102,7 +102,7 @@ where the derivatives are taken with respect to `t`. Your first two tasks are as
 
 2. Fill out the funcionality of `exercises/cubic_hermite.m` to find, given two points and two vectors and a value of `t`, the value `P(t)` of the cubic Hermite polynomial they define at time `t`.
 
-Please keep reading only after you've completed both tasks. Some of these tasks may be tricky! You aren't expected to be able to do them all in a minute like this was homework. Feel free to ask for help to your colleagues in the program, speak amongst yourselves and reach out to me and the TAs. 
+Please keep reading only after you've completed both tasks. Some of these tasks may be tricky! You aren't expected to be able to do them all in a minute like this was your undergraduate homework. Feel free to ask for help to your colleagues in the program, speak amongst yourselves and reach out to me and the TAs. 
 
 Great! But, in practice, we will not be given two vectors `m_0` and `m_1` that specify the derivatives. The specific type of Hermite spline we learned about in class is called a Catmull-Rom spline, and in it the derivatives at a given point `p_i` are calculated by interpolating between the points `p_i+1` and `p_i-1`. So, your next task is
 
