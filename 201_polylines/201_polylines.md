@@ -102,7 +102,7 @@ where the derivatives are taken with respect to `t`. Your first two tasks are as
 
 2. Fill out the funcionality of `exercises/cubic_hermite.m` to find, given two points and two vectors and a value of `t`, the value `P(t)` of the cubic Hermite polynomial they define at time `t`.
 
-Please keep reading only after you've completed both tasks. Some of these tasks may be tricky! You aren't expected to be able to do them all in a minute like this was your undergraduate homework. Feel free to ask for help to your colleagues in the program, speak amongst yourselves and reach out to me and the TAs. 
+Please keep reading only after you've completed both tasks. Some of these tasks may be tricky! You aren't expected to be able to do them all in a minute like this was your undergraduate homework. Feel free to ask for help to your colleagues in the program, speak amongst yourselves and reach out to me and the TAs. Also feel free to google or look stuff up by any other means.
 
 Great! But, in practice, we will not be given two vectors `m_0` and `m_1` that specify the derivatives. The specific type of Hermite spline we learned about in class is called a Catmull-Rom spline, and in it the derivatives at a given point `p_i` are calculated by interpolating between the points `p_i+1` and `p_i-1`. So, your next task is
 
@@ -117,3 +117,11 @@ And finally, just to make it nicer
 5. Fill out `exercises/get_pencil_spline.m` to turn a very coarse polyline into a fine polyline where points are sampled from a catmull-rom spline. You should call `catmull_rom_interpolation.m`.
 
 Good luck!
+
+P.S.: If this feels easy for you or you've done it already for whichever reason, here are some other cool stuff you could try (in no particular order):
+
+* Do all of this... in 3D! 3D Catmull-Rom splines are defined in the same way as 2D ones, and they are mostly used to interpolate between trajectory keyframes for objects that move in videogames or movie scenes. How about you add to these functions 3D functionality?
+* Catmull-Rom splines are just one type of Hermite splines. Could you try to do the same for other derivative rules (see[here](https://en.wikipedia.org/wiki/Cubic_Hermite_spline)).
+* What happens if the curve is not closed? What could we do to still impose derivatives at the first and last point?
+* How could we specify the points that we want to be *sharp* instead of smooth?
+
