@@ -5,15 +5,22 @@ This is a work-in-progress! Bugs get fixed, instructions get expanded, new bugs 
 ## MacOS
 
 1. Install Homebrew by running in the Mac terminal:
-```
+```sh
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
-2. Install `boost` by running
-```
+2. Install `boost` and `cmake` by running
+```sh
 brew install boost
+brew install cmake
 ```
-3. Inside `gptoolbox/mex`, run
+3. Navigate to wherever the `mex` folder inside your copy of `gptoolbox` is by using the terminal command
+```sh
+cd your/path/to/gptoolbox/mex
 ```
+For example, my `gptoolbox` is saved in my `Downloads` folder, so I use `cd ~/Downloads/gptoolbox/mex`.
+
+4. Then, build the mex files. This step may take a while (20 minutes on my laptop).
+```sh
 mkdir build
 cd build
 cmake ..
@@ -21,7 +28,7 @@ make
 ```
 
 A known issue is that sometimes `cmake` has a hard time finding Matlab. You may have to change the `cmake ..` line to give the path to Matlab explicitly:
-```
+```sh
 cmake ../ -DMatlab_ROOT_DIR=/path/to/matlab-version/
 ```
 
