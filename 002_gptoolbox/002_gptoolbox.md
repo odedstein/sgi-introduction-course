@@ -7,10 +7,23 @@ There are no exercises in this part of the tutorial.
 
 ## Downloading gptoolbox and adding it to the search path
 
-Download gptoolbox version X.X from its
+Download the current gptoolbox from its
 [github repository](https://github.com/alecjacobson/gptoolbox), and put it
 at a persistent path in your operating system.
 We'll call this path `GPTOOLBOX_PATH`.
+
+There are two ways for you to do this.
+If you are unfamiliar with git and github, then simply click on the green
+`code` button [here](https://github.com/alecjacobson/gptoolbox), then click
+on `Download ZIP`, download the gptoolbox library and unpack it somewhere in
+your system.
+Remember where you put it:
+the file path of the folder you downloaded
+(which should look like `/[...]/gptoolbox` on Mac/Linux, or
+`C:\[...]\gptoolbox` on Windows) is your gptoolbox path, henceforth called
+`GPTOOLBOX_PATH`.
+If you are familiar with git and github, then simply clone the
+[gptoolbox git repository](https://github.com/alecjacobson/gptoolbox).
 
 On the surface level, gptoolbox is simply a collection of MATLAB files.
 The only thing that is needed to install the gptoolbox library is to add all
@@ -48,7 +61,7 @@ It will be difficult to continue the course without making sure this basic step
 works.
 
 
-## Compiling the MEX functions (Optional)
+## Compiling the MEX functions (Optional until exercise 205)
 
 gptoolbox contains certain functions that are _MEX functions_, consisting of
 `C++` code that has to be compiled into code that can then be used as a normal
@@ -59,43 +72,12 @@ Compiling these functions is optional.
 This course does not require the use of any of these functions.
 If you want to take advantage of all of gptoolbox's capabilities, however, you
 might want to install these MEX functions.
+
 A detailed guide for the installation of gptoolbox's MEX components is
-available [here](https://github.com/alecjacobson/gptoolbox/tree/master/mex).
+available [here](../205_mex/compilation_instructions.md).
 This document contains a very brief overview.
-
-As a first step, you have to make sure that both the
-[Boost libraries](https://www.boost.org) as well as [CMake](https://cmake.org)
-are available on your operating system.
-* Many Linux distributions contain these in their public file repositories.
-* On macOS, these can be downloaded using [homebrew](https://brew.sh).
-* On Windows, dedicated installers are available on the respective websites
-for Boost and CMake.
-
-In addition to that, you need to install a `C++` compiler.
-* Many Linux distributions provide [gcc](https://gcc.gnu.org) or
-[clang](https://clang.llvm.org) in their public file repositories.
-Both of these options will work.
-* On macOS you have to use the clang compiler.
-It can be installed by opening a terminal window and running the command
-`xcode-select --install` and following the installation wizard that this starts.
-* On Windows, a `C++` compiler can be obtained from Microsoft:
-[Visual C++ Community Edition](https://visualstudio.microsoft.com/vs/features/cplusplus/).
-
-Once you have installed all required components, you are ready to compile the
-MEX libraries by performing the following steps:
-* Open the command line.
-* Enter the directory `GPTOOLBOX_PATH/mex` (or, on Windows,
-`GPTOOLBOX_PATH\mex`).
-* Create a subfolder called `build`, and navigate to it.
-* Issue the commands
-```
-cmake ..
-make
-```
-This should download all required code and compile it.
-Do not worry if this takes a long time, this is normal.
-You might have to add the newly compiled MEX files to your MATLAB search path
-by issuing the respective commands from above again.
+Please follow the link and install MEX if you want to be able to use these
+optional features.
 
 After the MEX files have been compiled, try issuing the following command:
 ```MATLAB
