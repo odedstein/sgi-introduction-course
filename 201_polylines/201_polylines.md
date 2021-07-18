@@ -78,4 +78,5 @@ and, every type you end a stroke, type "y" into the matlab console to continue w
 
 ## Exercises
 
-Now it's time for you to get used to these functions. Why don't you use the skeleton scripts in `exercise/` to make polylines of shapes you like?
+Now it's time for you to get used to these functions. Why don't you use the skeleton scripts in `exercise/` to make polylines of shapes you like? You can start with `draw_something.m` and `png_from_the_internet.m` to warm-up. Once you've done those two, you can move on to our main goal: drawing our very own first spline, following what we saw in the lecture earlier today.
+![](assets/spline-definition.png) 
