@@ -82,12 +82,12 @@ cp C:\dev\gptoolbox\mex\external\libigl\external\gmp\lib\libgmp-10.dll .
 cp C:\dev\gptoolbox\mex\external\libigl\external\mpfr\lib\libmpfr-4.dll .
 ```
 13. Open MATLAB and set up mex. Note that the following commands should be typed in MATLAB, not on Powershell.
-```
-mex -setup
-mex -setup C++
+```MATLAB
+>> mex -setup
+>> mex -setup C++
 ```
 14. Now, try running a simple program. If MATLAB doesn't crash, you're good to go. Note that the following should be typed in MATLAB, not on Powershell.
-```
-cd /dev/gptoolbox/mex
-[VT, FT] = wire_mesh([0 0 0; 1 1 1], [1 2], 'PolySize', 6, 'Thickness', 2e-3, 'Solid', false);
+```MATLAB
+>> cd /dev/gptoolbox/mex
+>> [VT, FT] = wire_mesh([0 0 0; 1 1 1], [1 2], 'PolySize', 6, 'Thickness', 2e-3, 'Solid', false);
 ```
