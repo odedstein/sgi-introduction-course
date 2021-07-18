@@ -4,6 +4,14 @@ This is a work-in-progress! Bugs get fixed, instructions get expanded, new bugs 
 
 ## MacOS
 
+*Special thanks to Lily Kimble and Dorothy Najjuma Kamya for help troubleshooting these instructions* 
+
+0. Open the Mac terminal and type the following:
+```sh
+sudo xcode-select --install
+```
+You may be prompted for your password or to sign some user agreement.
+
 1. Install Homebrew by running in the Mac terminal:
 ```sh
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -51,40 +59,40 @@ In the installer, choose "Custom Installation" and only select the Math Kernel L
 Create a new environment variable MKLROOT and set it to `C:\Program Files (x86)\Intel\oneAPI\mkl\latest`
 Create a new environment variable MKL_LIB_DIR and set it to `C:\Program Files (x86)\Intel\oneAPI\mkl\latest\lib\intel64`
 6. Open up Powershell (`Win+X -> Windows Powershell`). Go to any folder you like using the cd command:
-```
+```sh
 cd C:/dev
 ```
 7. Clone gptoolbox:
-```
+```sh
 git clone https://github.com/alecjacobson/gptoolbox/
 ```
 
 8. Configure the gptoolbox mex projects.
-```
+```sh
 cd gptoolbox/mex
 mkdir build
 cd build
 cmake ..
 ```
 9. This may result in an error. If yes, delete `FindMATLAB` and `FindBLAS` and try again:
-```
+```sh
 rm C:\dev\gptoolbox\mex\external\libigl\external\cgal\Installation\cmake\modules\FindMATLAB.cmake
 rm C:\dev\gptoolbox\mex\external\libigl\external\cgal\Installation\cmake\modules\FindBLAS.cmake
 cmake ..
 ```
 10. Now, build the mex code:
-```
+```sh
 cmake --build . --config Release
 ```
 The above step will take a while (up to 30 minutes on a standard laptop). 
 
 11. Copy all executable files to the base folder
-```
+```sh
 cd ..
 cp ./Release/*.mexw64 .
 ```
 12. Also copy the required dependencies:
-```
+```sh
 cp C:\dev\gptoolbox\mex\external\libigl\external\gmp\lib\libgmp-10.dll .
 cp C:\dev\gptoolbox\mex\external\libigl\external\mpfr\lib\libmpfr-4.dll .
 ```
