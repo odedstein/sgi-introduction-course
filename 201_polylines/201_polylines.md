@@ -81,11 +81,18 @@ and, every type you end a stroke, type "y" into the matlab console to continue w
 Now it's time for you to get used to these functions. Why don't you use the skeleton scripts in `exercise/` to make polylines of shapes you like? You can start with `draw_something.m` and `png_from_the_internet.m` to warm-up. Once you've done those two, you can move on to our main goal: drawing our very own first spline, following what we saw in the lecture earlier today.
 
 Let us consider two points 
+
 ![](assets/points.png)
+
 and two vectors 
+
 ![](assets/vectors.png)
+
 A [cubic Hermite polynomial](https://en.wikipedia.org/wiki/Cubic_Hermite_spline) is a function of the form
+
 ![](assets/spline-definition.png) 
+
 which satisfies
+
 ![](assets/conditions.png)
 
