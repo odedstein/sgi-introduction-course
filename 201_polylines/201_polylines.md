@@ -104,9 +104,9 @@ where the derivatives are taken with respect to `t`. Your first two tasks are as
 
 Please keep reading only after you've completed both tasks. Some of these tasks may be tricky! You aren't expected to be able to do them all in a minute like this was your undergraduate homework. Feel free to ask for help to your colleagues in the program, speak amongst yourselves and reach out to me and the TAs. Also feel free to google or look stuff up by any other means.
 
-Great! But, in practice, we will not be given two vectors `m_0` and `m_1` that specify the derivatives. The specific type of Hermite spline we learned about in class is called a Catmull-Rom spline, and in it the derivatives at a given point `p_i` are calculated by interpolating between the points `p_i+1` and `p_i-1`. So, your next task is
+Great! But, in practice, we will not be given two vectors `m_0` and `m_1` that specify the derivatives. The specific type of Hermite spline we learned about in class is called a Catmull-Rom spline, and in it the derivatives at a given point `p_i` are calculated by looking at the (half of the) difference between the points `p_i+1` and `p_i-1`. So, your next task is
 
-3. Fill out the function `exercises/estimate_derivatives_catmull_rom.m` which, given a set of points which we assume are ordered (point 1 is connected to point 2, point 2 is connected to point 3, etc.) and closed (the final point is connected to the first point), returns a set of derivatives; for each point `p_i`, its prescribed derivative is calculated by deducting `p_i+1 - p_i-1`.
+3. Fill out the function `exercises/estimate_derivatives_catmull_rom.m` which, given a set of points which we assume are ordered (point 1 is connected to point 2, point 2 is connected to point 3, etc.) and closed (the final point is connected to the first point), returns a set of derivatives; for each point `p_i`, its prescribed derivative is calculated by deducting `0.5*(p_i+1 - p_i-1)`.
 
 Your next task is putting it all together:
 
@@ -124,4 +124,3 @@ P.S.: If this feels easy for you or you've done it already for whichever reason,
 * Catmull-Rom splines are just one type of Hermite splines. Could you try to do the same for other derivative rules (see[here](https://en.wikipedia.org/wiki/Cubic_Hermite_spline)).
 * What happens if the curve is not closed? What could we do to still impose derivatives at the first and last point?
 * How could we specify the points that we want to be *sharp* instead of smooth?
-
