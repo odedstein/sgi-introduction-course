@@ -96,8 +96,24 @@ which satisfies
 
 ![](assets/conditions.png)
 
-where the derivatives are taken with respect to `t`. Your first two tasks are
+where the derivatives are taken with respect to `t`. Your first two tasks are as follows:
 
-1. By hand, figure out an expression for `a`, `b`, `c` and `d` in terms of the two points and two vectors considered.
+1. By hand, figure out an expression for `a`, `b`, `c` and `d` in terms of the two points and two vectors considered (if you get stuck here, the solution is in the wikipedia link above, but try to work it out yourself!).
 
-2. Fill out the funcionality of `exercises/cubic_hermite` to find, given two points and two vectors and a value of `t`, the value `P(t)` of the cubic Hermite polynomial they define at time `t`.
+2. Fill out the funcionality of `exercises/cubic_hermite.m` to find, given two points and two vectors and a value of `t`, the value `P(t)` of the cubic Hermite polynomial they define at time `t`.
+
+Please keep reading only after you've completed both tasks. Some of these tasks may be tricky! You aren't expected to be able to do them all in a minute like this was homework. Feel free to ask for help to your colleagues in the program, speak amongst yourselves and reach out to me and the TAs. 
+
+Great! But, in practice, we will not be given two vectors `m_0` and `m_1` that specify the derivatives. The specific type of Hermite spline we learned about in class is called a Catmull-Rom spline, and in it the derivatives at a given point `p_i` are calculated by interpolating between the points `p_i+1` and `p_i-1`. So, your next task is
+
+3. Fill out the function `exercises/estimate_derivatives_catmull_rom.m` which, given a set of points which we assume are ordered (point 1 is connected to point 2, point 2 is connected to point 3, etc.) and closed (the final point is connected to the first point), returns a set of derivatives; for each point `p_i`, its prescribed derivative is calculated by deducting `p_i+1 - p_i-1`.
+
+Your next task is putting it all together:
+
+4. Fill out `exercises/catmull_rom_interpolation.m` which, given a set of ordered points (same conditions as task 3) which are assumed to be equally spaced in time between 0 and 1 and a time value `t`, uses `cubic_hermite.m` and `estimate_derivatives_catmull_rom.m` to return `P(t)`, the value of the Catmull-Rom spline that contains interpolates all given points, at time `t`.
+
+And finally, just to make it nicer
+
+5. Fill out `exercises/get_pencil_spline.m` to turn a very coarse polyline into a fine polyline where points are sampled from a catmull-rom spline. You should call `catmull_rom_interpolation.m`.
+
+Good luck!
