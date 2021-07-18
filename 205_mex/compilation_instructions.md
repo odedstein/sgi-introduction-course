@@ -44,6 +44,8 @@ cmake ../ -DMatlab_ROOT_DIR=/path/to/matlab-version/
 
 ## Linux
 
+*Special thanks to Alberto Tono for providing these instructions* 
+
 1. Make sure you have **cmake** and **boost**  installed on your machine ( https://cmake.org/ and https://www.boost.org/ ) / you could also use cmake-gui that help a bit more in the debugging process. 
 
 
