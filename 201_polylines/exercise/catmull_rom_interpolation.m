@@ -5,7 +5,6 @@ function Pt = catmull_rom_interpolation(P,t)
 % cubic_hermite.m, 
 
 
-P_times = linspace(0,1,size(P,1));
 
 
 
