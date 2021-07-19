@@ -111,10 +111,32 @@ Great! But, in practice, we will not be given two vectors `m_0` and `m_1` that s
 Your next task is putting it all together:
 
 4. Fill out `exercises/catmull_rom_interpolation.m` which, given a set of ordered points (same conditions as task 3) which are assumed to be equally spaced in time between 0 and 1 and a time value `t`, uses `cubic_hermite.m` and `estimate_derivatives_catmull_rom.m` to return `P(t)`, the value of the Catmull-Rom spline that contains interpolates all given points, at time `t`.
+5. Fill out `exercises/upsample_spline.m` which, given a set of ordered points (same conditions as task 3) which are assumed to be equally spaced in time between 0 and 1, outputs `n` equally spaced (fine) points on the Catmull-Rom spline that interpolates them. 
+
+A way of evaluating that your implementation so far is working is to create a very coarse circumference in MATLAB:
+```MATLAB
+>> th = linspace(0,2*pi,8);
+>> th = th(1:end-1);
+>> V = [cos(th)',sin(th)'];
+>> plot(V(:,1),V(:,2),'LineWidth',3);axis equal;axis off;
+```
+A very visibly coarse open polyline should show:
+![](assets/coarse-circle.png)
+
+Now, if you run your bezier upsampler
+```MATLAB
+>> U = upsample_spline(V,100);
+>> plot(V(:,1),V(:,2),'LineWidth',3);axis equal;axis off;
+```
+a smooth, circle-looking shape should appear.
+
+![](assets/finer-circle.png)
+
+By the way! It won't be *exactly* a circle. If you want to learn more about why and what other splines one can define that can interpolate circumferences perfectly, please see [Cem Yuksel's talk](https://youtu.be/pK4zy5OKbHs) that I brought up during the lecture.
 
 And finally, just to make it nicer
 
-5. Fill out `exercises/get_pencil_spline.m` to turn a very coarse polyline into a fine polyline where points are sampled from a catmull-rom spline. You should call `catmull_rom_interpolation.m`.
+6. Fill out `exercises/get_pencil_spline.m` to turn a very coarse polyline into a fine polyline where points are sampled from a catmull-rom spline. You should call `catmull_rom_interpolation.m`.
 
 Good luck!
 
