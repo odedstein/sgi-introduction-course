@@ -19,7 +19,7 @@ the function value.
 To plot a per-vertex function, define a vector of length `n`, where `n` is
 the number of vertices that holds the function value for each vertex:
 ```MATLAB
->> f = V(:,1).^2 + V(:,2).^2 + V(:,2).^2;
+>> f = V(:,1).^2 + V(:,2).^2 + V(:,3).^2;
 
 ```
 

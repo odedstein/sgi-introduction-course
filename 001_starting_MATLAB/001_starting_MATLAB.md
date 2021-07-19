@@ -239,7 +239,7 @@ ans =
 ```
 
 _Componentwise_ operations in MATLAB are preceded by a dot.
-They are multiplication (`.*`), division (`.*`), and exponentiation (`.^`).
+They are multiplication (`.*`), division (`./`), and exponentiation (`.^`).
 ```MATLAB
 >> A = [1,1; 0,2]; B = [2,3; 1,-1];
 >> A*B
