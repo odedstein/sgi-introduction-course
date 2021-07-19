@@ -16,6 +16,11 @@ To read an OBJ mesh, use the command
 >> [V,F] = readOBJ('data/bunny.obj');
 ```
 The resulting variables `V,F` will contain the vertex and face lists.
+For this to work, you need to be in the correct directory, since the path to
+the mesh, `'data/bunny.obj'`, is relative to your current directory.
+Navigate your MATLAB to the folder where you downloaded the tutorial, and go
+into the folder for this exercise, `004_reading_and_writing_a_mesh`.
+
 In this case, we read the Stanford bunny, which looks like this:
 > Remember the visualization commands from [exercise 003!](../003_a_triangle_mesh/003_a_triangle_mesh.md)
 
