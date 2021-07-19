@@ -250,7 +250,7 @@ a reasonable choice.
 >> N = per_vertex_normals(V, F, 'Weighting','area');
 >> t = tsurf(F,V, 'CData',u);
 >> hold on;
->> qvr(barycenter(V,F), N);
+>> qvr(V, N);
 ```
 ![spot, with per-vertex normals](assets/spot_with_per_vert_normals.png)
 
