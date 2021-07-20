@@ -48,7 +48,7 @@ will result in this:
 
 It works like a charm! However, since this was a high-resolution input image, we can see there is a lot of detail in the polyline, which has over seven thousand vertices. If I am looking to prototype with this shape, I probably want to start with something simpler which has less of the noise and irregularities of this image. `gptoolbox` knows this, and that's why `png2poly` can accept a number of smoothing iterations as its second argument:
 ```MATLAB
->> [V,E] = png2poly('/data/uk.png',10,Inf);
+>> [V,E] = png2poly('data/uk.png',10,Inf);
 >> plot_edges(V,E,'-k')
 ```
 which gives me a much simpler shape to test things on, with less irregularities:
