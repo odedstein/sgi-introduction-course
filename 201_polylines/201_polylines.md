@@ -13,7 +13,7 @@ Sometimes we just want to find a diverse set of shapes to try things on in 2D. F
 Tracing its polygonal outline in `gptoolbox` is as easy as running a one-liner:
 
 ```MATLAB
->> [V,E] = png2poly('/data/toronto.png',0,Inf);
+>> [V,E] = png2poly('data/toronto.png',0,Inf);
 ```
 
 The output is in the form of a set of vertices `V` and a set of edges `E`, which is perfect for prototyping code we intend to ship later to 3D, since it matches the usual `V,F` format for triangle meshes. We can check that we have indeed obtained the right polyline by plotting the edges:
@@ -39,7 +39,7 @@ You may also notice that our newly-acquired polyline has the same resolution tha
 
 Then, calling
 ```MATLAB
->> [V,E] = png2poly('/data/uk.png',0,Inf);
+>> [V,E] = png2poly('data/uk.png',0,Inf);
 >> plot_edges(V,E,'-k')
 ```
 will result in this:
