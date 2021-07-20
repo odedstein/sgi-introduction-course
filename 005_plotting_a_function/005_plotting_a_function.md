@@ -39,7 +39,7 @@ To plot a per-face function, define a vector of length `m`, where `m` is the
 number of faces that holds the function value for each face:
 ```MATLAB
 >> centers = (V(F(:,1),:) + V(F(:,2),:) + V(F(:,3),:)) / 3;
->> f = centers(:,1).^2 + centers(:,2).^2 + centers(:,2).^2;
+>> f = centers(:,1).^2 + centers(:,2).^2 + centers(:,3).^2;
 ```
 
 We plot this function with the same command as before.
