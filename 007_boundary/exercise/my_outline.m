@@ -1,7 +1,7 @@
-function O = my_outline(V,F)
+function O = my_outline(F)
 %MY_OUTLINE Find the boundary edges of a triangle mesh
 %
-% [O] = outline(F)
+% [O] = my_outline(F)
 % 
 % Input:
 %  F  #F by polysize face list of indices
