@@ -143,6 +143,6 @@ Good luck!
 P.S.: If this feels easy for you or you've done it already for whichever reason, here are some other cool stuff you could try (in no particular order):
 
 * Do all of this... in 3D! 3D Catmull-Rom splines are defined in the same way as 2D ones, and they are mostly used to interpolate between trajectory keyframes for objects that move in videogames or movie scenes. How about you add to these functions 3D functionality?
-* Catmull-Rom splines are just one type of Hermite splines. Could you try to do the same for other derivative rules (see[here](https://en.wikipedia.org/wiki/Cubic_Hermite_spline)).
+* Catmull-Rom splines are just one type of Hermite splines. Could you try to do the same for other derivative rules (see[here](https://en.wikipedia.org/wiki/Cubic_Hermite_spline)) ?
 * What happens if the curve is not closed? What could we do to still impose derivatives at the first and last point?
 * How could we specify the points that we want to be *sharp* instead of smooth?
