@@ -1,4 +1,3 @@
-# laplacian_eigs
 
 Based on the the cot_laplace_demo code from the course [Computing and Processing Correspondences
 with Functional Maps](http://www.lix.polytechnique.fr/~maks/fmaps_SIG17_course/publications.html) by Ovsjanikov et al. 2012
@@ -42,7 +41,7 @@ where
 
 and compute the first k eigenvalues and eigenfunctions of the laplacian.
 
-Complete the function `lap_eig` and the first section of the script `laplacian_eigs` and visualize the first 6 eigenfunctions of the laplacains for a few meshes.
+Complete the function `lap_eig` and the first section of the script `laplacian_eigs` and visualize the first 6 eigenfunctions of the laplacian for a few meshes.
 You should get something like this:
 
 ![homer](assets/homer_ed.jpg)
@@ -87,7 +86,7 @@ Next, we will take two near-isometric shape, `cat-00` and `cat-01` and two non-i
 from the [Sumner data-set](https://people.csail.mit.edu/sumner/research/deftransfer/data.html)
 and compute their eigendecompotision.
 
-Try to think how the these spectrum should look. Then, complete the third section of the script `laplacian_eigs` to compare the eigenfunctions and eigenvalues of both pairs.
+Try to anticipate the results. Then, complete the third section of the script `laplacian_eigs` to compare the eigenfunctions and eigenvalues of both pairs.
 
  
 *Note [a comment on the visualization below](#A-comment-on-visualization).
@@ -119,7 +118,7 @@ MESH_VIS.mesh(F,V,'cam','..\data\cams\cat-00_cam.mat'); % uses the saved cam
 ## Global Point Signature (GPS)
 
 Based on the laplacian eigendecomposition, Rustamov proposed in 2007 a shape descriptor called [GPS](http://www.cs.jhu.edu/~misha/Fall07/Papers/Rustamov07.pdf).
-This descriptor associated each vertex on the mesh a vector containing the scaled eigenfunctions of the laplacian at the vertex.
+This descriptor associates each vertex on the mesh with a vector containing the scaled eigenfunctions of the laplacian at the vertex.
 
 ![\Large x](https://latex.codecogs.com/svg.latex?\Large&space;GPS(p)=\left(\frac{1}{\sqrt{\lambda_1}}\phi_1(p),\frac{1}{\sqrt{\lambda_2}}\phi_2(p),\frac{1}{\sqrt{\lambda_3}}\phi_3(p),..\right))
 
@@ -131,7 +130,7 @@ eigenfunction of the laplacian since ![x](https://latex.codecogs.com/svg.latex?\
 An interesting property of the GPS is that if the surface has no self-intersections, neither will the GPS.
 That means that for such a surface, the signatures are unique.
 This shape descriptor is also isometry invariant since it is defined only using the eigenvalues and eigenfunction of the laplacian, 
-but it does suffer from the same drawbacks as the eigenfunctions, i.e., sign flip and switching, which makes it harder to find the correspondene using this descriptor.
+but it does suffer from the same drawbacks as the eigenfunctions, i.e., sign flip and switching, which makes it harder to find the correspondence using this descriptor.
 
 
 
