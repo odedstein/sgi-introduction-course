@@ -52,6 +52,10 @@ At this point we have a grid defined by `X,Y,Z` and the values of our implicit f
 ```
 You can recover the mesh in the format we are used to by accessing `FV.vertices` and `FV.faces`.
 
+```MATLAB
+>> tsurf(FV.faces,FV.vertices);axis equal;
+```
+
 ![](assets/mesh.png)
 
 The same logic as above applies to 2D example, which are often easier to visualize. For example, 
