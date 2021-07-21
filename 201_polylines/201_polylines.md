@@ -1,12 +1,12 @@
 # Polylines
 
-Often, we prototype our code in 2D before taking it to 3D, since it is usually faster and easier to debug. Therefore, it is very useful that our geometry processing toolbox contains enough 2D functionality to make quick prototyping easy. Furthermore, we want said functionality to be similar enough to the 3D one in the same toolbox that the leap from 2D to 3D can be done as seamlessly as possible. `gptoolbox` aims to satisfy these two needs.
+Often, we prototype our code in 2D before taking it to 3D, since it is usually faster and easier to debug. Therefore, it is very useful that our geometry processing toolbox contains enough 2D functionality to make quick prototyping easy. Furthermore, we want said functionality to be similar enough to the 3D one in the same toolbox so that the leap from 2D to 3D can be done as seamlessly as possible. `gptoolbox` aims to satisfy these two needs.
 
 When prototyping in 2D, however, it is useful to keep Alec Jacobson's words in mind, "what works in 3D must work in 2D, but what works in 2D does not necessarily work in 3D".
 
 ## Get examples from the internet
 
-Sometimes we just want to find a diverse set of shapes to try things on in 2D. Fortunately, `gptoolbox` allows us to get polyline curves from general png files. For example, here' an image of the beautiful Toronto skyline:
+Sometimes we just want to find a diverse set of shapes to try things on in 2D. Fortunately, `gptoolbox` allows us to get polyline curves from general png files. For example, here is an image of the beautiful Toronto skyline:
 
 ![](assets/toronto.png)
 
@@ -58,7 +58,7 @@ This smoothing step is also useful when using very low resolution pngs, where th
 
 ## Draw your own examples
 
-Getting examples from the internet can be a really fun way to create a diverse set of shapes in which to test your 2D code. However, the particular details of your project often means you or your collaborators have a very concrete idea of the key examples one would neeed to test a particular assumption or functionality. For these cases, `gptoolbox` allows you to directly draw a polyline inside a matlab figure.
+Getting examples from the internet can be a really fun way to create a diverse set of shapes in which to test your 2D code. However, the particular details of your project often means you or your collaborators have a very concrete idea of the key examples one would need to test a particular assumption or functionality. For these cases, `gptoolbox` allows you to directly draw a polyline inside a matlab figure.
 
 Run
 ```MATLAB
@@ -72,7 +72,7 @@ As you may have noticed, `get_pencil_curve` only allows us to draw single compon
 ```MATLAB
 >> [V,E,cid] = get_pencil_curves(1e-6);
 ```
-and, every type you end a stroke, type "y" into the matlab console to continue with another one. To end, type "n". That way, I can get something like this:
+and, every time you end a stroke, type "y" into the matlab console to continue with another one. To stop, type "n". That way, I can get something like this:
 
 ![](assets/silvia.png) 
 
