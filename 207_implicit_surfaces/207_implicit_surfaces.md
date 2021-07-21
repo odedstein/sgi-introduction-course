@@ -14,7 +14,7 @@ end
 ```
 We can either make this function into its own file and then call it in other scripts or from the command line, or use it inside a script by defining at the end (MATLAB can be a little weird about this):
 ```MATLAB
-point = [0.2 0.2];
+point =  [0.2 0.2 0.2];
 value = sphere_fun(point);
 
 function I = sphere_fun(P)
@@ -27,7 +27,7 @@ If saved as a script and executed, the above will run without issues. However, i
 ```
 We can run that command in our command line and then type
 ```MATLAB
->> point = [0.2 0.2];
+>> point =  [0.2 0.2 0.2];
 >> value = sphere_fun(point);
 ```
 and it will run without problems, avoiding having to use scripts and defining functions with the complicated syntax. Still, the complicated syntax (which you'll use in the exercises below) is still the way to go if your function takes many lines to write, but for simple ones like this sphere we can also use the inline one.
