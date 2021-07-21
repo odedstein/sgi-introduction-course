@@ -123,7 +123,7 @@ A way of evaluating that your implementation so far is working is to create a ve
 A very visibly coarse open polyline should show:
 ![](assets/coarse-circle.png)
 
-Now, if you run your bezier upsampler
+Now, if you run your spline upsampler
 ```MATLAB
 >> U = upsample_spline(V,100);
 >> plot(V(:,1),V(:,2),'LineWidth',3);axis equal;axis off;
