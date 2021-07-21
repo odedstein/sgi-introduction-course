@@ -20,26 +20,26 @@ cam1 = cams{1};
 cam2 = cams{2};
 
 
-GPS1 = globalPointSignature_sol(V1, F1, 15);
-GPS2 = globalPointSignature_sol(V2, F2, 15);
-
 %%
-% First, let's compute matching points on near-isometric shapes for some selected landmarks:
+% Compute descriptors
 
-LankmarksInd = [7203; 3805; 3072]; % tip of the cat's tail, left ear, right front leg
 
-% Find the matching vertices on M2 by finding signatures from GPS2 that are
-% most similar to the signatures of the given landmarks.
+% Select a few landmarks on M1
+% To easily select landmarks use: MESH_VIS.selectLandmark(F1,V1)
+LankmarksInd = [];
+
+% Find the matching vertices on M2 by finding signatures that are
+% closest (in L2 sense) to the signatures of the given landmarks.
 % Hint: knnsearch
-closestPoints = 
+closestPoints = [];
 
 
+% Visualize the correspondence
 figure;
 MESH_VIS.displayp2pCorrespondence(F1, V1, F2, V2, [LankmarksInd, closestPoints],'cam1',cam1,'cam2',cam2);
 
 
 % You can try this for additional landmarks.
-% To easily select more landmarks use: MESH_VIS.selectLandmark(F1,V1)
 % Or compute a full map by finding a matching vertex on M2 for each vertex
 % of M1
 

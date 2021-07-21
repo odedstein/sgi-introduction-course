@@ -22,9 +22,13 @@ cam = cams{1};
 
 %% USe k-means algorithm (clustering algorithm) to segment the shape based on the GPS and visualize the results
 % Hint: use Matlab's kmeans function.
-% Try 5 or 6 segments 
+% Try 5 or 6 segments for the armadillo.
+% Feel free to try it with other meshes as well!
 
 
 d = 5; % GPS embedding dimention
+
+
+
 
 

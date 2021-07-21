@@ -22,7 +22,7 @@ cam = cams{4};
 % Compute the eigendecomposition of the laplacian
 
 
-% project the coordinate vectors onto the basis and back: 
+% project the coordinate vectors onto the basis and back
 
 
 % Visualize the reconstructed mesh 

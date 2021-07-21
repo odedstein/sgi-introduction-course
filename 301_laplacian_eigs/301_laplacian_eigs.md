@@ -1,7 +1,6 @@
-# laplacian_eigs
 
-**Based on the the cot_laplace_demo code from the course [Computing and Processing Correspondences
-with Functional Maps]( lix.polytechnique.fr/~maks/fmaps_SIG17_course/publications.html) by Ovsjanikov et al. 201**
+Based on the the cot_laplace_demo code from the course [Computing and Processing Correspondences
+with Functional Maps](http://www.lix.polytechnique.fr/~maks/fmaps_SIG17_course/publications.html) by Ovsjanikov et al. 2012
 
 # Laplacian Eigendecomposition
 In this section, we want to compute and examine the eigenvalues and eigenfunctions of the cotangent laplacian operator.
@@ -10,9 +9,9 @@ As mentioned in [exercise 013]( https://github.com/odedstein/sgi-introduction-co
 the laplacian is a differential operator who plays many roles in geometry processing. 
 
 
-The laplacian has many interesting qualities. One of which is isometry-invariance, which means that if we deform the mesh in a way that preserves 
+The laplacian has many interesting properties. One of which is isometry-invariance, which means that if we deform the mesh in a way that preserves 
 distances on it, the laplacian, and as a result the eigenvalues and eigenfunctions will remain the same.
-But there are a few problems with eigenfunctions as well.
+Yet, there are a few problems with eigenfunctions as well.
 First, the eigenfunctions are only defined up to a sign flip, or in the case of multiplicity of eigenvalues, up to rotations of eigenspace.
 Furthermore, in the case of close eigenvalues, even small deformations can make the eigenfunctions switch.  
 And for non-isometric shapes, the eigenfunctions can differ greatly.
@@ -42,10 +41,12 @@ where
 
 and compute the first k eigenvalues and eigenfunctions of the laplacian.
 
-Complete the function `lap_eig` and the first section of the script `laplacian_eigs` and visualize the first 6 eigenfunctions of the laplacains for a few meshes - [choose].
+Complete the function `lap_eig` and the first section of the script `laplacian_eigs` and visualize the first 6 eigenfunctions of the laplacian for a few meshes.
 You should get something like this:
 
 ![homer](assets/homer_ed.jpg)
+
+Notice that the first eigenvalue is 0 and the corresponding eigenfunction is constant. The rest of the eigenfunctions have higher frequencies as we continue.
 
 *Note [a comment on the visualization below](#A-comment-on-visualization).
 
@@ -53,9 +54,7 @@ You should get something like this:
 
 ## Task 2
 
-In this task, we want to show that the eigenfunctions do not change under isometric deformations.
-
-The most basic transformations we can perform are rigid transformations, i.e. translations and rotations.
+In this task, we want to see that the eigenfunctions do not change under rigid transformations, i.e., translations and rotations.
 
 <img src="assets/rigid.PNG" width="505" height="297">
 
@@ -67,11 +66,11 @@ For example:
 ```
 will move the mesh up in the z-axis.
 
-The rotation can be implemented by multiplying the matrix V by [rotation matrices]{en.wikipedia.org/wiki/Rotation_matrix#In_three_dimensions}.
+Rotations can be implemented by multiplying the matrix V by [rotation matrices]{https://en.wikipedia.org/wiki/Rotation_matrix#In_three_dimensions}.
 For example:
 
 ```MATLAB
->> V_new = V*rotMat;
+>> V_new = rotMat*V; % rotMat is 3x3, assuming V is 3x|V|
 ```
 
 
@@ -87,7 +86,7 @@ Next, we will take two near-isometric shape, `cat-00` and `cat-01` and two non-i
 from the [Sumner data-set](https://people.csail.mit.edu/sumner/research/deftransfer/data.html)
 and compute their eigendecompotision.
 
-Think of what you expect to get and then complete the third section of the script `laplacian_eigs` to compare the eigenfunctions and eigenvalues of both pairs.
+Try to anticipate the results. Then, complete the third section of the script `laplacian_eigs` to compare the eigenfunctions and eigenvalues of both pairs.
 
  
 *Note [a comment on the visualization below](#A-comment-on-visualization).
@@ -98,12 +97,12 @@ Think of what you expect to get and then complete the third section of the scrip
  
 Note that you can use Matlab's function `subplot` to show a few graphs in the same figure.
 You can also use the given `MESH_VIS` class to display your results.
-Use 'MES_VIS.mesh(F,V)` with additional options (read documentation) to display the mesh.
+Use `MESH_VIS.mesh(F,V)` with additional inputs (according to the function documentation) to display the mesh.
 
 For example, the option `caxis` enables you to control the colormap limits of the displayed function. 
 When comparing different functions on the mesh (for example, the eigenfunctions), it is useful to set all the colorbars to the same limits.
 
-In addition, for your convenience, you also have better initial camera positions saved at `data/cam/`, to
+In addition, for your convenience, you also have better initial camera positions saved at `data\cam\`. To
  use them, call `MESH_VIS` with the argument `cam` and the path to the correct camera file.
 This will display the mesh with the saved camera and give you a better initial view of the mesh. 
 
@@ -119,37 +118,27 @@ MESH_VIS.mesh(F,V,'cam','..\data\cams\cat-00_cam.mat'); % uses the saved cam
 ## Global Point Signature (GPS)
 
 Based on the laplacian eigendecomposition, Rustamov proposed in 2007 a shape descriptor called [GPS](http://www.cs.jhu.edu/~misha/Fall07/Papers/Rustamov07.pdf).
-This descriptor associated each vertex on the mesh a vector containing the scaled eigenfunctions of the laplacian at the vertex.
+This descriptor associates each vertex on the mesh with a vector containing the scaled eigenfunctions of the laplacian at the vertex.
 
 ![\Large x](https://latex.codecogs.com/svg.latex?\Large&space;GPS(p)=\left(\frac{1}{\sqrt{\lambda_1}}\phi_1(p),\frac{1}{\sqrt{\lambda_2}}\phi_2(p),\frac{1}{\sqrt{\lambda_3}}\phi_3(p),..\right))
 
 
 
-Note that here ![x](https://latex.codecogs.com/svg.latex?(\lambda_1,\phi_1)) corresponds to the second eigenvalue and eigenfunction of the laplacian since for the 
-first one ![x](https://latex.codecogs.com/svg.latex?\lambda=0).
+Note that here ![x](https://latex.codecogs.com/svg.latex?(\lambda_1,\phi_1)) corresponds to the second eigenvalue and 
+eigenfunction of the laplacian since ![x](https://latex.codecogs.com/svg.latex?\lambda_0=0).
 
 An interesting property of the GPS is that if the surface has no self-intersections, neither will the GPS.
 That means that for such a surface, the signatures are unique.
 This shape descriptor is also isometry invariant since it is defined only using the eigenvalues and eigenfunction of the laplacian, 
-but it does suffer from the same drawbacks as the eigenfunctions, i.e sign flip, and switching, which make finding correspondence using the GPS harder.
+but it does suffer from the same drawbacks as the eigenfunctions, i.e., sign flip and switching, which makes it harder to find the correspondence using this descriptor.
 
 
 
 Complete the function `GlobalPointSignature` and the script 'GPS_based_segmentation` to compute segmentation based on the GPS.
 We compute the segmentation using the k-means algorithm. 
-If you are not familiar with this algorithm, it is completely fine, you can think of it as a black-box algorithm to 
-cluster the points such that each point belongs to the cluster with the closest mean.
+If you are not familiar with this algorithm, it is completely fine, you can think of it as a black-box algorithm for 
+clustering points such that each point belongs to the cluster with the closest mean.
 We compute distances between points according to the distance between their GPS.
-
-
-
-
-
-
-`GPS_match` to compute correspondence using the GPS.
-In `GPS_match` we will try to compute point-to-point correspondence based on the GPS.
-Follow the instructions in the script.
-
 
 
 
@@ -159,16 +148,15 @@ Follow the instructions in the script.
 The eigenfunctions form a  basis similar to the Fourier basis from signal processing.
 Eigenfunctions correspondings to higher eigenvalues represent higher frequencies.
 Functions on the mesh can be represented as a linear combination of the eigenfunction.
+Using a truncated basis will filter out higher frequencies as only the lower frequencies can be represented using the lower frequency functions.
 
-Using a truncated basis will filter out higher frequencies as only the lower frequencies can be represented using the smaller eigenfunctions.
 
 In this section, we will represent the mesh coordinate functions using this basis and then reconstruct the mesh back, 
 to investigate the approximation using a reduced smooth basis.
-Projecting the mesh coordinate onto a truncated basis will smooth the mesh as higher frequencies' detail will be filtered.
-
+Projecting the mesh coordinates onto a truncated basis will smooth the mesh as higher frequencies' detail will be filtered out.
 
 To this end, you will compute bases for functions of different sizes k and then, 
-you will project the coordinate functions onto this basis and look at the reconstruction error.
+you will project the coordinate functions onto this basis and back and look at the reconstruction error.
 
 Use your function `lap_eig` to compute the eigendecomposition of W to ![x](https://latex.codecogs.com/svg.latex?k_i) eigenvectors. 
 We denote the matrix containg these eigenvectors as coloumns by 
