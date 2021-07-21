@@ -13,4 +13,8 @@ function [evals, evecs] = lap_eig(V, F, k)
   
   
 % Compute the k smallest eigenvalues and eigenfunctions of the laplacian.
-% Return then in a sorted order - from the smallest eigenvalue to the largest
+% Return them in a sorted order - from the smallest eigenvalue to the
+% largest.
+% Use: [evecs, evals] = eigs(W, A, k, -1e-5);
+% instead of: [evecs, evals] = eigs(W, A, k, 'sm');
+% for better results.

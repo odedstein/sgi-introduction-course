@@ -33,12 +33,20 @@ rotx = @(ang) [1 0 0; 0 cos(ang) -sin(ang) ; 0 sin(ang) cos(ang)] ; % rotate abo
 roty = @(ang) [cos(ang) 0 sin(ang) ; 0 1 0 ; -sin(ang) 0  cos(ang)] ;
 rotz = @(ang) [cos(ang) -sin(ang) 0 ; sin(ang) cos(ang) 0 ; 0 0 1] ;
 
+% To rotate about the x axis by +pi/4: V_new = (rotx(pi/4)*V')'; 
+
 % Compute the new vertices positions:
 V_new = [];
 
+% Compute the eigen decomposition of the new mesh - (V_new,F) and compare
+% to the previous one
+
+
 
 %% Task 3:
-
+% Compute the eigendecompotision of:
+% - two near-isometric shape, cat-00 and cat-01 
+% - two non-isometric shapes cat-00 and lion-02
 
 
 
