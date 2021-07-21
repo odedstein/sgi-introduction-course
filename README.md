@@ -8,6 +8,7 @@ The courses are as follows:
 * 1st day: 0xx, by [Oded Stein](https://odedstein.com/)
 * 2nd day: 1xx, by [Hsueh-Ti Derek Liu](https://www.dgp.toronto.edu/~hsuehtil/), [Jiayi Eris Zhang](https://eriszhang.github.io)
 * 3rd day: 2xx, by [Silvia Sellán](http://dgp.toronto.edu/~sgsellan/)
+* 4th day: 3xx, by Michal Edelstein
 
 We thank Peter Rock and Leticia Mattos Da Silva for their help in designing the course.
 
