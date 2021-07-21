@@ -68,7 +68,7 @@ around the triangle counter-clockwise.
 This counter-clockwise direction is important for the correct orientation of
 the triangle.
 If the indices of the triangle are going in the counter-clockwise direction, we
-are looking at the front of the triangle (it's _positively oriented_, otherwise
+are looking at the front of the triangle (it's _positively oriented_), otherwise
 we're looking at the back of the triangle (it's _negatively oriented_).
 
 Let's add a second triangle to our triangle mesh, `(1,0), (1,1), (0,1)`.
@@ -152,5 +152,5 @@ simple cube made of triangles with 8 vertices
 * `my_very_own_mesh`, which returns the triangle soup `V,F` for a mesh of your
 very own creation.
 
-As usual, uhe skeletons for these functions, ready for you to fill in, can be
+As usual, the skeletons for these functions, ready for you to fill in, can be
 found in `exercise/`.
