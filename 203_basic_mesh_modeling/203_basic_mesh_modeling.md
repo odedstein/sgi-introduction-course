@@ -4,30 +4,7 @@ There are many [websites](https://www.thingiverse.com) and [datasets](https://te
 
 ## 2D extruded meshes
 
-In [tutorial item 201](../201_polylines/), we covered the process of creating 2D polylines using `gptoolbox`, and in [tutorial item 202](../202_wrappers/), we learnt to triangulate them using `gptoolbox`'s wrapper of `triangle`. As an example, we can generate a mesh of the Toronto skyline (remember to pass the holes to `triangle` as an argument):
-```MATLAB
->> [V,E] = png2poly('data/toronto.png',10,Inf);
->> [U,G] = triangle(V,E,[30,245],'Flags','-q20a10');
->> tsurf(G,U)
->> axis equal
-```
-![](assets/toronto-mesh.png)
-
-We can generate a 3D surface mesh by extruding this 2D one:
-
-```MATLAB
->> [Ue,Ge] = extrude(U,G);
->> tsurf(Ge,Ue,falpha(1,0),fsoft,fphong)
-```
-
-![](assets/toronto-mesh-3d.png)
-
-Finally, if our algorithm requires solid geometry, we need only tetrahedralize our mesh with (this may take a while)
-
-```MATLAB
->> [V,T,F] = tetgen(Ue,Ge);
-```
-This a simple, fast way of getting valid geometry to test our 3D algorirthms on before we go ahead with more principled testing on general artist-designed or industrial shapes. Of course, being able to have this workflow entirely in Matlab comes with a lot of benefits: for example, we can design a function that calls `get_pencil_curve`, tetrahedralizes an extruded version of our drawn closed curve, and runs our research algorithm on it. This allows for very fast testing on a diverse set of shapes, so you can better understand the instances in which your algorithm can fail or not.
+I removed this!
 
 ## Basic procedural meshes
 
