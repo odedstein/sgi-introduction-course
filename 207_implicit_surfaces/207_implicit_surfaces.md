@@ -60,7 +60,7 @@ You can recover the mesh in the format we are used to by accessing `FV.vertices`
 
 The same logic as above applies to 2D example, which are often easier to visualize. For example, 
 ```
->> disk_fun = @(P)  P(:,1).^2 + P(:,2).^2 - 1;
+>> disk_fun = @(P)  sqrt(P(:,1).^2 + P(:,2).^2) - 1;
 >> x = linspace(-2.5,2.5,100); % Create 100 points between -2.5 and 2.5
 >> y = x; % y covers the same range
 >> [X,Y] = meshgrid(x,y); % Create grid arrays x,y
