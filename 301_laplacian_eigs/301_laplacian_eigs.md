@@ -34,7 +34,7 @@ where
 
 ![x](https://latex.codecogs.com/svg.latex?W\in\mathbb{R}^{|V|\times%20|V|}) is the cotangent laplacian matrix
 
-![x](https://latex.codecogs.com/svg.latex?Ain\mathbb{R}^{|V|\times%20|V|}) - is a mass matrix
+![x](https://latex.codecogs.com/svg.latex?A\in\mathbb{R}^{|V|\times%20|V|}) - is a mass matrix
 
 ![x](https://latex.codecogs.com/svg.latex?(\lambda_i,\phi_i\in\mathbb{R}^{|V|})) - are the eigenvalue and eigenfunctions of the laplacian
 
