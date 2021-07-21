@@ -14,7 +14,7 @@ end
 ```
 We can either make this function into its own file and then call it in other scripts or from the command line, or use it inside a script by defining at the end (MATLAB can be a little weird about this):
 ```MATLAB
-point = [0.2 0.2];
+point =  [0.2 0.2 0.2];
 value = sphere_fun(point);
 
 function I = sphere_fun(P)
@@ -27,7 +27,7 @@ If saved as a script and executed, the above will run without issues. However, i
 ```
 We can run that command in our command line and then type
 ```MATLAB
->> point = [0.2 0.2];
+>> point =  [0.2 0.2 0.2];
 >> value = sphere_fun(point);
 ```
 and it will run without problems, avoiding having to use scripts and defining functions with the complicated syntax. Still, the complicated syntax (which you'll use in the exercises below) is still the way to go if your function takes many lines to write, but for simple ones like this sphere we can also use the inline one.
@@ -52,11 +52,15 @@ At this point we have a grid defined by `X,Y,Z` and the values of our implicit f
 ```
 You can recover the mesh in the format we are used to by accessing `FV.vertices` and `FV.faces`.
 
+```MATLAB
+>> tsurf(FV.faces,FV.vertices);axis equal;
+```
+
 ![](assets/mesh.png)
 
 The same logic as above applies to 2D example, which are often easier to visualize. For example, 
 ```
->> disk_fun = @(P)  P(:,1).^2 + P(:,2).^2 - 1;
+>> disk_fun = @(P)  sqrt(P(:,1).^2 + P(:,2).^2) - 1;
 >> x = linspace(-2.5,2.5,100); % Create 100 points between -2.5 and 2.5
 >> y = x; % y covers the same range
 >> [X,Y] = meshgrid(x,y); % Create grid arrays x,y
