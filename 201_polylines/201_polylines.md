@@ -72,7 +72,7 @@ As you may have noticed, `get_pencil_curve` only allows us to draw single compon
 ```MATLAB
 >> [V,E,cid] = get_pencil_curves(1e-6);
 ```
-and, every type you end a stroke, type "y" into the matlab console to continue with another one. To end, type "n". That way, I can get something like this:
+and, every time you end a stroke, type "y" into the matlab console to continue with another one. To end, type "n". That way, I can get something like this:
 
 ![](assets/silvia.png) 
 
