@@ -34,7 +34,7 @@ Solving for the unknown variables $\mathbf{p}^{t+\Delta t}_i$ of the next time s
 
 Alternatively, in this exercise we will take a variational perspective i.e. view physics simulation as an optimization problem. We will define an energy that will be minimized by the value of $\mathbf{p}^{t+\Delta t}$ that satisfies $\mathbf{f} = m \mathbf{a}$. You will probably find this familiar if you have taken a variational mechanics class. The minimizer $\mathbf{p}$ of some function $E(\mathbf{p})$ will satisfy $\partial E/\partial \mathbf{p} = \mathbf{0}$. So we construct an energy $E$ such that $\partial E/\partial \mathbf{p} = \mathbf{f} - m\mathbf{a} = \mathbf{0}$:
 
-$$ \mathbf{p}^{t+\Delta t} = \arg\min_{\mathbf{p}} \left(\sum\limits_{ij} \frac12 k( || \mathbf{p}_i-\mathbf{p}_j|| - r_{ij})^2\right) - \Delta t^2 \left(\sum\limits_i m_i \left(\frac{\mathbf{p}_i - 2 \mathbf{p}^{t}_i + \mathbf{p}_i^{t-\Delta t}}{\Delta t^2 }\right)^2 \right) + \left(\sum\limits_i \mathbf{p}_i^\top \mathbf{f}^\text{ext}_{i} \right) $$
+$$ \mathbf{p}^{t+\Delta t} = \arg\min_{\mathbf{p}} \left(\sum\limits_{ij} \frac12 k( || \mathbf{p}_i-\mathbf{p}_j|| - r_{ij})^2\right) - \Delta t^2 \left(\sum\limits_i \frac{1}{2} m_i \left(\frac{\mathbf{p}_i - 2 \mathbf{p}^{t}_i + \mathbf{p}_i^{t-\Delta t}}{\Delta t^2 }\right)^2 \right) + \left(\sum\limits_i \mathbf{p}_i^\top \mathbf{f}^\text{ext}_{i} \right) $$
 
 
 where, in our case, $\mathbf{f}^\text{ext} = m\mathbf{g}$ is the gravity exerted on all the masses ang $\mathbf{g} \in \mathbf{R}^2$ is the gravitational acceleration. Keen observers will identify that the first term is our elastic potential energy $V$, the second term resembles kinetic energy and the last term is the gravitational potential energy.
@@ -49,8 +49,8 @@ $$ \mathbf{p} = \begin{bmatrix} x_0 \\ x_1 \\ x_2 \\ \vdots \\ x_n   \\ y_0 \\ y
  We can then, for example, express the inertial term using matrices:
 
 \begin{align*}
-\Delta t^2 \left(\sum\limits_i m_i \left(\frac{\mathbf{p}_i - 2 \mathbf{p}^{t}_i + \mathbf{p}_i^{t-\Delta t}}{\Delta t^2 }\right)^2 \right) &= \frac{1}{\Delta t^2} \left(\sum\limits_i \left(\mathbf{p}_i - 2 \mathbf{p}^{t}_i + \mathbf{p}_i^{t-\Delta t}\right)^\top m_i \left(\mathbf{p}_i - 2 \mathbf{p}^{t}_i + \mathbf{p}_i^{t-\Delta t}\right) \right) \ \\
-&= \frac{1}{\Delta t^2} { \left(\mathbf{p} - 2\mathbf{p}^{t} + \mathbf{p}^{t-\Delta t}\right)^\top \mathbf{M} \left(\mathbf{p} - 2\mathbf{p}^{t} + \mathbf{p}^{t-\Delta t}\right) },
+\Delta t^2 \left(\sum\limits_i \frac{1}{2} m_i \left(\frac{\mathbf{p}_i - 2 \mathbf{p}^{t}_i + \mathbf{p}_i^{t-\Delta t}}{\Delta t^2 }\right)^2 \right) &= \frac{1}{\Delta t^2} \left(\sum\limits_i \frac{1}{2} \left(\mathbf{p}_i - 2 \mathbf{p}^{t}_i + \mathbf{p}_i^{t-\Delta t}\right)^\top m_i \left(\mathbf{p}_i - 2 \mathbf{p}^{t}_i + \mathbf{p}_i^{t-\Delta t}\right) \right) \ \\
+&= \frac{1}{2} { \left(\mathbf{p} - 2\mathbf{p}^{t} + \mathbf{p}^{t-\Delta t}\right)^\top \frac{\mathbf{M}}{\Delta t^2} \left(\mathbf{p} - 2\mathbf{p}^{t} + \mathbf{p}^{t-\Delta t}\right) },
 \end{align*}
 
 where $M \in \mathbf{R}^{2n \times 2n}$ is a diagonal matrix with the diagonal entries being the corresponging point mass $m$ i.e. $M_{ii} = m_{i}$. $M$ is often called the mass matrix.

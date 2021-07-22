@@ -34,7 +34,7 @@ Solving for the unknown variables <img src="./svgs/60cd486c9b59db93b3a4fad0605cc
 
 Alternatively, in this exercise we will take a variational perspective i.e. view physics simulation as an optimization problem. We will define an energy that will be minimized by the value of <img src="./svgs/61cf41460b5d444b8df90703eb5ef637.svg?invert_in_darkmode" align=middle width=41.32432425pt height=27.6567522pt/> that satisfies <img src="./svgs/f428e42f1278299d021e503dfeb2f94f.svg?invert_in_darkmode" align=middle width=53.10859125pt height=22.8310566pt/>. You will probably find this familiar if you have taken a variational mechanics class. The minimizer <img src="./svgs/980fcd4213d7b5d2ffcc82ec78c27ead.svg?invert_in_darkmode" align=middle width=10.5022269pt height=14.6118786pt/> of some function <img src="./svgs/29caae963fbe810e18a545ca36f0c169.svg?invert_in_darkmode" align=middle width=36.3698379pt height=24.657534pt/> will satisfy <img src="./svgs/50eff1c869952649a256668f39a1a6be.svg?invert_in_darkmode" align=middle width=82.4540607pt height=24.657534pt/>. So we construct an energy <img src="./svgs/84df98c65d88c6adf15d4645ffa25e47.svg?invert_in_darkmode" align=middle width=13.0821966pt height=22.4657235pt/> such that <img src="./svgs/1659b79562bb1cb2d662028a17b053cf.svg?invert_in_darkmode" align=middle width=155.6538423pt height=24.657534pt/>:
 
-<p align="center"><img src="./svgs/e2986ceecbe4cb501ce7d467922e4af4.svg?invert_in_darkmode" align=middle width=721.487976pt height=59.1786591pt/></p>
+<p align="center"><img src="./svgs/1e170ae0eb32b9f3a8d4af4aa1256323.svg?invert_in_darkmode" align=middle width=733.65237495pt height=59.1786591pt/></p>
 
 
 where, in our case, <img src="./svgs/6be6c3f773137fe769edcd81b92b4fba.svg?invert_in_darkmode" align=middle width=72.3438771pt height=26.0859621pt/> is the gravity exerted on all the masses ang <img src="./svgs/b55cebd57d98b8b971bcb3376f25d605.svg?invert_in_darkmode" align=middle width=50.53626435pt height=26.7617526pt/> is the gravitational acceleration. Keen observers will identify that the first term is our elastic potential energy <img src="./svgs/a9a3a4a202d80326bda413b5562d5cd1.svg?invert_in_darkmode" align=middle width=13.24203705pt height=22.4657235pt/>, the second term resembles kinetic energy and the last term is the gravitational potential energy.
@@ -48,7 +48,7 @@ Alright, now we have our objective function to optimize. But still, it looks som
 
  We can then, for example, express the inertial term using matrices:
 
-<p align="center"><img src="./svgs/0d4d098f76a38060c4d6df2aa1a98e2e.svg?invert_in_darkmode" align=middle width=688.7201673pt height=98.7441576pt/></p>
+<p align="center"><img src="./svgs/df30579bf527eb6b4476d2487dc01063.svg?invert_in_darkmode" align=middle width=715.7886252pt height=99.42909735pt/></p>
 
 where <img src="./svgs/c86080e161350406e3815e409ef7f8eb.svg?invert_in_darkmode" align=middle width=91.64002155pt height=26.7617526pt/> is a diagonal matrix with the diagonal entries being the corresponging point mass <img src="./svgs/0e51a2dede42189d77627c4d742822c3.svg?invert_in_darkmode" align=middle width=14.4331011pt height=14.1552444pt/> i.e. <img src="./svgs/c77736a9a18701ee9f8b4a2671151cd4.svg?invert_in_darkmode" align=middle width=67.0728201pt height=22.4657235pt/>. <img src="./svgs/fb97d38bcc19230b0acd442e17db879c.svg?invert_in_darkmode" align=middle width=17.7397374pt height=22.4657235pt/> is often called the mass matrix.
 
