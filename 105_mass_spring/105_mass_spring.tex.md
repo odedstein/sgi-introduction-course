@@ -61,7 +61,7 @@ In this task, express the gravitational potential energy using matrices, similar
 ## Task 2: Newton's method
 Now we have our objective function in hand. To solve this energy minimization problem, there are many effective optimization techniques that can be applied. Following what we learned from the lecture, we use Newton's method to compute the local minimum of our objective function by solving a sequence of quadratic functions. At the $i$th Newton iteration, we solve for the newton update ${\Delta \mathbf{p}}_{i}$ s.t. $\mathbf{p}_{i} = \mathbf{p}_{i-1} + {\Delta \mathbf{p}}_{i}$ by doing Taylor expansion of our objective around $\mathbf{p}_{i-1}$ up to the second order:
 
-$$ \Delta \mathbf{p}_{i} = \arg\min_{\Delta \mathbf{p}} \frac{1}{\Delta t^{2}} {\Delta \mathbf{p}}^{^\top} \mathbf{M} \left(\mathbf{p}_{i-1} - 2\mathbf{p}^{t} + \mathbf{p}^{t-\Delta t} \right) + {\Delta \mathbf{p}}^{^\top} \mathbf{G}(\mathbf{p}_{i-1}) + \frac{1}{2} {\Delta \mathbf{p}}^{^\top} \mathbf{K}(\mathbf{p}_{i-1}) \Delta \mathbf{p} + \text{gravitational potential term}.$$
+$$ \Delta \mathbf{p}_{i} = \arg\min_{\Delta \mathbf{p}} \frac{1}{2} {\Delta \mathbf{p}}^{^\top} \frac{\mathbf{M}}{\Delta t^{2}} \Delta \mathbf{p} + {\Delta \mathbf{p}}^{^\top} \frac{\mathbf{M}}{\Delta t^{2}} \left(\mathbf{p}_{i-1} - 2\mathbf{p}^{t} + \mathbf{p}^{t-\Delta t} \right) + {\Delta \mathbf{p}}^{^\top} \mathbf{G}(\mathbf{p}_{i-1}) + \frac{1}{2} {\Delta \mathbf{p}}^{^\top} \mathbf{K}(\mathbf{p}_{i-1}) \Delta \mathbf{p} + {\Delta \mathbf{p}}^{^\top} \mathbf{f}_{\text{ext}}.$$
 
 where $\mathbf{G}(\mathbf{p}_{i-1})$ and $\mathbf{K}(\mathbf{p}_{i-1})$ are the gradient and hessian of the elastic potential energy $V$ evaluated at $\mathbf{p}_{i-1}$.
 
