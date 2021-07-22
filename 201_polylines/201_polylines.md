@@ -172,7 +172,7 @@ A very visibly coarse open polyline should show:
 Now, if you run your spline upsampler
 ```MATLAB
 >> U = upsample_spline(V,100);
->> plot(V(:,1),V(:,2),'LineWidth',3);axis equal;axis off;
+>> plot(U(:,1),U(:,2),'LineWidth',3);axis equal;axis off;
 ```
 a smooth, circle-looking shape should appear.
 
