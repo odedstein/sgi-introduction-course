@@ -1,5 +1,5 @@
 function [V,F] = simple_cube()
-%SIMPLE_SCUBE  construct a triangle mesh for a simple cube
+%SIMPLE_CUBE  construct a triangle mesh for a simple cube
 %
 % [V,F] = simple_cube();
 %
