@@ -112,7 +112,7 @@ for more detail on the entries of the different matrices.
 The Laplacian can now be used, for example, to smooth a noisy function by
 performing a small time-step of the heat equation:
 ```MATLAB
->> un = noisy_function();
+>> un = rand(size(V,1),1);
 >> L = -cotmatrix(V,F);
 >> M = massmatrix(V,F);
 >> u = (1e-2*L + M) \ (M*un);
