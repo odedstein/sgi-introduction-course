@@ -8,7 +8,7 @@ function [HKS, t] = heatKernelSignature(V, F)
   %   F  matrix, size (F,3), of element indices into V
   %   k  number of eigenvalues and eigenfunctions to use
   % Outputs:
-  %   HKS  matrix, size (V,k), of HKS
+  %   HKS  matrix, size (V,nt), of HKS
   
 
 
