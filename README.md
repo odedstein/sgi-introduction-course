@@ -9,6 +9,7 @@ The courses are as follows:
 * 2nd day: 1xx, by [Hsueh-Ti Derek Liu](https://www.dgp.toronto.edu/~hsuehtil/), [Jiayi Eris Zhang](https://eriszhang.github.io)
 * 3rd day: 2xx, by [Silvia Sellán](http://dgp.toronto.edu/~sgsellan/)
 * 4th day: 3xx, by Michal Edelstein
+* 5th day: on [this external GitHub repo](https://github.com/SGI-2021/directional-fields-tutorial), by [Amir Vaxman](https://webspace.science.uu.nl/~vaxma001/)
 
 We thank Peter Rock and Leticia Mattos Da Silva for their help in designing the course.
 
