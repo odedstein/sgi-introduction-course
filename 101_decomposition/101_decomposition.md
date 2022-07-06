@@ -1,0 +1,23 @@
+# Matrix Decomposition
+
+Matrix decomposition (or factorization) is a process of splitting a matrix into a product of matrices, such as the LU decomposition, Cholesky factorization, QR decomposition and more. For instance, when solving a linear system <img src="svgs/70681e99f542745bf6a0c56bd4600b39.svg?invert_in_darkmode" align=middle width=50.69621369999999pt height=22.831056599999986pt/>, by using LU decomposition the system matrix <img src="svgs/53d147e7f3fe6e47ee05b88b166bd3f6.svg?invert_in_darkmode" align=middle width=12.32879834999999pt height=22.465723500000017pt/> can be decomposed into a lower triangular matrix <img src="svgs/ddcb483302ed36a59286424aa5e0be17.svg?invert_in_darkmode" align=middle width=11.18724254999999pt height=22.465723500000017pt/> and an upper triangular matrix <img src="svgs/6bac6ec50c01592407695ef84f457232.svg?invert_in_darkmode" align=middle width=13.01596064999999pt height=22.465723500000017pt/> s.t. <img src="svgs/b7800468c321276fd038c1496efa3cca.svg?invert_in_darkmode" align=middle width=58.449632999999984pt height=22.465723500000017pt/>. Factorizing a matrix would require some time, but after the factorization, it enables one to solve linear systems <img src="svgs/6ffa573707fca115cad7b243d91a7109.svg?invert_in_darkmode" align=middle width=50.69621369999999pt height=22.831056599999986pt/> with the same <img src="svgs/53d147e7f3fe6e47ee05b88b166bd3f6.svg?invert_in_darkmode" align=middle width=12.32879834999999pt height=22.465723500000017pt/> much faster. In the case of LU decomposition, the two systems <img src="svgs/40e5b019ec86ecc9d03962993903902b.svg?invert_in_darkmode" align=middle width=75.35603129999998pt height=24.65753399999998pt/> and <img src="svgs/b8accc55eca44c437cdb782e24805d2d.svg?invert_in_darkmode" align=middle width=80.21905484999999pt height=26.76175259999998pt/> require fewer additions and multiplications to solve compared with the original system <img src="svgs/70681e99f542745bf6a0c56bd4600b39.svg?invert_in_darkmode" align=middle width=50.69621369999999pt height=22.831056599999986pt/> and the pre-factorized matrices <img src="svgs/ddcb483302ed36a59286424aa5e0be17.svg?invert_in_darkmode" align=middle width=11.18724254999999pt height=22.465723500000017pt/> and <img src="svgs/6bac6ec50c01592407695ef84f457232.svg?invert_in_darkmode" align=middle width=13.01596064999999pt height=22.465723500000017pt/> can be reused given different <img src="svgs/4bdc8d9bcfb35e1c9bfb51fc69687dfc.svg?invert_in_darkmode" align=middle width=7.054796099999991pt height=22.831056599999986pt/>.
+
+
+In MATLAB, a built-in function [decomposition](https://www.mathworks.com/help/matlab/ref/decomposition.html) is designed exactly for doing this matrix decomposition. In the context of geometry processing, we often encounter applications that require solving linear systems with the same left-hand-side <img src="svgs/53d147e7f3fe6e47ee05b88b166bd3f6.svg?invert_in_darkmode" align=middle width=12.32879834999999pt height=22.465723500000017pt/>, but with a different right-hand-side <img src="svgs/4bdc8d9bcfb35e1c9bfb51fc69687dfc.svg?invert_in_darkmode" align=middle width=7.054796099999991pt height=22.831056599999986pt/>. For example, computing geodesic distances from different source points
+
+![heat geodesics](assets/heat_geo.jpg)
+
+The `decomposition` function is easy to use. Typically, we solve a linear system <img src="svgs/70681e99f542745bf6a0c56bd4600b39.svg?invert_in_darkmode" align=middle width=50.69621369999999pt height=22.831056599999986pt/> without using `decomposition` by typing
+```MATLAB
+>> x = A \ b;
+```
+
+If we want to use `decomposition`, we can simply do
+```MATLAB
+>> dA = decomposition(A);
+```
+to decompose <img src="svgs/53d147e7f3fe6e47ee05b88b166bd3f6.svg?invert_in_darkmode" align=middle width=12.32879834999999pt height=22.465723500000017pt/> first, where the decomposition type is automatically chosen based on the properties of the input matrix. Then solve the linear system by typing
+```MATLAB
+>> x = dA \ b; % much faster
+```
+This process will give us the same output <img src="svgs/332cc365a4987aacce0ead01b8bdcc0b.svg?invert_in_darkmode" align=middle width=9.39498779999999pt height=14.15524440000002pt/> as doing `A \ b`, but the actual solve part of doing `dA \ b` will be much more efficient. Hence it is particurly suitable for cases where <img src="svgs/4bdc8d9bcfb35e1c9bfb51fc69687dfc.svg?invert_in_darkmode" align=middle width=7.054796099999991pt height=22.831056599999986pt/> is frequently changing while <img src="svgs/53d147e7f3fe6e47ee05b88b166bd3f6.svg?invert_in_darkmode" align=middle width=12.32879834999999pt height=22.465723500000017pt/> is fixed.

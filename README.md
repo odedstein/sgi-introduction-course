@@ -1,11 +1,39 @@
 # Introduction to Geometry Processing - Summer Geometry Institute 2021
 
-If you are looking for an introduction to geometry processing with MATLAB,
-please see our [repository for "A basic tutorial for geometry processing in MATLAB using gptoolbox"](https://github.com/odedstein/gp-matlab-tutorial).
+Welcome to the repository for the Introduction to Geometry Processing at the Summer Geometry Institute 2021.
+This repository features excercises to acquaint you with [MATLAB](https://www.mathworks.com/campaigns/products/trials.html?prodcode=ML), the [gptoolbox library](https://github.com/odedstein/sgi-introduction-course/blob/main/002_gptoolbox/002_gptoolbox.md), and basic geometry processing concepts.
+Complete the exercises in order from 001 to 999!
 
-This SGI course took place in a previous year, and this repository has since
-been deprecated.
-If you want to browse the course as it existed in 2021, please look at
-the commit history of this repository.
+The courses are as follows:
+* 1st day: 0xx, by [Oded Stein](https://odedstein.com/)
+* 2nd day: 1xx, by [Hsueh-Ti Derek Liu](https://www.dgp.toronto.edu/~hsuehtil/), [Jiayi Eris Zhang](https://eriszhang.github.io)
+* 3rd day: 2xx, by [Silvia Sellán](http://dgp.toronto.edu/~sgsellan/)
+* 4th day: 3xx, by Michal Edelstein
+* 5th day: on [this external GitHub repo](https://github.com/SGI-2021/directional-fields-tutorial), by [Amir Vaxman](https://webspace.science.uu.nl/~vaxma001/)
+
+We thank Peter Rock and Leticia Mattos Da Silva for their help in designing the course.
+
+
+## Download Course Material 
+
+In order to complete this course, please download the git repository and save
+it on your computer.
+You can do this by going to the
+[base of the repository](https://github.com/odedstein/sgi-introduction-course),
+and either:
+
+* Install the repository as a zip file.
+To do this, click on the green button on the page labeled `Code`, and then
+click `Download ZIP`.
+Unpack the ZIP file somewhere on your computer, and navigate to that directory
+in MATLAB.
+* If you are familiar with git, open your system's console, and run the
+following command in the directory you want this tutorial to be downloaded to:
+```
+git clone https://github.com/odedstein/sgi-introduction-course.git
+```
+Now, navigate to this directory in MATLAB.
+
+You are now ready to do your first exercise!
 
 
