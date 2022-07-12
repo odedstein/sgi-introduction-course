@@ -24,7 +24,7 @@ Consider the following simple mesh:
 What are its boundaries?
 To determine the boundaries, we look at every point on every edge and check
 whether this point is a part of only one triangle (and thus a boundary edge),
-or whether the point is a part of only one triangle (and thus an interior
+or whether the point is a part of two triangles (and thus an interior
 edge).
 
 ![simple square mesh with boundary edges highlighted](assets/square_bdries.png)
