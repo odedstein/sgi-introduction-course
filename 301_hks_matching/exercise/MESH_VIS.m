@@ -6,7 +6,7 @@ classdef MESH_VIS
     
     methods (Static)
         
-        function mesh(F,V,varargin)
+        function landcolor = mesh(F,V,varargin)
             
             p = inputParser;
             p.KeepUnmatched=true;
@@ -15,7 +15,7 @@ classdef MESH_VIS
             addOptional(p,'EdgeColor','none');
             addOptional(p,'landmarks',0); % a vector of landmark indices
             addOptional(p,'landSize',0); % size of the sphere marking the landmarks
-            addOptional(p,'landColor',[1 0 0]);
+            addOptional(p,'landColor',[]);
             addOptional(p,'FaceAlpha',.8);
             addOptional(p,'LineWidth',.5);
             addOptional(p,'docked',0);
@@ -66,9 +66,16 @@ classdef MESH_VIS
                 else 
                     landSize = p.Results.landSize;
                 end
-                MESH_VIS.vis_landmarks( V, p.Results.landmarks,  landSize, p.Results.landColor);                      
+                landcolor = MESH_VIS.vis_landmarks( V, p.Results.landmarks,  landSize, p.Results.landColor); 
+            else
+                landcolor = [];
             end
             
+            if ~isempty(p.Results.cam)
+                load(p.Results.cam);
+                MESH_VIS.set_camera(gca,cam);
+            end
+
             camlight; lighting phong; material dull;
 
             cameratoolbar; cameratoolbar('SetCoordSys','none');
@@ -83,11 +90,6 @@ classdef MESH_VIS
                 if p.Results.colorbar
                     colorbar;
                 end
-            end
-            
-            if ~isempty(p.Results.cam)
-                load(p.Results.cam);
-                MESH_VIS.set_camera(gca,cam);
             end
             
             if ~isempty(p.Results.title)
@@ -115,14 +117,16 @@ classdef MESH_VIS
             cam.cp = get(ca, 'CameraPosition');
         end
         
-        function vis_landmarks( V, p, s, color )
+        function color = vis_landmarks( V, p, s, color )
             % p - vertex indices
             
             [SX,SY,SZ] = sphere;
             a = s;
             SX = SX*a; SY = SY*a; SZ = SZ*a;
             
-            if size(color,1)==1
+            if isempty(color)
+                color = jet(length(p));
+            elseif size(color,1)==1
                 color = repmat(color,length(p),1);
             end
             hold on;
