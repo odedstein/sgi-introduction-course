@@ -23,19 +23,10 @@ In this exercise, you are going to implement a 2D version of the linear blend sk
 
 **Optional Challenge**
 Simply implementing linear blend skinning using Equation (1) works fine, but this will result in a slower runtime in MATLAB. This is because a direct implementation of that involves double for loops (one for the vertices, one for the handles). A rule of thumb in MATLAB programming is to avoid for/while loops as much as possible. And, actually, we can implement a (faster) linear blend skinning without any loops at all, but with only matrix multiplications. Specifically, 
+
 <p align="center"><img src="svgs/2110a26e0908af1aa4f3b579a0ed85d0.svg?invert_in_darkmode" align=middle width=59.151679949999995pt height=11.232861749999998pt/></p>
-where <img src="svgs/6bac6ec50c01592407695ef84f457232.svg?invert_in_darkmode" align=middle width=13.01596064999999pt height=22.465723500000017pt/> her is a 2-by-#vertices matrix (since we are working on 2D) of deformed vertex locations, <img src="svgs/2f118ee06d05f3c2d98361d9c30e38ce.svg?invert_in_darkmode" align=middle width=11.889314249999991pt height=22.465723500000017pt/> concatenates all the <img src="svgs/6700c5860aa69a6e385a063c4000f436.svg?invert_in_darkmode" align=middle width=15.710696099999991pt height=22.465723500000017pt/> as different columns `T = [T1, T2, ...]`, and the <img src="svgs/53d147e7f3fe6e47ee05b88b166bd3f6.svg?invert_in_darkmode" align=middle width=12.32879834999999pt height=22.465723500000017pt/> is a matrix that encodes <img src="svgs/3772fcee64a3507eb0b3ace1e8f2411e.svg?invert_in_darkmode" align=middle width=35.96475629999999pt height=14.15524440000002pt/>. If you are interested in making it even faster, you can pre-compute the matrix <img src="svgs/53d147e7f3fe6e47ee05b88b166bd3f6.svg?invert_in_darkmode" align=middle width=12.32879834999999pt height=22.465723500000017pt/> (because it only depends on the weights and the input shape) and reuse it whenever the user specify a different handle transformations <img src="svgs/2f118ee06d05f3c2d98361d9c30e38ce.svg?invert_in_darkmode" align=middle width=11.889314249999991pt height=22.465723500000017pt/>.
 
-<!-- 
-## Task 1: Solve a quadratic program
-In this task, you are going to manually derive how to solve this optimization problem 
-```svg
-minimize    u’ * Q * u
-subject to  u(b) = bc
-```
-where `u, b, bc` are vectors and `Q` is a symmetric matrix. Deriving the optimal value of `u` is very similar to how you find the optimal <img src="svgs/332cc365a4987aacce0ead01b8bdcc0b.svg?invert_in_darkmode" align=middle width=9.39498779999999pt height=14.15524440000002pt/> of a quadratic function <img src="svgs/85b40b52737dc2911dc23543fac9b1c7.svg?invert_in_darkmode" align=middle width=89.20457369999998pt height=26.76175259999998pt/>. (Hint: in this derivation, you might need to split `u` into knowns and unknowns).
-
-You may wonder why we would like you to derive the solution of this quadratic program, right? One reason is that we can solve problems of this type reliably and efficiently (you will know why after your derivation). Thus, many researchers formulated their problems (e.g., shape deformation, parameterization, smoothing, etc.) as quadratic programs. So after you go through this exercise, you would be able to understand (and even derive) many of those beautiful algorithms. -->
+where <img src="svgs/6bac6ec50c01592407695ef84f457232.svg?invert_in_darkmode" align=middle width=13.01596064999999pt height=22.465723500000017pt/> is a 2-by-#vertices matrix (since we are working on 2D) of deformed vertex locations, <img src="svgs/2f118ee06d05f3c2d98361d9c30e38ce.svg?invert_in_darkmode" align=middle width=11.889314249999991pt height=22.465723500000017pt/> concatenates all the <img src="svgs/6700c5860aa69a6e385a063c4000f436.svg?invert_in_darkmode" align=middle width=15.710696099999991pt height=22.465723500000017pt/> as different columns `T = [T1, T2, ...]`, and the <img src="svgs/53d147e7f3fe6e47ee05b88b166bd3f6.svg?invert_in_darkmode" align=middle width=12.32879834999999pt height=22.465723500000017pt/> is a matrix that encodes <img src="svgs/3772fcee64a3507eb0b3ace1e8f2411e.svg?invert_in_darkmode" align=middle width=35.96475629999999pt height=14.15524440000002pt/>. If you are interested in making it even faster, you can pre-compute the matrix <img src="svgs/53d147e7f3fe6e47ee05b88b166bd3f6.svg?invert_in_darkmode" align=middle width=12.32879834999999pt height=22.465723500000017pt/> (because it only depends on the weights and the input shape) and reuse it whenever the user specify a different handle transformations <img src="svgs/2f118ee06d05f3c2d98361d9c30e38ce.svg?invert_in_darkmode" align=middle width=11.889314249999991pt height=22.465723500000017pt/>.
 
 ## Task 2: Computing Skinning Weights
 In this part, you will code up a solver (`computing_skinning_weights.m`) to compute the skinning weights. This will lead to solve the following optimization problem  
@@ -71,14 +62,6 @@ where `M` is the lumped mass matrix and `L` is the cotangent matrix. If your mem
 
 After your implementation, you should see resulting weights (right) of each handle (left, yellow dots) like this
 ![biharmonicW](assets/biharmonicW.jpg)
-
-<!-- **Optional Challenge**
-The above solution involves looping over all the handle indices one-by-one `b(j)`. But actually, you don't need to do that. The solution of Task 2 is equivalent to the solution the following problem
-```svg
-minimize    trace( W' * Q * W )
-subject to  W(:,b) = bc
-```
-So an optional challenge is how can you derive the optimal solution to this problem and then solve this directly, without the need of looping over all the `b(j)` one-by-one? -->
 
 **After Thoughts**
 The above implementation still need one addition modification. Would you like to guess what is that based on your experience playing with the tool? 
