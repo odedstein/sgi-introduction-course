@@ -2,6 +2,11 @@
 %[V,F] = readOBJ('data/spot_good.obj'); % this one will work
 [V,F] = readOBJ('data/spot_bad.obj');  % but this one will not!
 
+% NOTE: The result may not be the same on the "bad" mesh after you repair
+% it, because this code computes the distance from vertex "1", but which
+% vertex is vertex "1" may change. That is fine, as long as it outputs
+% reasonable a looking distance.
+
 % Run the algorithm 
 % (I promise nothing is wrong with this algorithm, the problem is the mesh)
 dists = heat_geodesic(V,F,1);
