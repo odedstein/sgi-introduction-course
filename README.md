@@ -1,15 +1,15 @@
-# Introduction to Geometry Processing - Summer Geometry Institute 2021
+# Introduction to Geometry Processing - Summer Geometry Institute 2023
 
-Welcome to the repository for the Introduction to Geometry Processing at the Summer Geometry Institute 2021.
+Welcome to the repository for the Introduction to Geometry Processing at the Summer Geometry Institute 2023.
 This repository features excercises to acquaint you with [MATLAB](https://www.mathworks.com/campaigns/products/trials.html?prodcode=ML), the [gptoolbox library](https://github.com/odedstein/sgi-introduction-course/blob/main/002_gptoolbox/002_gptoolbox.md), and basic geometry processing concepts.
 Complete the exercises in order from 001 to 999!
 
 The courses are as follows:
 * 1st day: 0xx, by [Oded Stein](https://odedstein.com/)
 * 2nd day: 2xx, by [Silvia Sellán](http://dgp.toronto.edu/~sgsellan/)
-* 3rd day: 1xx, by [Hsueh-Ti Derek Liu](https://www.dgp.toronto.edu/~hsuehtil/), [Jiayi Eris Zhang](https://eriszhang.github.io)
-* 4th day: 3xx, by Michal Edelstein
-* 5th day: TBD by Nick Sharp
+* 3th day: 3xx, by Michal Edelstein
+* 4rd day: 1xx, by [Jiayi Eris Zhang](https://eriszhang.github.io)
+* 5th day: TBD
 
 We thank Peter Rock and Leticia Mattos Da Silva for their help in designing the course.
 
