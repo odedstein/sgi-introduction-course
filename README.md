@@ -7,7 +7,7 @@ Complete the exercises in order from 001 to 999!
 The courses are as follows:
 * 1st day: 0xx, by [Oded Stein](https://odedstein.com/)
 * 2nd day: 2xx, by [Silvia Sellán](http://dgp.toronto.edu/~sgsellan/)
-* 3th day: 3xx, by Michal Edelstein
+* 3th day: 3xx, by Michal Edelstein and [Patrick Schmidt](https://patr-schm.github.io/)
 * 4rd day: 1xx, by [Jiayi Eris Zhang](https://eriszhang.github.io)
 * 5th day: TBD
 
