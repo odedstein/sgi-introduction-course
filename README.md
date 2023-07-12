@@ -9,7 +9,7 @@ The courses are as follows:
 * 2nd day: 2xx, by [Silvia Sellán](http://dgp.toronto.edu/~sgsellan/)
 * 3th day: 3xx, by Michal Edelstein and [Patrick Schmidt](https://patr-schm.github.io/)
 * 4rd day: 1xx, by [Jiayi Eris Zhang](https://eriszhang.github.io)
-* 5th day: TBD
+* 5th day: 4xx, by [Nick Sharp](https://nmwsharp.com)
 
 We thank Peter Rock and Leticia Mattos Da Silva for their help in designing the course.
 
