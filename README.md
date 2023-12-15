@@ -1,4 +1,4 @@
-# Introduction to Geometry Processing - Summer Geometry Institute 2023
+# Introduction to Geometry Processing - Summer Geometry Initiative
 
 Welcome to the repository for the Introduction to Geometry Processing at the Summer Geometry Institute 2023.
 This repository features excercises to acquaint you with [MATLAB](https://www.mathworks.com/campaigns/products/trials.html?prodcode=ML), the [gptoolbox library](https://github.com/odedstein/sgi-introduction-course/blob/main/002_gptoolbox/002_gptoolbox.md), and basic geometry processing concepts.
