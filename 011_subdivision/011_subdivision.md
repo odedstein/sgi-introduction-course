@@ -113,7 +113,7 @@ Remember, if we do not do this, our subdivision is a simple upsampling
 procedure that adds vertices to our surface without actually changing its
 appearance.
 We move an interior red vertex to the following weighted average of its own
-position, as well as the position of all of its new green neighbors:
+position, as well as the position of all of its old red neighbors:
 
 ![weights for the old vertices in the interior](assets/old-verts-interior.png)
 
