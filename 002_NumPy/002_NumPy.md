@@ -144,6 +144,21 @@ them putting each row into one larger list:
  [7. 8. 9.]]
 ```
 
+The dimension of an array (a vector or matrix in NumPy) is available in the
+array's `shape` property:
+```python
+>>> vec = np.arange(2,7)
+>>> print(vec.shape)
+(5,)
+>>> print(f"vec is a {vec.shape[0]} vector.")
+vec is a 5 vector.
+>>> mat = np.array([[1.,2.,3.], [4.,5.,6.], [7.,8.,9.]])
+>>> print(mat.shape)
+(3, 3)
+>>> print(f"mat is a {mat.shape[0]} x {mat.shape[1]} matrix.")
+mat is a 3 x 3 matrix.
+```
+
 The identity matrix of dimension `d` is constructed using `np.eye(d)`.
 ```python
 >>> mat = np.eye(4)
