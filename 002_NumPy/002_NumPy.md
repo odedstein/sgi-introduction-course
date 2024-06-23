@@ -61,7 +61,7 @@ commas like so:
 def function_name(i1,i2):
      sum_of_inputs = i1 + i2
      diff_of_inputs = i1 - i2
-     return sum_of_inputs, sum_of_inputs
+     return sum_of_inputs, diff_of_inputs
 
 s,d = function_name(1., 4.)
 print(f"My function returned {s} and {d}.")
