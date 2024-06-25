@@ -69,7 +69,7 @@ print(f"My function returned {s} and {d}.")
 
 You should see the following output in your terminal:
 ```
-My function returned 5.0 and 5.0.
+My function returned 5.0 and -3.0.
 ```
 
 Let's try to create a function that adds two numbers, and then multiplies them
