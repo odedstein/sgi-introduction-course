@@ -514,7 +514,7 @@ from gpytoolbox import signed_distance
 sdist, ind, t = signed_distance(points, vertices, F=edges)
 # Plot signed distances and polyline
 _ = plt.plot(vertices[:, 0], vertices[:, 1], '-k', linewidth=3)
-_ = plt.scatter(points[:,0], points[:,1], c=sdist, cmap = 'RdBu', vmin = - np.abs(sdist).max(), vmax = np.abs(sdist).max()) # using a divergent colormap and centering it makes sense for signed distances, where "zero" is the surface
+_ = plt.scatter(points[:,0], points[:,1], c=sdist, cmap = 'RdBu', vmin = - np.abs(sdist).pyax(), vmax = np.abs(sdist).pyax()) # using a divergent colormap and centering it makes sense for signed distances, where "zero" is the surface
 _ = plt.colorbar()
 _ = plt.axis('equal')
 ```
@@ -532,12 +532,12 @@ Often, you will want to compute these distances for all the points in a grid, wh
 # Build a grid
 x = np.linspace(-0.5, 0.5, 100)
 y = np.linspace(-0.5, 0.5, 100)
-X, Y = np.meshgrid(x, y)
+X, Y = np.pyeshgrid(x, y)
 points = np.array([X.flatten(), Y.flatten()]).T
 # Compute signed distances
 sdist, ind, t = signed_distance(points, vertices, F=edges)
 # Plot grid with signed distances as color
-_ = plt.pcolormesh(X, Y, sdist.reshape(X.shape), cmap = 'RdBu', vmin = - np.abs(sdist).max(), vmax = np.abs(sdist).max())
+_ = plt.pcolormesh(X, Y, sdist.reshape(X.shape), cmap = 'RdBu', vmin = - np.abs(sdist).pyax(), vmax = np.abs(sdist).pyax())
 # Add polyline
 _ = plt.plot(vertices[:, 0], vertices[:, 1], '-k', linewidth=3)
 _ = plt.colorbar()
@@ -551,7 +551,7 @@ _ = plt.axis('equal')
 
 ## Exercises
 
-Now it's time for you to get used to these functions. Why don't you use the skeleton scripts in `exercise/` to make polylines of shapes you like? You can start with `draw_something.m` and `png_from_the_internet.m` to warm-up. Use the same `png2poly` function, but with a different png and shape. Once you've done those two, you can move on to our main goal: drawing our very own first spline, following what we saw in the lecture earlier today.
+Now it's time for you to get used to these functions. Why don't you use the skeleton scripts in `exercise/` to make polylines of shapes you like? You can start with `draw_something.py` and `png_from_the_internet.py` to warm-up. Use the same `png2poly` function, but with a different png and shape. Once you've done those two, you can move on to our main goal: drawing our very own first spline, following what we saw in the lecture earlier today.
 
 Let us consider two points 
 
@@ -573,79 +573,104 @@ where the derivatives are taken with respect to `t`. Your first two tasks are as
 
 1. By hand, figure out an expression for `a`, `b`, `c` and `d` in terms of the two points and two vectors considered (if you get stuck here, the solution is in the wikipedia link above, but try to work it out yourself!).
 
-2. Fill out the funcionality of `exercises/cubic_hermite.m` to find, given two points and two vectors and a value of `t`, the value `P(t)` of the cubic Hermite polynomial they define at time `t`.
+2. Fill out the funcionality of `exercises/cubic_hermite.py` to find, given two points and two vectors and a value of `t`, the value `P(t)` of the cubic Hermite polynomial they define at time `t`.
 
 Please keep reading only after you've completed both tasks. Some of these tasks may be tricky! You aren't expected to be able to do them all in a minute like this was your undergraduate homework. Feel free to ask for help to your colleagues in the program, speak amongst yourselves and reach out to me and the TAs. Also feel free to google or look stuff up by any other means. To test if your formula and your code is right, you can choose arbitrary points, tangents and a time between 0 and 1, and you should get the same result I did.
 ```MATLAB
->> p0 = [0 0];
->> p1 = [1 0];
->> m0 = [0 1];
->> m1 = [0 -1];
->> t = 0.5;
->> Pt = cubic_hermite(p0,p1,m0,m1,t);
->> Pt
+import numpy as np
+p0 = np.array([0, 0])
+p1 = np.array([1, 0])
+m0 = np.array([0, 1])
+m1 = np.array([0, -1])
+t = 0.5
+Pt = cubic_hermite(p0, p1, m0, m1, t)
+print(Pt)
 
-Pt =
-
-    0.5000    0.2500
+# Expected Output:
+# [0.5 0.25]
 ```
 Sometimes it is more useful to visually debug your code rather than just checking whether two numbers coincide. So, for example, you could write
-```MATLAB
->> p0 = [0 0];
->> p1 = [1 0];
->> m0 = [0 1];
->> m1 = [0 -1];
->> curve = []; % Initialize your curve to nothing
->> t = linspace(0,1,100); % t is a vector of 100 values between 0 and 1
->> for i = 1:length(t)
-curve = [curve; cubic_hermite(p0,p1,m0,m1,t(i))]; % add new point to the curve
-end
->> plot(curve(:,1),curve(:,2));axis equal;
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+p0 = np.array([0, 0])
+p1 = np.array([1, 0])
+m0 = np.array([0, 1])
+m1 = np.array([0, -1])
+curve = []  # Initialize your curve to nothing
+t = np.linspace(0, 1, 100)  # t is a vector of 100 values between 0 and 1
+
+for ti in t:
+    curve.append(cubic_hermite(p0, p1, m0, m1, ti))  # add new point to the curve
+
+curve = np.array(curve)
+plt.plot(curve[:, 0], curve[:, 1])
+plt.axis('equal')
+plt.show()
 ```
+
 You should see a beautifully curved line appear:
 
 ![](assets/hermite.png)
 
 Great! But, in practice, we will not be given two vectors `m_0` and `m_1` that specify the derivatives. The specific type of Hermite spline we learned about in class is called a Catmull-Rom splinen (again, see Wikipedia link above), and in it the derivatives at a given point `p_i` are calculated by looking at the (half of the) difference between the points `p_i+1` and `p_i-1`. So, your next task is
 
-3. Fill out the function `exercises/estimate_derivatives_catmull_rom.m` which, given a set of points which we assume are ordered (point 1 is connected to point 2, point 2 is connected to point 3, etc.) and closed (the final point is connected to the first point), returns a set of derivatives; for each point `p_i`, its prescribed derivative is calculated by deducting `0.5*(p_i+1 - p_i-1)`.
+3. Fill out the function `exercises/estimate_derivatives_catmull_rom.py` which, given a set of points which we assume are ordered (point 1 is connected to point 2, point 2 is connected to point 3, etc.) and closed (the final point is connected to the first point), returns a set of derivatives; for each point `p_i`, its prescribed derivative is calculated by deducting `0.5*(p_i+1 - p_i-1)`.
 
 A way of evaluating that you've coded step 3 correctly is by using the `gptoolbox` command `qvr`, that you covered with Oded in day 1. Let's start by creating an arbitrary shape; for example, a circle:
 
-```MATLAB
->> th = linspace(0,2*pi,20);
->> th = th(1:end-1);
->> V = [cos(th)',sin(th)'];
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+th = np.linspace(0, 2*np.pi, 20)
+th = th[:-1]
+V = np.column_stack((np.cos(th), np.sin(th)))
 ```
 Now, let's call our new function to estimate the derivatives at every point of the circle
-```MATLAB
->> M = estimate_derivatives_catmull_rom(V);
+```python
+>> M = estimate_derivatives_catmull_rom(V)
 ```
-If we now use the `qvr` command, we should see arrows coming from every point in the circle roughly in the direction tangent to the circle at each point:
-```MATLAB
->> qvr(V,M); axis equal;
+If we now use the `quiver` command, we should see arrows coming from every point in the circle roughly in the direction tangent to the circle at each point:
+```python
+import matplotlib.pyplot as plt
+plt.quiver(V[:,0], V[:,1], M[:,0], M[:,1])
+plt.axis('equal')
+plt.show()
 ```
 ![](assets/qvr.png)
 
 Your next task is putting it all together:
 
-4. Fill out `exercises/catmull_rom_interpolation.m` which, given a set of ordered points (same conditions as task 3) which are assumed to be equally spaced in time between 0 and 1 and a time value `t`, uses `cubic_hermite.m` and `estimate_derivatives_catmull_rom.m` to return `P(t)`, the value of the Catmull-Rom spline that interpolates all given points, at time `t`.
-5. Fill out `exercises/upsample_spline.m` which, given a set of ordered points (same conditions as task 3) which are assumed to be equally spaced in time between 0 and 1, outputs `n` equally spaced (fine) points on the Catmull-Rom spline that interpolates them. 
+4. Fill out `exercises/catmull_rom_interpolation.py` which, given a set of ordered points (same conditions as task 3) which are assumed to be equally spaced in time between 0 and 1 and a time value `t`, uses `cubic_hermite.py` and `estimate_derivatives_catmull_rom.py` to return `P(t)`, the value of the Catmull-Rom spline that interpolates all given points, at time `t`.
+5. Fill out `exercises/upsample_spline.py` which, given a set of ordered points (same conditions as task 3) which are assumed to be equally spaced in time between 0 and 1, outputs `n` equally spaced (fine) points on the Catmull-Rom spline that interpolates them. 
 
 A way of evaluating that your implementation so far is working is to create a very coarse circumference in MATLAB:
-```MATLAB
->> th = linspace(0,2*pi,8);
->> th = th(1:end-1);
->> V = [cos(th)',sin(th)'];
->> plot(V(:,1),V(:,2),'LineWidth',3);axis equal;axis off;
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+th = np.linspace(0, 2*np.pi, 8)
+th = th[:-1]
+V = np.column_stack((np.cos(th), np.sin(th)))
+plt.plot(V[:, 0], V[:, 1], linewidth=3)
+plt.axis('equal')
+plt.axis('off')
+plt.show()
+
 ```
 A very visibly coarse open polyline should show:
 ![](assets/coarse-circle.png)
 
 Now, if you run your spline upsampler
-```MATLAB
->> U = upsample_spline(V,100);
->> plot(U(:,1),U(:,2),'LineWidth',3);axis equal;axis off;
+```python
+U = upsample_spline(V, 100)
+plt.plot(U[:, 0], U[:, 1], linewidth=3)
+plt.axis('equal')
+plt.axis('off')
+plt.show()
+
 ```
 a smooth, circle-looking shape should appear.
 
@@ -655,7 +680,7 @@ By the way! It won't be *exactly* a circle. If you want to learn more about why 
 
 And finally, just to make it nicer
 
-6. Fill out `exercises/get_pencil_spline.m` to turn a very coarse polyline into a fine polyline where points are sampled from a catmull-rom spline. You should call `catmull_rom_interpolation.m`.
+6. Fill out `exercises/get_pencil_spline.py` to turn a very coarse polyline into a fine polyline where points are sampled from a catmull-rom spline. You should call `catmull_rom_interpolation.py`.
 
 Good luck!
 
