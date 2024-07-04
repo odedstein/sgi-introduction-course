@@ -551,7 +551,7 @@ _ = plt.axis('equal')
 
 ## Exercises
 
-Now it's time for you to get used to these functions. Why don't you use the skeleton scripts in `exercise/` to make polylines of shapes you like? You can start with `draw_something.py` and `png_from_the_internet.py` to warm-up. Use the same `png2poly` function, but with a different png and shape. Once you've done those two, you can move on to our main goal: drawing our very own first spline, following what we saw in the lecture earlier today.
+Now it's time for you to get used to these functions. Why don't you use the skeleton scripts in `exercise/` to make polylines of shapes you like? You can start with `png_from_the_internet.py` to warm-up. It uses the same `png2poly` function, but with a different png and shape. Once you've done those two, you can move on to our main goal: drawing our very own first spline, following what we saw in the lecture earlier today.
 
 Let us consider two points 
 
@@ -680,7 +680,7 @@ By the way! It won't be *exactly* a circle. If you want to learn more about why 
 
 And finally, just to make it nicer
 
-6. Fill out `exercises/get_pencil_spline.py` to turn a very coarse polyline into a fine polyline where points are sampled from a catmull-rom spline. You should call `catmull_rom_interpolation.py`.
+6. Write your own very coarse polyline into a fine polyline where points are sampled from a catmull-rom spline. You can find it on a png from the internet, or write it yourself by hand. You should call `catmull_rom_interpolation.py`. Be creative!
 
 Good luck!
 
