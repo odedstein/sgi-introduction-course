@@ -21,7 +21,7 @@ _ = plt.axis('equal')
 
 
     
-![png](/assets/tutorial-2d-prototyping_4_0.png)
+![png](assets/tutorial-2d-prototyping_4_0.png)
     
 
 
@@ -56,7 +56,7 @@ _ = plt.axis('equal')
 
 
     
-![png](/assets/tutorial-2d-prototyping_10_0.png)
+![png](assets/tutorial-2d-prototyping_10_0.png)
     
 
 
@@ -71,7 +71,7 @@ _ = plt.axis('equal')
 
 
     
-![png](/assets/tutorial-2d-prototyping_12_0.png)
+![png](assets/tutorial-2d-prototyping_12_0.png)
     
 
 
@@ -87,7 +87,7 @@ _ = plt.axis('equal')
 
 
     
-![png](/assets/tutorial-2d-prototyping_14_0.png)
+![png](assets/tutorial-2d-prototyping_14_0.png)
     
 
 
@@ -108,7 +108,7 @@ _ = plt.axis('equal')
 
 
     
-![png](/assets/tutorial-2d-prototyping_16_1.png)
+![png](assets/tutorial-2d-prototyping_16_1.png)
     
 
 
@@ -243,7 +243,7 @@ _ = plt.axis('equal')
 
 
     
-![png](/assets/tutorial-2d-prototyping_19_0.png)
+![png](assets/tutorial-2d-prototyping_19_0.png)
     
 
 
@@ -273,7 +273,7 @@ _ = plt.axis('equal')
 
 
     
-![png](/assets/tutorial-2d-prototyping_22_0.png)
+![png](assets/tutorial-2d-prototyping_22_0.png)
     
 
 
@@ -294,7 +294,7 @@ _ = plt.axis('equal')
 
 
     
-![png](/assets/tutorial-2d-prototyping_24_0.png)
+![png](assets/tutorial-2d-prototyping_24_0.png)
     
 
 
@@ -308,7 +308,7 @@ _ = plt.plot(point_cloud[:, 0], point_cloud[:, 1], 'o')
 
 
     
-![png](/assets/tutorial-2d-prototyping_25_0.png)
+![png](assets/tutorial-2d-prototyping_25_0.png)
     
 
 
@@ -330,7 +330,7 @@ _ = plt.quiver(point_cloud[:, 0], point_cloud[:, 1], normal_vectors[:,0], normal
 
 
     
-![png](/assets/tutorial-2d-prototyping_27_0.png)
+![png](assets/tutorial-2d-prototyping_27_0.png)
     
 
 looking at how to compute distances to 2D polylines.
@@ -355,7 +355,7 @@ _ = plt.axis('equal')
 
 
     
-![png](/assets/tutorial-2d-prototyping_29_0.png)
+![png](assets/tutorial-2d-prototyping_29_0.png)
     
 
 
@@ -371,7 +371,7 @@ _ = plt.axis('equal')
 
 
     
-![png](/assets/tutorial-2d-prototyping_30_0.png)
+![png](assets/tutorial-2d-prototyping_30_0.png)
     
 
 
@@ -401,7 +401,7 @@ _ = plt.axis('equal')
 
 
     
-![png](/assets/tutorial-2d-prototyping_33_0.png)
+![png](assets/tutorial-2d-prototyping_33_0.png)
     
 
 
@@ -426,7 +426,7 @@ _ = plt.axis('equal')
 
 
     
-![png](/assets/tutorial-2d-prototyping_35_1.png)
+![png](assets/tutorial-2d-prototyping_35_1.png)
     
 
 
@@ -451,7 +451,7 @@ _ = plt.axis('equal')
 
 
     
-![png](/assets/tutorial-2d-prototyping_37_0.png)
+![png](assets/tutorial-2d-prototyping_37_0.png)
     
 
 
@@ -479,7 +479,7 @@ _ = plt.axis('equal')
 
 
     
-![png](/assets/tutorial-2d-prototyping_39_0.png)
+![png](assets/tutorial-2d-prototyping_39_0.png)
     
 
 
@@ -499,7 +499,7 @@ _ = plt.axis('equal')
 
 
     
-![png](/assets/tutorial-2d-prototyping_41_0.png)
+![png](assets/tutorial-2d-prototyping_41_0.png)
     
 
 
@@ -521,7 +521,7 @@ _ = plt.axis('equal')
 
 
     
-![png](/assets/tutorial-2d-prototyping_43_0.png)
+![png](assets/tutorial-2d-prototyping_43_0.png)
     
 
 
@@ -546,7 +546,7 @@ _ = plt.axis('equal')
 
 
     
-![png](/assets/tutorial-2d-prototyping_45_0.png)
+![png](assets/tutorial-2d-prototyping_45_0.png)
     
 
 ## Exercises
