@@ -1,6 +1,6 @@
-# Polylines
+# Shapes in two dimensions!
 
-In code, polylines are often represented by a matrix of sorted *vertex* coordinates $V\in\mathbb{R}^{n\times 2}$. Each row contains the coordinates of a single vertex $v_i$, and the $i$-th edge is obtained by connecting the $i$-th vertex to the $i+1$-th vertex.
+In code, *polylines* are often represented by a matrix of sorted *vertex* coordinates $V\in\mathbb{R}^{n\times 2}$. Each row contains the coordinates of a single vertex $v_i$, and the $i$-th edge is obtained by connecting the $i$-th vertex to the $i+1$-th vertex.
 
 To make a simple polyline of a circle, `gpytoolbox` provides a simple wrapper:
 

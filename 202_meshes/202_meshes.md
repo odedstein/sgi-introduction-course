@@ -1,4 +1,4 @@
-# Basic Mesh Modeling
+# Meshes!
 
 There are many [websites](https://www.thingiverse.com) and [datasets](https://ten-thousand-models.appspot.com) dedicated to real-world 3D objects you can test your final algorithms on. However, earlier in the prototyping process, we often want to test our code on simpler, synthetic meshes whose parameters we can control. `gpytoolbox` includes functionality to procedurally create meshes of simple 3D objects.
 
