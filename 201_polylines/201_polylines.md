@@ -576,7 +576,7 @@ where the derivatives are taken with respect to `t`. Your first two tasks are as
 2. Fill out the funcionality of `exercises/cubic_hermite.py` to find, given two points and two vectors and a value of `t`, the value `P(t)` of the cubic Hermite polynomial they define at time `t`.
 
 Please keep reading only after you've completed both tasks. Some of these tasks may be tricky! You aren't expected to be able to do them all in a minute like this was your undergraduate homework. Feel free to ask for help to your colleagues in the program, speak amongst yourselves and reach out to me and the TAs. Also feel free to google or look stuff up by any other means. To test if your formula and your code is right, you can choose arbitrary points, tangents and a time between 0 and 1, and you should get the same result I did.
-```MATLAB
+```python
 import numpy as np
 p0 = np.array([0, 0])
 p1 = np.array([1, 0])
@@ -630,7 +630,7 @@ V = np.column_stack((np.cos(th), np.sin(th)))
 ```
 Now, let's call our new function to estimate the derivatives at every point of the circle
 ```python
->> M = estimate_derivatives_catmull_rom(V)
+M = estimate_derivatives_catmull_rom(V)
 ```
 If we now use the `quiver` command, we should see arrows coming from every point in the circle roughly in the direction tangent to the circle at each point:
 ```python
@@ -646,7 +646,7 @@ Your next task is putting it all together:
 4. Fill out `exercises/catmull_rom_interpolation.py` which, given a set of ordered points (same conditions as task 3) which are assumed to be equally spaced in time between 0 and 1 and a time value `t`, uses `cubic_hermite.py` and `estimate_derivatives_catmull_rom.py` to return `P(t)`, the value of the Catmull-Rom spline that interpolates all given points, at time `t`.
 5. Fill out `exercises/upsample_spline.py` which, given a set of ordered points (same conditions as task 3) which are assumed to be equally spaced in time between 0 and 1, outputs `n` equally spaced (fine) points on the Catmull-Rom spline that interpolates them. 
 
-A way of evaluating that your implementation so far is working is to create a very coarse circumference in MATLAB:
+A way of evaluating that your implementation so far is working is to create a very coarse circumference in python:
 ```python
 import numpy as np
 import matplotlib.pyplot as plt
