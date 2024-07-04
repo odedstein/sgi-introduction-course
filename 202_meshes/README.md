@@ -1,5 +1,5 @@
 # Basic mesh modeling
 
-[writeup / notes](203_basic_mesh_modeling.md)
+[writeup / notes](202_meshes.md)
 
 [exercises](exercise)
