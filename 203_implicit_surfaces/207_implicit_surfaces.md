@@ -296,10 +296,169 @@ _ = plt.axis('equal')
 ![png](assets/tutorial-2d-prototyping_45_0.png)
 
 
+Great! Now let's add one dimension to the problem.
 
+## Implicit Representations in 3D
 
+In 3D, the principles are the same; for example, we can define a sphere using an SDF as follows:
 
+```python
+def sphere_sdf(P):
+    return np.sqrt(P[0]**2 + P[1]**2 + P[2]**2) - 1
+```
 
+The one big difference in 3D is that *visualizing* a 3D function is much harder than visualizing a 2D function. There are several ways of doing it: for example, one I particularly like is to generate a volumetric mesh of a cube, sample the function at each vertex of the cube, and then use `polyscope`'s "slice planes" feature. Here's how to go about it:
+
+```python
+import numpy as np
+import polyscope as ps
+import gpytoolbox as gpy
+# Build a grid
+v, t = gpy.regular_cube_mesh(10)
+# center and rescale the vertices to fit the [-2, 2]^3 cube
+v = 4*v - 2
+# Compute the SDF
+values = np.array([sphere_sdf(point) for point in v])
+# Register the mesh with polyscope
+ps.init()
+ps_mesh = ps.register_volume_mesh("cube", v, t)
+# Add the SDF values to the mesh
+ps_mesh.add_scalar_quantity("SDF", values, enabled=True)
+# Show the mesh
+ps.show()
+```
+
+![](assets/cube-no-slice.png)
+
+Now, we click on "View > Slice Planes > Add plane" and, on the options that appear under "Add Plane", we click on "Inspect > cube". We can now see the slice planes of the SDF of the sphere:
+
+![](assets/cube-slice.png)
+
+and we can move the interactive gizmo to look at the slice plane in different angles and positions:
+
+![](assets/cube-slice-ui.png)
+
+This SDF is not particularly impressive: this is because we used a very coarse cube to sample the function. If we increase the resolution of the cube (careful! your computer may suffer a little from this!), we can inspect more complex SDFs. Here's a script I would use in practice
+
+```python
+import numpy as np
+import polyscope as ps
+import gpytoolbox as gpy
+# Build a grid
+v, t = gpy.regular_cube_mesh(50)
+# center and rescale the vertices to fit the [-2, 2]^3 cube
+v = 4*v - 2
+# Compute the SDF
+values = np.array([sphere_sdf(point) for point in v])
+# Register the mesh with polyscope
+ps.init()
+ps_mesh = ps.register_volume_mesh("cube", v, t)
+# Add the SDF values to the mesh
+ps_mesh.add_scalar_quantity("SDF", values, vminmax=(-2, 2), enabled=True)
+# Show the mesh
+ps.show()
+```
+
+![](assets/slice-finer.png)
+
+This visualization is useful if we want to inspect the details of the function we are generating (often, to check that we have not written any bugs accidentally!). Often, however, the actual information we want to extract from the SDF is the zero level-set; i.e., the surface that it is implicitly representing. We can do this using the traditional algorithm called [marching cubes](https://en.wikipedia.org/wiki/Marching_cubes), which is implemented in `gpytoolbox` as `marching_cubes`:
+
+```python
+import numpy as np
+import polyscope as ps
+import gpytoolbox as gpy
+# Build a grid
+v, _ = gpy.regular_cube_mesh(20)
+# center and rescale the vertices to fit the [-2, 2]^3 cube
+v = 4*v - 2
+# Compute the SDF
+values = np.array([sphere_sdf(point) for point in v])
+V,F = gpy.marching_cubes(values,v,20,20,20,0.0)
+# Register the mesh with polyscope
+ps.init()
+ps_mesh = ps.register_surface_mesh("sphere", V, F)
+# Show the mesh
+ps.show()
+```
+
+![](assets/sphere-mc.png)
+
+Admittedly, a sphere is a pretty boring example. Fortunately, the same `signed_distance` function we used in 2D works in 3D as well, so we can use it to compute distances to more complex shapes. For example, let's load a 3D mesh and compute the signed distance to it:
+
+```python
+import numpy as np
+import polyscope as ps
+import gpytoolbox as gpy
+mesh_vertices, mesh_faces = gpy.read_mesh("data/bunny.obj")
+# normalize it to be in the [-1,1]^3 cube
+mesh_vertices = 2*gpy.normalize_points(mesh_vertices)
+# Build a grid
+v, t = gpy.regular_cube_mesh(20)
+# center and rescale the vertices to fit the [-2, 2]^3 cube
+v = 4*v - 2
+# Compute the signed distance
+values, _ind, _t = gpy.signed_distance(v, mesh_vertices, F=mesh_faces)
+V,F = gpy.marching_cubes(values,v,20,20,20,0.0)
+# Register the mesh with polyscope
+ps.init()
+ps_mesh = ps.register_surface_mesh("bunny", V, F)
+# Show the mesh
+ps.show()
+```
+
+![](assets/bunny-mc-low-res.png)
+
+This is a pretty low resolution bunny! It should draw the point to you that converting from a mesh to a grid of SDF values is a lossy operation. We can increase the resolution of the grid to get a better approximation of the bunny:
+
+```python
+import numpy as np
+import polyscope as ps
+import gpytoolbox as gpy
+mesh_vertices, mesh_faces = gpy.read_mesh("data/bunny.obj")
+# normalize it to be in the [-1,1]^3 cube
+mesh_vertices = 2*gpy.normalize_points(mesh_vertices)
+# Build a grid
+v, t = gpy.regular_cube_mesh(50)
+# center and rescale the vertices to fit the [-2, 2]^3 cube
+v = 4*v - 2
+# Compute the signed distance
+values, _ind, _t = gpy.signed_distance(v, mesh_vertices, F=mesh_faces)
+V,F = gpy.marching_cubes(values,v,50,50,50,0.0)
+# Register the mesh with polyscope
+ps.init()
+ps_mesh = ps.register_surface_mesh("bunny", V, F)
+# Show the mesh
+ps.show()
+```
+
+![](assets/bunny-mc-high-res.png)
+
+We could also visualize the bunny using slice planes (often, I do this at the same time as I plot the zero levelset!). You can even use the polyscope UI to tell the bunny to not be affected by the slice plane
+
+```python
+import numpy as np
+import polyscope as ps
+import gpytoolbox as gpy
+mesh_vertices, mesh_faces = gpy.read_mesh("data/bunny.obj")
+# normalize it to be in the [-1,1]^3 cube
+mesh_vertices = 2*gpy.normalize_points(mesh_vertices)
+# Build a grid
+v, t = gpy.regular_cube_mesh(50)
+# center and rescale the vertices to fit the [-2, 2]^3 cube
+v = 4*v - 2
+# Compute the signed distance
+values, _ind, _t = gpy.signed_distance(v, mesh_vertices, F=mesh_faces)
+V,F = gpy.marching_cubes(values,v,50,50,50,0.0)
+# Register the mesh with polyscope
+ps.init()
+ps_mesh = ps.register_surface_mesh("bunny", V, F)
+# add volume mesh
+ps_volume_mesh = ps.register_volume_mesh("cube", v, t)
+ps_volume_mesh.add_scalar_quantity("SDF", values, vminmax=(-2, 2), enabled=True)
+ps.show()
+```
+
+![](assets/bunny-full.png)
 
 
 
