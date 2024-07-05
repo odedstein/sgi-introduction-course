@@ -359,5 +359,8 @@ Try writing the following functions:
 The skeletons for these functions, ready for you to fill in, can be found in
 `exercise/`.
 
+___
+
+_Thanks to Nicolas Pigadas for spotting a bug function!_
 
 

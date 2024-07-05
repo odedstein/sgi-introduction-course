@@ -1,10 +1,10 @@
 import numpy as np
 def shuffle_by_1(A):
     """
-    Shuffles the rows of a matrix to the bottom by one.
+    Shuffles the columns of a matrix to the right by one.
 
-    This function returns the matrix A with rows shuffled to the bottom by 1,
-    such that the new ith row is the old i-1th row, and the new 1st row 
-    is the old last row.
+    This function returns the matrix A with columns shuffled to the right by 1,
+    such that the new ith col is the old i-1th col, and the new 1st col 
+    is the old last col.
     """
     return None
