@@ -12,7 +12,6 @@ from .tail_vertex import tail_vertex
 from .build_implicit_half_edges import build_implicit_half_edges
 from .is_boundary_half_edge import is_boundary_half_edge
 from .vertex_one_ring_half_edges_from_half_edge import vertex_one_ring_half_edges_from_half_edge
-from .vertex_one_ring_faces_from_half_edge import vertex_one_ring_faces_from_half_edge
 from .is_boundary_vertex_from_half_edge import is_boundary_vertex_from_half_edge
 from .is_collapse_valid import is_collapse_valid
 from .remove_unreferenced import remove_unreferenced
@@ -21,8 +20,13 @@ from .faces_from_half_edge_data import faces_from_half_edge_data
 from exercise.optimal_location_and_cost import optimal_location_and_cost
 from exercise.triangle_quadrics import triangle_quadrics
 from exercise.face_areas import face_areas
-from src.compute_triangle_planes import compute_triangle_planes
 
+# Uncomment these if you want to play with the solution
+# =====
+# from solution.optimal_location_and_cost import optimal_location_and_cost
+# from solution.triangle_quadrics import triangle_quadrics
+# from solution.face_areas import face_areas
+# =====
 
 def decimate_qem(Vo,Fo,num_target_vertices,
                    triangle_quality_threshold = 0.1, 

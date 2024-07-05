@@ -17,10 +17,9 @@ from .is_boundary_vertex_from_half_edge import is_boundary_vertex_from_half_edge
 from .is_collapse_valid import is_collapse_valid
 from .remove_unreferenced import remove_unreferenced
 from .faces_from_half_edge_data import faces_from_half_edge_data
-
-from exercise.optimal_location_and_cost import optimal_location_and_cost
-from exercise.triangle_quadrics import triangle_quadrics
-from exercise.face_areas import face_areas
+from .optimal_location_and_cost import optimal_location_and_cost
+from .triangle_quadrics import triangle_quadrics
+from .face_areas import face_areas
 from src.compute_triangle_planes import compute_triangle_planes
 
 

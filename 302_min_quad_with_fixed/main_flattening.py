@@ -6,16 +6,15 @@ import numpy as np
 import igl
 
 from src.read_obj import read_obj
-from src.decimate_qem import decimate_qem
 
-from src.cotmatrix_dense import cotmatrix_dense
-from exercise.mqwf_dense import mqwf_dense
+from src.cotmatrix import cotmatrix
+from exercise.mqwf import mqwf
 
 def main():
     V,F = read_obj('./data/ogre_sim.obj')
 
     # construct the laplacian
-    L = cotmatrix_dense(V, F)
+    L = cotmatrix(V, F)
 
     # extract the boundary
     bnd = igl.boundary_loop(F)
@@ -25,7 +24,7 @@ def main():
     Bo = np.zeros((np.shape(V)[0],2))
 
     # solve the constrained linear system
-    UV2 = mqwf_dense(L, Bo, bnd, uvb)
+    UV2 = mqwf(L, Bo, bnd, uvb)
     zeros_column = np.zeros((np.shape(V)[0], 1))
     UV = np.hstack((UV2, zeros_column))
     UV[:, [0, 1, 2]] = UV[:, [0, 2, 1]]

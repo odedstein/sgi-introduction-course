@@ -12,7 +12,7 @@ The courses are as follows:
 * 1st day: 0xx, by [Oded Stein](https://odedstein.com/)
 * 2nd day: 1xx, by [Dale Decatur](https://ddecatur.github.io) and [Richard Liu](http://www.computerscience.uchicago.edu/people/richard-liu/)
 * 3rd day: 2xx, by [Silvia Sellán](http://dgp.toronto.edu/~sgsellan/)
-* 4th day: 3xx, by [Derek Liu](https://www.dgp.toronto.edu/~hsuehtil/) and [Jiayi Eris Zhang](https://eriszhang.github.io)
+* 4th day: 3xx, by [Jiayi Eris Zhang](https://eriszhang.github.io) and [Derek Liu](https://www.dgp.toronto.edu/~hsuehtil/)
 * 5th day: 4xx, by [Nick Sharp](https://nmwsharp.com)
 
 We thank Olga Guțan, Peter Rock and Leticia Mattos Da Silva for their help in designing the course.

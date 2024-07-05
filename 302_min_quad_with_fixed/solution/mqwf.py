@@ -1,21 +1,20 @@
 import numpy as np
 import scipy
-# from sksparse.cholmod import cholesky
 
-def mqwf_dense(A, B, known, known_val):
+def mqwf(A, B, known, known_val):
     """
     This function solves the following problem 
 
     minimize_x 0.5 * x' * A * x - x' * B 
     such that x[known] = known_val
 
-    Inputs:
-        A: n x n np array 
+    Inputs
+        A: n x n scipy sparse array 
         B: n x dim np array
         known: 1D np array of indices of constrained vertices
         known_val: constrained values at "known"
 
-    Outputs:
+    Outputs
         u: n x dim of output solution
     """
 
@@ -38,6 +37,7 @@ def mqwf_dense(A, B, known, known_val):
     # Auu * x_unknown = RHS[unknown] - Auk @ known_values
     Auu = A[:,unknown]
     Auu = Auu[unknown,:]
+    preF = scipy.sparse.linalg.factorized(Auu) # prefactorization, a key to make linear solve A LOT faster for consecutive solves if having the same system matrix A
 
     # get RHS    
     Auk = A[unknown,:]
@@ -45,7 +45,7 @@ def mqwf_dense(A, B, known, known_val):
     RHS = B[unknown] - Auk @ known_val
 
     # solve 
-    unknown_val = np.linalg.solve(Auu,RHS)
+    unknown_val = preF(RHS)
 
     # assemble solution
     out = np.zeros((n,B.shape[1]))

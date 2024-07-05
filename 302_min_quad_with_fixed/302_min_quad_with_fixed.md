@@ -52,7 +52,7 @@ dE(x)/dx = 2 * Anew * x + bnew = 0
 ```
 This will result in a linear system with left-hand-side `2*Anew` and right-hand-side `-bnew`.
 
-Fill in the missing part in `min_quad_with_fixed_dense.py.`
+Fill in the missing part in `min_quad_with_fixed.py.`
 
 ## Application: Flatten a Surface
 
