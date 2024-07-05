@@ -124,9 +124,9 @@ performing a small time-step of the heat equation:
 ## Exercises
 
 If you are learning geometry processing, try writing the following functions:
-* `cotangend_laplacian_from_grad`, which produces the Laplacian matrix using the gradient
+* `cotangent_laplacian_from_grad`, which produces the Laplacian matrix using the gradient
 matrix.
-* `cotangend_laplacian_from_entries`, which produces the Laplacian matrix using the
+* `cotangent_laplacian_from_entries`, which produces the Laplacian matrix using the
 cotangent formula.
 
 As usual, the skeleton for these functions, ready for you to fill in, can be

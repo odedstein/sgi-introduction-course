@@ -163,9 +163,9 @@ The identity matrix of dimension `d` is constructed using `np.eye(d)`.
 ```python
 >>> mat = np.eye(4)
 >>> print(mat)
-[[1. 2. 3.]
- [4. 5. 6.]
- [7. 8. 9.]]
+[[1. 0. 0.]
+ [0. 1. 0.]
+ [0. 0. 1.]]
 ```
 
 Using the arithmetic operators `+`, `-`, `*`, `/` and `**` on numpy arrays
@@ -177,7 +177,7 @@ of compatible sizes, or an array and a scalar.
 So, the following elementwise operations are legal:
 ```python
 >>> A = np.array([[1., 2.], [3., 4.], [5., 6.]])
->>> np.array([[13., 14.], [15., 16.], [17., 18.]])
+>>> B = np.array([[13., 14.], [15., 16.], [17., 18.]])
 >>> print(f"A+B: {A+B}")
 A+B: [[14. 16.]
  [18. 20.]
@@ -196,7 +196,8 @@ A-3: [[-2. -1.]
  [0.2        0.16666667]]
 ```
 
-The following elementwise operations are illegal:
+The following elementwise operations are illegal, since they are combining
+array of different dimensions:
 ```python
 >>> A = np.array([[1., 2.], [3., 4.], [5., 6.]])
 >>> u = np.array([1., 2., 3., 4.])
@@ -211,7 +212,7 @@ Traceback (most recent call last):
 ValueError: operands could not be broadcast together with shapes (3,2) (2,2)
 ```
 
-There are a variety of mathematic operations in NumPy that are specific to
+There are a variety of mathematical operations in NumPy that are specific to
 matrices.
 _Matrix multiplication_ is performed via the `@` operator:
 ```python
@@ -229,7 +230,7 @@ Transpose A.T: [[1. 3. 5.]
  [2. 4. 6.]]
 ```
 
-While matrixes in NumPy can be inverted with `np.linalg.inv`, it is generally
+While matrices in NumPy can be inverted with `np.linalg.inv`, it is generally
 not advisable to do so.
 Instead, one can solve the linear equation `A@u == b` with the `np.linalg.solve`
 function:
@@ -241,12 +242,7 @@ inv(A)@b = [ 1.  -1.5]
 ```
 
 The last thing we will cover in this intro is how to access matrix elements.
-NumPy uses square bracket access for array elements:
-```python
-
-```
-
-MATLAB uses bracket access for vector elements.
+NumPy uses square bracket access for array elements.
 Bracket access with the index `i` will select the `i`-th element of a vector.
 For a matrix, you must specify rows and columns.
 Python uses zero-indexing: the first element of an array has index `0`.
@@ -286,8 +282,6 @@ There are many more, but this should be enough to get us started!
 
 We will now quickly go through the basic programming control statements and how
 they are implemented in Python.
-This section assumes that you already know the programming concepts behind
-`if`, `while`, and `for`, and will only quickly explain how to use these.
 
 An `if` block in Python has the form
 ```python

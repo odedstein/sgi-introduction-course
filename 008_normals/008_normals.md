@@ -151,8 +151,8 @@ works very similar to the `add_scalar_quantity` that you already know):
 ```python
 >>> ps.init()
 >>> ps_spot = ps.register_surface_mesh("spot", V, F, smooth_shade=True)
->>> ps_spot.add_vector_quantity("per-face normals", N, defined_on='faces', enabled=True)
->>> ps.show(
+>>> ps_spot.add_vector_quantity("per-face normals", N, defined_on="faces", enabled=True)
+>>> ps.show()
 ```
 
 ![spot, with normals](assets/spot_with_normals.png)
@@ -178,6 +178,7 @@ tangent space of a surface at each point).
 Since smooth surfaces have normal vectors at every point, it is natural to want
 to compute normal vectors at other parts of our mesh than just at triangle
 faces.
+
 For many applications we want _per-vertex normals_, where each vertex of the
 mesh is associated with a vector in 3D.
 In Gpytoolbox, such a per-vertex normal can be computed with the function
@@ -219,10 +220,11 @@ a reasonable choice.
 >>> N = gpy.per_face_normals(V,F)
 >>> ps.init()
 >>> ps_spot = ps.register_surface_mesh("spot", V, F, smooth_shade=True)
->>> ps_spot.add_vector_quantity("per-vertex normals", N, defined_on='faces', enabled=True)
+>>> ps_spot.add_vector_quantity("per-vertex normals", N, defined_on='vertices', enabled=True)
 >>> ps.show()
 ```
 ![spot, with per-vertex normals](assets/spot_with_per_vert_normals.png)
+
 
 
 ## Exercises
@@ -237,11 +239,15 @@ triangle in the mesh.
 If you already know geometry processing well and are familiar with the concept
 of normals of (or have already completed above exercise),
 try writing the following functions which tests your mastery of normals:
-* `flipped_normals`, which returns the flipped normals of a triangle mesh.
+* `flipped_normals`, which returns the flipped normals of a triangle mesh (make sure to set Polyscope to plot only the wireframe of the surface, so you can see inside it and look at the flipped normals!).
 * `tangents`, which returns two perpendicular, oriented tangent vectors for each
 face of a triangle mesh.
-_HINT: Use `np.sum(A*B, axis=-1)` to compute the row-wise dot produce of two
+_HINT: Use `np.sum(A*B, axis=-1)` to compute the row-wise dot product of two
 matrices._
+Olga has kindly provided us with an example of what the tangents should look
+like:
+
+![tangents](assets/tangents.png)
 
 As usual, the skeleton for these functions, ready for you to fill in, can be
 found in `exercise/`.

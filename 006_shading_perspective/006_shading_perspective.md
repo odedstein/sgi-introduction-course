@@ -15,7 +15,7 @@ This is especially apparent for coarse meshes:
 >>> ps.show()
 ```
 
-![A low-resolution flat-shaded spot](images/flat_spot.png)
+![A low-resolution flat-shaded spot](assets/flat_spot.png)
 
 This effect stems from the fact that Polyscope uses a variant of the
 [Blinn-Phong shading model](https://en.wikipedia.org/wiki/Blinn–Phong_reflection_model)
@@ -34,7 +34,7 @@ triangles:
 >>> ps.show()
 ```
 
-![A low-resolution smooth-shaded spot](images/smooth_spot.png)
+![A low-resolution smooth-shaded spot](assets/smooth_spot.png)
 
 ## Material
 
@@ -60,7 +60,7 @@ Here is how you display a mud spot:
 
 This displays:
 
-![A mud spot](images/mud_spot.png)
+![A mud spot](assets/mud_spot.png)
 
 And here is a ceramic penguin:
 ```python
@@ -71,7 +71,7 @@ And here is a ceramic penguin:
 
 This displays:
 
-![A ceramic spot](images/ceramic_spot.png)
+![A ceramic spot](assets/ceramic_spot.png)
 
 The built-in materials are (where the colorable ones allow you to set a color
 on top of the material, or apply a colormap to a plotted function):

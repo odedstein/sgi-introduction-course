@@ -15,7 +15,7 @@ The courses are as follows:
 * 4th day: 3xx, by [Derek Liu](https://www.dgp.toronto.edu/~hsuehtil/) and [Jiayi Eris Zhang](https://eriszhang.github.io)
 * 5th day: 4xx, by [Nick Sharp](https://nmwsharp.com)
 
-We thank Peter Rock and Leticia Mattos Da Silva for their help in designing the course.
+We thank Olga Guțan, Peter Rock and Leticia Mattos Da Silva for their help in designing the course.
 
 
 ## Download Course Material 

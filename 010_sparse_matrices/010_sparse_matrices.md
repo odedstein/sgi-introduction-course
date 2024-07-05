@@ -15,7 +15,7 @@ of `n*m` is required.
 This seems reasonable, and also the only way to store a matrix like `A`.
 After all, every entry has a different value, so we need to store every entry.
 
-But what when the matrix contains entries that are mostly the same, with only
+But what about when the matrix contains entries that are mostly the same, with only
 a few one different?
 For such matrices it does not make sense to store every single value in memory.
 For very large matrix systems, it can even be impossible to store everything in
@@ -46,8 +46,8 @@ One could store the row and column information for all nonzero values like so:
 ```
 This format is called
 [coordinate list](https://en.wikipedia.org/wiki/Sparse_matrix#Coordinate_list_(COO)).
-It is not the format used by MATLAB internally, but it is important, as it is
-very easy to construct sparse matrices from this format, and MATLAB displays
+It is not the format used by Python internally, but it is important, as it is
+very easy to construct sparse matrices from this format, and Python displays
 sparse matrices as a coordinate list when prompted.
 
 A more popular format is the

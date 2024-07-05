@@ -22,6 +22,8 @@ where `m` is the number of triangle faces in the mesh.
 
 Let's look at a very simple triangle mesh:
 a mesh that consists of only one triangle.
+Open up your console or your working script, import everything as you did in
+the last exercise, and let's get to our triangle.
 This triangle has the vertices `(0,0), (1,0), (0,1)`:
 ```python
 >>> V = np.array([[0.,0.], [1.,0.], [0.,1.]])

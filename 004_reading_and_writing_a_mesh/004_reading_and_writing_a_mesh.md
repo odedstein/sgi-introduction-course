@@ -24,8 +24,9 @@ V,F = gpy.read_mesh('data/bunny.obj')
 The resulting variables `V,F` will contain the vertex and face lists.
 For this to work, you need to be in the correct directory, since the path to
 the mesh, `'data/bunny.obj'`, is relative to your current directory.
-Navigate your MATLAB to the folder where you downloaded the tutorial, and go
-into the folder for this exercise, `004_reading_and_writing_a_mesh`.
+Navigate your terminal to the folder where you downloaded the tutorial, and go
+into the folder for this exercise, `004_reading_and_writing_a_mesh`, and start
+your console (or put your working script here).
 
 In this case, we read the Stanford bunny, which looks like this:
 > Remember the visualization commands from [exercise 003!](../003_a_triangle_mesh/003_a_triangle_mesh.md)
@@ -42,6 +43,9 @@ This works with the command
 >>> gpy.write_mesh('data/bunny.obj', V,F);
 ```
 
+_NOTE: This will overwrite whatever is in that file currently!
+Make sure to only do this if you actually want to overwrite a file._
+
 
 ## Other file formats
 
@@ -55,7 +59,7 @@ They are:
 ## Try writing your own mesh
 
 Try writing the following function:
-* `write_polyhedron`, which writes the simple tetrahedron from 003 to a file.
+* `write_tetrahedron`, which writes the simple tetrahedron from 003 to a file.
 
 As usual, the skeleton for this function, ready for you to fill in, can be
 found in `exercise/`.
