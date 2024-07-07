@@ -6,6 +6,8 @@ You will first compute a trivial parameterization (local basis projection) of a 
 
 Below is the mathematical construction for the matrices that you will be building to solve the system in the notebook. This isn't necessary to know to complete the exercise, but may be useful for those interested in understanding better where the Laplacian matrix arises from in this system.
 
+### Solving the spring system
+
 We start with the spring energy minimization problem.
 $$E = \min\_{\mathbf{U}} \sum\_{\{i,j\} \in \mathbf{E}} w\_{ij} ||\mathbf{u}\_i - \mathbf{u}\_j||^2$$
 
