@@ -91,16 +91,16 @@ also often get away with the easier, simplified, lumped mass matrix
 
 which is easier to work with, as it is a diagonal matrix.
 
-In gptoolbox, the Laplacian can be constructed by calling the function
-`cotmatrix` (namead after the _cotangent formula_ with which it is
+In Gpytoolbox, the Laplacian can be constructed by calling the function
+`cotangent_laplacian` (namead after the _cotangent formula_ with which it is
 constructed):
-```MATLAB
->> L = -cotmatrix(V,F);
+```python
+>>> L = gpy.cotangent_laplacian(V,F);
 ```
 
 The mass matrix is constructed using `massmatrix`
-```MATLAB
->> M = massmatrix(V,F);
+```python
+>>> M = gpy.massmatrix(V,F);
 ```
 `massmatrix` accepts a third argument specifying which kind of mass matrix to
 compute, see the documentation of the function for more detail.
@@ -111,12 +111,11 @@ for more detail on the entries of the different matrices.
 
 The Laplacian can now be used, for example, to smooth a noisy function by
 performing a small time-step of the heat equation:
-```MATLAB
->> un = noisy_function();
->> L = -cotmatrix(V,F);
->> M = massmatrix(V,F);
->> u = (1e-2*L + M) \ (M*un);
->> tsurf(F,V, 'CData',u);
+```python
+>>> un = noisy_function();
+>>> L = gpy.cotangent_laplacian(V,F)
+>>> M = gpy.massmatrix(V,F)
+>>> u = sp.sparse.linalg.spsolve(1e-3*L + M, M*un)
 ```
 
 ![smoothing, using the Laplacian](assets/smoothinglaplacian.png)
@@ -125,13 +124,13 @@ performing a small time-step of the heat equation:
 ## Exercises
 
 If you are learning geometry processing, try writing the following functions:
-* `cotmatrix_from_grad`, which produces the Laplacian matrix using the gradient
+* `cotangent_laplacian_from_grad`, which produces the Laplacian matrix using the gradient
 matrix.
-* `cotmatrix_from_entries`, which produces the Laplacian matrix using the
+* `cotangent_laplacian_from_entries`, which produces the Laplacian matrix using the
 cotangent formula.
 
 As usual, the skeleton for these functions, ready for you to fill in, can be
 found in `exercise/`.
-Compare your solution with gptoolbox's `cotmatrix` to see whether you have
+Compare your solution with Gpytoolbox's `cotangent_laplacian` to see whether you have
 computed the correct solution.
 

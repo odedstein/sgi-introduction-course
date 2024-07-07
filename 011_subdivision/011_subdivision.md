@@ -23,12 +23,18 @@ This does not look as good as it could.
 While it might be advantageous to design and compute things on coarse meshes,
 once we display, we usually want to display a fine, dense and smooth mesh.
 One way to do this is to replace each triangle with four triangles.
+In Gpytoolbox this is done with the function
+`subdivide(V,F,method='upsample',iters=k)`, which upsamples a surface `k`
+times.
 That way we add more fidelity and detail to our mesh:
 
 ![replacing one triangle by four](assets/upsample.png)
 
 This is how this looks for our mug, applied three times, and displayed below
 with edges and without:
+```python
+>>> Vu,Fu = gpy.subdivide(V,F, iters=3, method='upsample')
+```
 
 ![an upsampled mug](assets/upsampled-mug.png)
 
@@ -118,7 +124,7 @@ position, as well as the position of all of its old red neighbors:
 ![weights for the old vertices in the interior](assets/old-verts-interior.png)
 
 What exactly is the coefficient β?
-gptoolbox uses
+Gpytoolbox uses
 ![Loop's beta](assets/loops-beta.png), where n is the number
 of green neighbors of the moved red vertex
 (even though the image above shows only six neighbors, in practice there
@@ -141,12 +147,13 @@ it particularly desirable, see, for example,
 [this article](https://www.dgp.toronto.edu/public_user/stam/reality/Research/pdf/loop.pdf)
 for a discussion.
 
-In gptoolbox, Loop subdivision is implemented in the `loop(V,F,k)` command,
+In Gpytoolbox, Loop subdivision is implemented in the
+`subdivide(V,F,method='loop',iters=k)` command,
 which will subdivide the surface `V,F` `k` times.
 For example, the following command will give us a smooth, high-resolution, fine
 version of our mug, ready to drink from:
-```MATLAB
->> [Vu,Fu] = loop(V,F,4);
+```python
+>>> Vu,Fu = gpy.subdivide(V,F, iters=3, method='loop')
 ```
 
 ![a coarse and a subdivided mug](assets/coarse-and-subdivided-mug.png)
@@ -156,23 +163,25 @@ version of our mug, ready to drink from:
 
 You might have noticed that, at each step, the vertex averaging process was
 a completely linear operation.
-This means that there is a linear map `Si` such that `Vip1 = Si*Vi`,
-where `Vi` is the matrix of vertex positions, and `Vip1` are the vertex
+This means that there is a linear map `Si` such that `Vu = Si*V`,
+where `V` is the matrix of vertex positions, and `Vu` are the vertex
 positions after one step of subdivision.
+Gpytoolbox can return this matrix to you if you add the argument
+`return_matrix=True`:
 gptoolbox provides this matrix via the third output argument of `loop`:
-```MATLAB
->> [Vip1,Fip1,Si] = loop(Vi,Fi);
+```python
+>>> Vu,Fu,Si = gpy.subdivide(V,F, iters=3, method='loop', return_matrix=True)
 ```
 
 `Si` is a sparse matrix (as described in
-[this exercise](../010_sparse_matrices/010_sparse_matrices.m)), and therefore
+[this exercise](../010_sparse_matrices/010_sparse_matrices.md)), and therefore
 does not use much storage space or much computational power to multiply.
-It holds that `Vip1` is equal to `Si*Vi`.
+It holds that `Vu` is equal to `Si*V`.
 This property can be used to take any per-vertex quantity on the coarse
 mesh and obtain a corresponding quantity on the fine mesh.
 That process is smooth, just like the subdivision itself:
-```MATLAB
->> uip1 = Si*ui;
+```python
+>> uu = Si*u;
 ```
 
 ![a coarse and an upsampled function](assets/coarse-and-upsampled-function.png)
@@ -181,14 +190,14 @@ That process is smooth, just like the subdivision itself:
 ## Exercises
 
 If you are learning geometry processing, try writing the following functions:
-* `my_upsample`, which matches the behavior of `gptoolbox`'s `upsample` function.
-* `my_loop`, which matches the behavior of `gptoolbox`'s `loop` function.
+* `my_upsample`, which matches the behavior of `Gpytoolbox`'s
+`subdivide(method='upsample')` function.
+* `my_loop`, which matches the behavior of `Gpytoolbox`'s
+`subdivide(method='loop')` function.
 
 If you already know geometry processing well and are familiar with the concept
 of subdivision (or have already completed above exercise),
-try writing the following functions which tests your mastery of subdivision:
-* `plot_subdivided`, which takes a coarse mesh plus a function on that mesh,
-and plots a subdivided, fine version.
+try writing the following function which tests your mastery of subdivision:
 * `reverse_subdivision`, which takes a function on a subdivided mesh and finds
 a corresponding function on the coarse mesh.
 HINT: try to find the closest subdividable function in the

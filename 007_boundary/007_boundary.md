@@ -1,7 +1,7 @@
 # Boundary
 
 In this exercise we will learn what the boundary of a surface is, and how we can
-work with it using gptoolbox.
+work with it using Gpytoolbox.
 
 
 ## The boundary of a surface
@@ -48,143 +48,83 @@ _A boundary triangle is a triangle that contains at least one boundary edge_,
 otherwise it is an _interior triangle_.
 
 
-## Computing the boundary in gptoolbox
+## Computing the boundary in Gpytoolbox
 
-The basic tool in gptoolbox to extract the boundary in gptoolbox are the
-functions `outline` and `on_boundary`.
+The basic tool in Gpytoolbox to extract the boundary in gptoolbox are the
+functions `boundary_edges` and `boundary_vertices`.
 
-`outline` returns a set of ordered boundary edges for every triangle mesh.
+`boundary_edges` returns the boundary edges as a list of lines for a triangle
+mesh.
 Consider the following small mesh of a square:
 
 ![a small mesh of a square](assets/small_square.png)
-```MATLAB
->> V =  [0, 0;  0, 0.5; 0, 1; 0.5, 0; 0.5, 0.5; 0.5, 1;  1, 0;  1, 0.5;  1, 1]
-V =
 
-            0            0
-            0          0.5
-            0            1
-          0.5            0
-          0.5          0.5
-          0.5            1
-            1            0
-            1          0.5
-            1            1
->> F = [1, 4, 2; 4, 5, 2; 2, 5, 3; 5, 6, 3; 4, 7, 5; 7, 8, 5; 5, 8, 6; 8, 9, 6]
-F =
-
-     1     4     2
-     4     5     2
-     2     5     3
-     5     6     3
-     4     7     5
-     7     8     5
-     5     8     6
-     8     9     6
+```python
+>>> V = np.array([[0, 0], [0, 0.5], [0, 1], [0.5, 0], [0.5, 0.5], [0.5, 1], [1, 0], [1, 0.5], [1, 1]]) 
+>>> F = np.array([[0,3,1], [3,4,1], [1,4,2], [4,5,2], [3,6,4], [6,7,4], [4,7,5], [7,8,5]])
+>>> print(V)
+[[0.  0. ]
+ [0.  0.5]
+ [0.  1. ]
+ [0.5 0. ]
+ [0.5 0.5]
+ [0.5 1. ]
+ [1.  0. ]
+ [1.  0.5]
+ [1.  1. ]]
+>>> print(F)
+[[0 3 1]
+ [3 4 1]
+ [1 4 2]
+ [4 5 2]
+ [3 6 4]
+ [6 7 4]
+ [4 7 5]
+ [7 8 5]]
 ```
 
 Just as the variable `F` gives us the triangles on the mesh as collections of
-three indices into `V` for each face, `outline(F)` will return the boundary
+three indices into `V` for each face, `boundary_edges(F)` will return the boundary
 edges as collections of two indices into `V` for each boundary edge:
-```MATLAB
->> outline(F)
-
-ans =
-
-     2     1
-     3     2
-     6     3
-     1     4
-     9     6
-     4     7
-     7     8
-     8     9
+```python
+>>> bdry_edges = gpy.boundary_edges(F)
+>>> print(bdry_edges)
+[[1 0]
+ [0 3]
+ [2 1]
+ [5 2]
+ [3 6]
+ [8 5]
+ [6 7]
+ [7 8]]
 ```
 
-Each row of `ans` is an edge, a straight line from `V(ans(i,1),:)` to
-`V(ans(i,2),:)`.
-Together, all the rows of `ans` are the boundary edges of `F`.
+Each row of `bdry_edges` is an edge, a straight line from `V[bdry_edges[i,0],:]`
+to `V[bdry_edges[i,1],:]`.
+Together, all the rows of `bdry_edges` are the boundary edges of `F`.
 
-Using MATLAB's `unique` function (which returns all one of each element in a
-matrix) we can extract the boundary _vertices_ from the return value of
-`outline`:
-```MATLAB
->> unique(outline(F))
-
-ans =
-
-     1
-     2
-     3
-     4
-     6
-     7
-     8
-     9
+With Gpytoolbox's `boundary_vertices` function we can compute the list of
+boundary vertices as indices into the vertex list `V`:
+```python
+bdry_vertices = gpy.boundary_vertices(F)
+>>> print(bdry_vertices)
+[0 1 2 3 5 6 7 8]
 ```
 
 As we can see, the boundary vertices are all the vertices with the exception of
-`5`, the vertex in the middle of the square.
-
-The function `on_boundary` can be used to tell which triangle is on the boundary
-and which is not.
-It takes the triangle list `F` and returns a list of booleans `I` which tells us
-whether that respective triangle is a boundary triangle, and it returns a matrix
-of booleans `C` (with the same dimensions as `F`) that tells us whether the edge
-opposing a vertex is a boundary edge:
-```MATLAB
->> [I,C] = on_boundary(F)
-
-I =
-
-  8×1 logical array
-
-   1
-   0
-   1
-   1
-   1
-   1
-   0
-   1
-
-
-C =
-
-  8×3 logical array
-
-   0   1   1
-   0   0   0
-   0   1   0
-   1   0   0
-   0   0   1
-   0   0   1
-   0   0   0
-   1   0   1
-```
-
-Looking at the return value `I` we can see that all triangles, except for the
-second and the seventh, are boundary triangles (and thus contain at least one
-boundary edge).
-This list of booleans can be transformed into a list of indices with the MATLAB
-function `find`.
-The return value `C` has the exact same dimensions as `F`, and tells us whether
-a vertex at a certain position in `F` (i.e., `C(i,j) == F(i,j)`) is opposite a
-boundary edge or not.
+`4`, the vertex in the middle of the square.
 
 
 ## Exercises
 
 If you are learning geometry processing, try writing the following function:
-* `my_outline`, which matches the behavior of `gptoolbox`'s `outline` function.
+* `my_boundary_edges`, which matches the behavior of Gpytoolbox's
+`boundary_edges` function.
 
 If you already know geometry processing well and are familiar with the concept
 of boundaries of triangle meshes (or have already completed above exercise),
 try writing the following functions which tests your mastery of the boundary
 command:
-* `plot_boundary_orange`, which takes a triangle mesh as input, and then plots
-it by coloring all boundary vertices in orange, and all interior vertices in
-blue.
 * `boundary_triangles`, which takes a triangle mesh as input, and returns a list
 of all boundary trianges.
 * `boundary_length`, which takes a triangle mesh as input, and returns the

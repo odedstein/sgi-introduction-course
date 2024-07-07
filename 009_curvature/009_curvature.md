@@ -98,11 +98,11 @@ Principal curvatures are only well-defined on smooth surfaces.
 We can however evaluate discretizations of principal curvatures on discrete
 surfaces that approximate the principal curvatures on smooth surfaces in some
 way.
-The integrated values of these principal curvatures (integrated over the
-neighborhood of each vertex) can be computed in gptoolbox using
-```MATLAB
->> kappa = discrete_curvatures(V,F);
-```
+
+Gpytoolbox does not contain a way to compute principal curvatures.
+If you want to compute the principal curvature in Python, I recommend that
+you install [libigl](https://libigl.github.io/libigl-python-bindings/) and
+use its [`principal_curvature`](https://libigl.github.io/libigl-python-bindings/igl_docs/#principal_curvature) function.
 
 
 ## Mean curvature
@@ -128,13 +128,16 @@ we have to compute some approximation for discrete surfaces such as triangle
 meshes.
 The theory behind the computation of the mean curvature for triangle meshes
 requires theoretical knowledge that we have not yet obtained in this course.
-But we can use gptoolbox's mean curvature command as a black box to look at the
-integrated mean curvature of a surface:
-```MATLAB
->> H = discrete_mean_curvature(V,F);
->> t = tsurf(F,V, 'CData',H);
->> v = max(abs([min(H), max(H)]));
->> caxis([-v, v]);
+
+You can use the finite element operators for the Laplacian and mass matrix
+(which will be introduced in [exercise 013](../013_laplacian)) to compute the
+discrete mean curvature `H`:
+```python
+>>> L = gpy.cotangent_laplacian(V,F)
+>>> M = gpy.massmatrix(V,F)
+>>> HN = -sp.sparse.linalg.spsolve(M, L*V)
+>>> sign = -np.sum(gpy.per_vertex_normals(V,F)*HN, axis=-1)
+>>> H = np.linalg.norm(HN, axis=-1) * sign
 ```
 
 In the following image you can see the mean curvature displayed on two surfaces,
@@ -227,10 +230,10 @@ See [here](https://www.cs.cmu.edu/~kmcrane/Projects/DDG/) for a more detailed
 treatment of the angle defect that features a thorough theoretical foundation
 for its properties.
 
-In gptoolbox we can compute the integrated Gaussian curvature of a triangle mesh
-via the angle defect using the function `discrete_gaussian_curvature`:
-```MATLAB
->> k = discrete_gaussian_curvature(V,F);
+In Gpytoolbox we can compute the integrated Gaussian curvature of a triangle mesh
+via the angle defect using the function `angle_defect`:
+```python
+>>> k = gpy.angle_defect(V,F);
 ```
 
 In the following image you can see the Gauss curvature displated on two
@@ -266,14 +269,10 @@ One of the exercises consists of you trying to generate your own such effect!
 ## Exercises
 
 If you are learning geometry processing, try writing the following function:
-* `my_discrete_gaussian_curvature`, which matches the behavior of `gptoolbox`'s
-`discrete_gaussian_curvature` function.
+* `my_angle_defect`, which matches the behavior of `Gpytoolbox`'s
+`angle_defect` function.
 
-If you already know geometry processing well and are familiar with the concept
-of curvature (or have already completed above exercise),
-try writing the following function which tests your mastery of curvature:
-* `draw_with_grime`, which takes a triangle mesh and plots it in a way that
-simulates dirt and grime in the crevices of the object.
+_HINT: Look at the Gpytoolbox function `tip_angles`, it might be helpful!_
 
 As usual, the skeleton for these functions, ready for you to fill in, can be
 found in `exercise/`.

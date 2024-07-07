@@ -101,7 +101,7 @@ has dimensions _3m x n_, since each face stores three coordinates for each
 face: _x_, _y_, and _z_.
 
 There is some freedom in how to exactly lay out the coordinates per face.
-gptoolbox chooses to first lay out all _x_-coordinates for each face, one after
+Gpytoolbox chooses to first lay out all _x_-coordinates for each face, one after
 the other, then all _y_-coordinates, and then all _z_-coordinates, like so:
 
 ![the rows of grad](assets/gradlayout.png)
@@ -113,49 +113,22 @@ As the gradient on each face depends only on the function falue of its vertices,
 the resulting matrix is very sparse.
 The gptoolbox command to compute this sparse gradient matrix for a mesh `V,F` is
 called `grad`:
-```MATLAB
->> G = grad(V,F);
-```
-
-
-## Intrinsic grad
-
-Since the gradient of a per-vetex function on each triangle face is given by
-a vector that is tangential to that face, it is technically not necessary to
-specify it using _x_, _y_, and _z_ coordinates in 3D.
-We can represent it using only two coordinates using two orthogonal tangent
-vectors to the triangle that span the plane of the triangle.
-
-The gptoolbox funtion `grad_intrinsic` achieves this:
-it computes the same gradient operator as gptoolbox's `grad` function, but
-instead of its rows representing _x_-, _y_-, and _z_-coordinates, it returns
-only two sets of rows:
-* The first set of rows determines, for each triangle,
-the part of the gradient along the direction of the triangle edge that goes
-from the 2nd to the 3rd vertex.
-* The second set of rows determines, for each triangle, the part of the gradient
-along the direction orthogonal to the edge that goes from the 2nd to the 3rd
-vertex (but so that the coordinate system is oriented the same way as the
-triangle).
-
-![the rows of grad_intrinsic](assets/intrinsicgradlayout.png)
-
-```MATLAB
->> G = grad_intrinsic(V,F);
+```python
+>>> G = gpy.grad(V,F);
 ```
 
 
 ## Exercises
 
 If you are learning geometry processing, try writing the following function:
-* `my_grad`, which matches the behavior of `gptoolbox`'s `grad` function.
+* `my_grad`, which matches the behavior of `Gpytoolbox`'s `grad` function.
 
 If you already know geometry processing well and are familiar with the concept
 of gradients (or have already completed above exercise),
 try writing the following function which tests your mastery of gradients:
 * `critical_points`, which identifies the faces of a triangle mesh where, for
 a given input functions, a critical point occurs.
-HINT: investigate what the MATLAB function `find` might be able to do for you!
+HINT: investigate what the Python function `argwhere` might be able to do for you!
 
 As usual, the skeleton for these functions, ready for you to fill in, can be
 found in `exercise/`.

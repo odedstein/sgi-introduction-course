@@ -4,101 +4,37 @@ There are many ways to modify a surface plot to make it more appealing.
 This exercise goes over a few different ways to shade a plot, and to add
 perspective to it.
 
-
-## Axes on / off
-
-All of our plots so far have had labeled axis and a grid in the background.
-While this can be helpful to convey the scale of the plotted objects, when such
-scale is irrelevant, it can be distracting.
-```MATLAB
->> t = tsurf(F,V);
->> shading interp;
->> axis equal;
-```
-![potentially distracting axis](assets/spot_axison.png)
-
-MATLAB offers a simple way to remove the axes and the background grid by issuing
-the command `axis off`:
-```MATLAB
->> axis off;
-```
-![no axis](assets/spot_axisoff.png)
-
-When saving this image through the MATLAB interface, or through
-`saveas(gcf, 'file.png')`, the grey background will appear as transparent.
-
-
-## Lights
-
-At the moment, our plotted model is not lit at all - every visible point of the
-surface contributes to the image equally.
-In the real world, however, objects are illuminated by lights, leading to
-different points of the surface contributing unequally.
-We can do this in MATLAB by adding lights, for example, a light coming
-directly from the camera, using `camlight`:
-```MATLAB
->> lights = camlight;
-```
-![light at camera position](assets/spot_camlight.png)
-
-We can add a light at an arbitrary position using the function
-`light('Position',POSITION,'Style','local');`, where `POSITION` is the 3d
-coordinate of the light source.
-```MATLAB
->> light('Position',[-1.5 1 1],'Style','local');
-```
-![light at other position](assets/spot_otherlight.png)
-
-Now, the coloring is continuous due to us using the `shading interp` command
-earlier.
-The lighting, however, is not continuous. To achieve continuous lighting, we
-need to add a variety of parameters to the `tsurf` command:
-```MATLAB
->> shadingParams = {'FaceLighting','gouraud', 'FaceColor','interp'};
-```
-These parameters are added to the _end_ of the tsurf command,
-`tsurf([...], shadingParams{:})`.
-Alternatively, we can also set them individually on the resulting surface
-object,
-```MATLAB
->> t = tsurf(F,V);
->> set(t, 'FaceLighting','gouraud');
->> set(t, 'FaceColor','interp');
+## Smooth vs. flat shating
+Our plots currently all show the triangles of the objects we plot quite
+distinctly.
+This is especially apparent for coarse meshes:
+```python
+>>> V,F = gpy.read_mesh("data/spot_low_resolution.obj")
+>>> ps.init()
+>>> ps_spot = ps.register_surface_mesh("spot", V, F)
+>>> ps.show()
 ```
 
-If we do not want the surface do be default colored based on its `z`
-coordinate, we have to plot a constant function:
-```MATLAB
->> u = ones(size(V,1),1);
+![A low-resolution flat-shaded spot](assets/flat_spot.png)
+
+This effect stems from the fact that Polyscope uses a variant of the
+[Blinn-Phong shading model](https://en.wikipedia.org/wiki/Blinn–Phong_reflection_model)
+with _flat shading_:
+the shape is literally assumed to be piecewise flat for lighting computations,
+and not an approximation of a smooth surface.
+If you want a smoother appearance instead, this can be done by enabling
+_smooth shading_; either in the GUI or with the `smooth_shade` argument.
+If this argument is used, Polyscope will interpolate normals smoothly across the
+shape, resulting in smooth reflections that hide the appearance of individual
+triangles:
+```python
+>>> V,F = gpy.read_mesh("data/spot_low_resolution.obj")
+>>> ps.init()
+>>> ps_spot = ps.register_surface_mesh("spot", V, F, smooth_shade=True)
+>>> ps.show()
 ```
 
-Combining all lighting commands then gives us
-```MATLAB
->> u = ones(size(V,1),1);
->> shadingParams = {'FaceLighting','gouraud', 'FaceColor','interp'};
->> tsurf(F,V, 'CData',u, shadingParams{:});
->> shading interp;
->> axis equal;
->> axis off;
->> light('Position',[-1.5 1 1],'Style','local');
->> lights = camlight;
->> colormap(cbrewer('Blues', 500));
-```
-![light at other position](assets/spot_smoothlit.png)
-
-Lights in MATLAB can be either _local_ lights, which are point lights at the
-specified position emanating light in all directions (constructed with
-parameters `'Style','local'`), or they can be _infinite_ lights, which model
-light sources infinitely far away (like the sun) (constructed with
-parameters `'Style','infinite'`).
-
-Additionally, lights can have a specific color (similar to colored lightbulbs
-in real life) instead of the default white color.
-This color can be specified using the parameters `'Style','[R,G,B]'`, where
-`R`, `G`, `B` are RBG values between 0 and 1.
-gptoolbox's `add_lights` function offers a default lighting scene with
-pastel-colored lights.
-
+![A low-resolution smooth-shaded spot](assets/smooth_spot.png)
 
 ## Material
 
@@ -108,165 +44,113 @@ matt, certain materials are reflective, and certain materials are transparent.
 The world has an endless variety of different materials.
 Which material is our cow?
 
-MATLAB's most basic shading model does not model the richness of the physical
+Polyscope's most basic shading model does not model the richness of the physical
 world (modern
-[physically based rendering engines](https://en.wikipedia.org/wiki/Physically_based_rendering) attempt to), but it supports a variety of different materials using the basic
-[Phong reflection model](https://en.wikipedia.org/wiki/Phong_reflection_model).
-In this shading model, every material is defined by its _diffuse color_
-(modelling an ideally rough surface), its _specular color_
-(modelling an ideally shiny surface), and its _ambient color_
-(the color which can always be seen, even in the absence of light).
-In MATLAB, we can set the strength of the diffuse, specular, and ambient parts
-of the material using the `'SpecularStrength',XXX`, `'DiffuseStrength',XXX`, and
-`'AmbientStrength',XXX` parameters in the parameter list of `tsurf`.
+[physically based rendering engines](https://en.wikipedia.org/wiki/Physically_based_rendering) attempt to), but it supports a variety of different materials using 
+[matcaps](https://polyscope.run/py/features/materials/), which can convincingly
+approximate a variety of real-world materials.
+You can apply them to a surface using the `material` argument.
 
-For example, here we plot a surface that is almost entirely diffuse:
-![mainly diffuse material](assets/spot_mainlydiffuse.png)
+Here is how you display a mud spot:
+```python
+>>> ps.init()
+>>> ps_spot = ps.register_surface_mesh("spot", V, F, smooth_shade=True, material="mud")
+>>> ps.show()
+```
 
-This is an example of a surface that is almost entirely specular:
-![mainly specular material](assets/spot_mainlyspecular.png)
+This displays:
 
-And here is a surface that is almost entirely ambient:
-![mainly specular material](assets/spot_mainlyambient.png)
+![A mud spot](assets/mud_spot.png)
 
-Good default choices for material parameters are, in my opinion,
-* `'DiffuseStrength',0.5, 'SpecularStrength',0.2, 'AmbientStrength',0.3`
-for a mainly diffuse material, which makes it easy to see the shape of the
-surface without making the color map hard to read;
+And here is a ceramic penguin:
+```python
+>>> ps.init()
+>>> ps_spot = ps.register_surface_mesh("spot", V, F, smooth_shade=True, material="ceramic")
+>>> ps.show()
+```
 
-![good diffuse choice](assets/spot_goodchoice1.png)
+This displays:
 
-* `'DiffuseStrength',0.4, 'SpecularStrength',0.6, 'AmbientStrength',0.3`
-for a strongly specular that accentuates the contours of the shape, which
-is good for plotting shapes with constant color (but may make colormaps hard
-to read); 
+![A ceramic spot](assets/ceramic_spot.png)
 
-![good specular choice](assets/spot_goodchoice2.png)
+The built-in materials are (where the colorable ones allow you to set a color
+on top of the material, or apply a colormap to a plotted function):
+- `clay` (colorable)
+- `wax` (colorable)
+- `candy` (colorable)
+- `flat` (colorable)
+- `mud` (not colorable)
+- `ceramic` (not colorable)
+- `jade` (not colorable)
+- `normal` (not colorable)
 
-* and `'SpecularStrength',0.2`, `'DiffuseStrength',0.2`, `'AmbientStrength',0.7`
-for a soft material effect that feels like there is a lot of light everywhere.
-
-![good soft choice](assets/spot_goodchoice3.png)
-
-The parameters `SpecularExponent` and `SpecularColorReflectance` further
-modify the specular part of the shading, see
-[here](https://en.wikipedia.org/wiki/Specular_reflection)
-for details on specular shading.
+A matcap is a simple image that tells Polyscope what color to render depending
+on which angle the surface forms between the camera and the light source.
+You can easily create your own matcap images with the `load_static_material`
+function - the [Polyscope documentation](https://polyscope.run/py/features/materials/#load_blendable_material)
+contains instructions on how to do that.
 
 
 ## Perspective
 
-So far, all images we have seen have been computed using an
-[orthographic projection](https://en.wikipedia.org/wiki/Orthographic_projection).
-An orthographic projection projects objects onto the screen such that the
-line from the object to the point it lands on is perpendicular to the screen
-itself.
-This is not how the human eye or camera lenses work.
-Cameras work by using perspective - light rays pass through a lens that focuses
-them onto the screen.
+Have you ever asked yourself how a 3D object gets turned into a 2D object to
+plot on screen?
+In a computer graphics class you can learn all types of
+[3D projections](https://en.wikipedia.org/wiki/3D_projection).
+Polyscope supports two of them: _perspective_ and _orthographic_, and you
+can switch between them with the `set_view_projection_mode` function.
 
-![lens animation](assets/lensanimation.gif)
-(lens animation by [Oleg Alexandrov](https://en.wikipedia.org/wiki/File:Lens_and_wavefronts.gif))
-
-This behavior can be mimicked in computer rendering using a
-[perspective projection](https://en.wikipedia.org/wiki/Perspective_(graphical)).
-The perspective projection distorts an image by making objects closer to the
-screen appearing larger.
-Since this mimicks the behavior of cameras in real life, this can make images
-look more realistic.
-
-In MATLAB, a simple version of the perspective projection can be enabled with
-the command `camproj('perspective')`:
-```MATLAB
->> camproj('perspective')
-```
-![spot, with perspective enabled](assets/spot_perspective.png)
-
-
-## Shadow
-
-In order to make objects appear more visually pleasing, one can display them
-with a shadow.
-The gptoolbock command for this is `add_shadow`
-```MATLAB
->> add_shadow([t],lights);
-```
-![spot, with added shadow](assets/spot_shadow.png)
-
-The `add_shadow` command optionally takes as an argument a list of surfaces
-for which the shadows are to be displayed, and a list of lights which cast the
-shadows.
-if no arguments are supplied, shadows will be displayed for all surfaces using
-all lights.
-
-Currently, `add_shadow` only works with inifite (and not local) lights.
-
-
-## Ambient occlusion (ADVANCED)
-
-Ambient occlusion will only work if you compiled the MEX functions that came
-with gptoolbox.
-If you did not, do not worry:
-this part of the exercise is completely optional.
-
-[Ambient occlusion](https://en.wikipedia.org/wiki/Ambient_occlusion)
-tries to model the fact that, for any shape, cavities are less well-lit than
-exposed surfaces, since there is a smaller number of light rays hitting them
-from a light source.
-MATLAB's rendering engine does not actually trace rays from light sources to
-our shape, but we can simulate something like ambient occlusion using a
-specific gptoolbox function on top of MATLAB's rendering engine:
-`apply_ambient_occlusion`.
-This function takes as argument a list of objects to which ambiend occlusion is
-to be applied.
-By default, it also adds its own lights and changes the materials, which we can
-explicitly turn off.
-```MATLAB
->> apply_ambient_occlusion([t],'AddLights',false,'SoftLighting',false);
+You should use orthographic projection if you want parallel lines in 3D to also
+be parallel in your 2D view, for example because you want to accurately
+represent the angles of a square:
+```python
+>>> V,F = gpy.regular_square_mesh(2)
+>>> ps.init()
+>>> ps_square = ps.register_surface_mesh("square", V, F)
+>>> ps.set_view_projection_mode("orthographic")
+>>> ps.show()
 ```
 
-This gives us the following image, with the cavities of the object slighty
-darkened.
+![An orthographic square](assets/orthographic_square.png)
 
-![spot, with ambient occlusion](assets/spot_ambient_occlusion.png)
-
-Since ambiend occlusion tends to darken the scene, it can often be desirable to
-add additional lights when ambient occlusion is applied.
-This also serves to accentuate the contrast between lit and dark regions.
-
-
-## A summary of all shading & perspective commands
-
-Here is a summary of all shading & perspective commands that were used in this
-exercise.
-Feel free to collect them in a function for easy access in the future!
-
-```MATLAB
-function default_shading(t)
-%DEFAULT_SHADING Applies a default shading choice for the surface t plotted
-%in the current figure
-%
-% Inputs:
-%  t  surface to be shaded
-    shading interp;
-    axis equal;
-    axis off;
-    colormap(cbrewer('Blues', 500));
-    light('Position',[-1.5 1 1],'Style','local');
-    lights = camlight;
-    set(t, 'FaceLighting','gouraud', 'FaceColor','interp');
-    set(t, 'DiffuseStrength',0.5, 'SpecularStrength',0.2, 'AmbientStrength',0.3);
-    camproj('perspective');
-    add_shadow([t],lights);
-end
+Our eyes do not perform a perfect orthographic projection in real life, which
+is why orthographically projected objects usually look uncanny.
+To mimic how our eyes work, use the perspective projection (which is the default
+in Polyscope).
+The two vertical edges of the square are no longer parallel, but the world
+looks more natural:
+```python
+>>> V,F = gpy.regular_square_mesh(2)
+>>> ps.init()
+>>> ps_square = ps.register_surface_mesh("square", V, F)
+>>> ps.set_view_projection_mode("perspective")
+>>> ps.show()
 ```
 
-You can call this function before you plot a surface to perform all the shading
-operations we learned in this exercise:
-```MATLAB
->> t = tsurf(F, V, 'CData', u, shadingParams{:});
->> default_shading(t);
+![A perspective square](assets/perspective_square.png)
+
+
+## Ground plane & shadow
+
+To make it easier to place your plotted object in its surroundings, Polyscope
+displays a ground plane with a reflection on your object right below it.
+You can toggle the ground plane on and off by using the "Appearance" option
+in the Polyscope GUI, or by using the `set_ground_plane_mode` command:
+```python
+>>> ps.set_ground_plane_mode("none")
 ```
+
+![spot, with no ground plane](assets/spot_no_ground.png)
+
+Instead of displaying a ground plane with a reflection, you can also choose to
+display a shadow instead.
+Personally, I prefer this style for professional research paper figures:
+```python
+>>> ps.set_ground_plane_mode("shadow_only")
+>>> ps.set_shadow_darkness(0.8)
+```
+
+![spot, with shadow](assets/spot_shadow.png)
 
 
 ## TRY

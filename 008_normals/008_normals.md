@@ -22,99 +22,85 @@ These two vectors are not perpendicular:
 
 A vector's norm is the square root of its scalar product with itself:
 `norm([x y z]) == sqrt(x*x + y*y + z*z)`.
+It is computed in Numpy using the `np.linalg.norm` function.
 A vector with norm one is also called a _unit vector_.
 
 A vector can be normalized (which means, converted into a parallel vector
 of unit norm), unless it has zero length, via the operation
-```MATLAB
->> x = x / norm(x)
+```python
+>>> x = x / np.linalg.norm(x)
 ```
 
 For a collection of vectors in a matrix, where each row of the matrix
-corresponds to a vector, one can use gptoolbox's `normrow` function to compute
-a vector that contains the norm of each row in the matrix, and then
-componentwise divide by it to obtain normalized vectors:
-```MATLAB
->> X = X ./ normrow(X)
+corresponds to a vector, one can use the `axis` argument to compute the norm of
+each row in parallel:
+```python
+>>> np.linalg.norm(X, axis=-1)
+```
+
+To divide every row of `X` by its norm, we broadcast the result of the norm
+computation over the columns of the matrix `X` by adding `NONE` to the computed
+result like this:
+```python
+>>> np.linalg.norm(X, axis=-1)[:,None]
+```
+
+So, here is  how to normalize the rows of a matrix X:
+```python
+>>> X = X / np.linalg.norm(X, axis=-1)[:,None]
 ```
 
 It is possible to project any vector `u1 = [x1, y1, z1]` onto the
 _orthogonal complement_ of a second vector `u2 = [x2, y2, z2]` in order to obtain
 two perpendicular vectors by performing an orthogonal projection
-`u1 - (u1'*u2)*u2/(u2'*u2)`:
-```MATLAB
->> u1
-
-u1 = rand(3,1)
-
-     -0.33172
-     -0.15407
-      0.47622
-
->> u2 = rand(3,1)
-
-u2 =
-
-      0.95751
-      0.96489
-      0.15761
-
->> u1' * u2
-
-ans =
-
-     -0.39123
-
->> u1 = u1 - (u1'*u2)*u2/(u2'*u2)
-
-u1 =
-
-     -0.13168
-     0.047507
-      0.50915
-
->> u1' * u2
-
-ans =
-
-  -2.7756e-17
-
+`u1 - (u1'*u2)*u2/(u2'*u2)`.
+We compute the dot product of two vectors with NumPy's `dot` function:
+:
+```python
+>>> rng = np.random.default_rng(1434251)
+>>> u1 = rng.random(3)
+>>> print(u1)
+[0.13367219 0.53070176 0.91193361]
+>>> u2 = rng.random(3)
+>>> print(u2)
+[0.82107301 0.62538083 0.81860006]
+>>> print(u1.dot(u2))
+1.1881542412563915
+>>> u1 = u1 - np.dot(u1,u2)*u2 / np.dot(u2,u2)
+>>> print(u1)
+[-0.42849175  0.10252236  0.35146283]
+>>> print(np.dot(u1,u2))
+-1.5158949498870973e-16
 ```
 
 The resulting projected vector, in this case `u1`, is guaranteed to be the closest vector to to the
 original `u1` that is orthogonal to `u2` with respect to the norm.
 
+_NOTE: The functions `random.default_rng` and `random` are a way to reproducibly
+create random numbers in NumPy.
+I encourage you read the NumPy documentation on random number generation for
+more information!_
 
 Given non-parallel vectors `u1`, `u2` (which means two vectors that are not
 simply rescalings of each other), we can construct a third vector that is
 orthogonal to both `u1` and `u2` using the
 [cross product](https://en.wikipedia.org/wiki/Cross_product)
 `cross(u1, u2) == [u1(2)*u2(3) - u1(3)*u2(2), u1(3)*u2(1) - u1(1)*u2(3), u1(1)*u2(2) - u1(2)*u2(1)]`.
-```MATLAB
->> u3 = cross(u1,u2)
-
-u3 =
-
-     -0.48378
-      0.50827
-     -0.17255
-
->> u3'*u1
-
-ans =
-
-   1.3878e-17
-
->> u3'*u2
-
-ans =
-
-     0
+In NumPy, this is implemented with the `cross` function:
+```python
+>>> u3 = np.cross(u1,u2)
+>>> print(u3)
+[-0.1358733   0.63934001 -0.35214887]
+>>> print(np.dot(u1,u3))
+1.6691322969430801e-18
+>>> print(np.dot(u2,u3))
+1.981756080074304e-17
 ```
 
 If you plug matrices `U1`, `U2`, where each row is a 3D-vector into `cross`,
 then the function will return a matrix where each row is the cross product
-of the corresponding two rows in `U1` and `U2`.
+of the corresponding two rows in `U1` and `U2` as long as you correctly use
+the `axis` argument.
 
 The cross product has many interesting mathematical properties.
 We will highlight two important ones here:
@@ -140,9 +126,9 @@ in the triangle, `n' * e == 0`.
 
 The orientation of the normal vector means that, for any two _consecutive_ edges
 `e1`, `e2` in the triangle, the normal vector can be computed using
-```MATLAB
->> n = cross(e1, e2);
->> n = n / norm(n);
+```python
+>>> n = np.cross(e1, e2);
+>>> n = n / np.linalg.norm(n);
 ```
 The two edges `e1`, `e2` have to be two consecutive edges of the triangle.
 The convention is that the triangle edges are visited in a counterclockwise
@@ -153,29 +139,21 @@ Here is a picture of a triangle and its normal vector:
 
 ![a triangle with its normal vector](assets/triangle_with_normal.png)
 
-In gptoolbox the `normals` command returns the unnormalized normals (so the 
-normals are potentially not of length one) of any mesh.
-Each of the rows returned 
-by `normal` corresponds the unnormalized normalvector of the face with the 
-respective index. In order to normalize them, one can divide by `normrow`:
-```MATLAB
->> N = normals(V,F);
->> N = N ./ normrow(N);
+In Gpytoolbox you can compute the per-face normals of a triangle mesh using
+the `per_face_normals` command:
+```python
+>>> V,F = gpy.read_mesh("data/spot.obj")
+>>> N = gpy.per_face_normals(V,F)
 ```
 
-The resulting vectors can be plotted with gptoolbox's `qvr` function, which
-takes as its argument first the 3D locations at which vectors are to be
-plotted, and then the vector itself (which might need to be scaled in order
-to display properly).
-In order to plot multiple things at the same time, MATLAB requires us to issue a
-`hold on` command before our second plot command:
-```MATLAB
->> t = tsurf(F,V);
->> hold on;
->> qvr(barycenter(V,F), N);
+You can visualize the normals in Polyscope with `add_vector_quantity` (which
+works very similar to the `add_scalar_quantity` that you already know):
+```python
+>>> ps.init()
+>>> ps_spot = ps.register_surface_mesh("spot", V, F, smooth_shade=True)
+>>> ps_spot.add_vector_quantity("per-face normals", N, defined_on="faces", enabled=True)
+>>> ps.show()
 ```
-(the `barycenter` command computes the center of each triangle, which is the
-location at which we want to plot each per-face vector)
 
 ![spot, with normals](assets/spot_with_normals.png)
 
@@ -200,9 +178,10 @@ tangent space of a surface at each point).
 Since smooth surfaces have normal vectors at every point, it is natural to want
 to compute normal vectors at other parts of our mesh than just at triangle
 faces.
+
 For many applications we want _per-vertex normals_, where each vertex of the
 mesh is associated with a vector in 3D.
-In gptoolbox, such a per-vertex normal can be computed with the function
+In Gpytoolbox, such a per-vertex normal can be computed with the function
 `per_vertex_normals`.
 `per_vertex_normals` takes as an input our mesh as a list of vertices `V` and
 faces `F`, and returns matrix of normal vectors `N`, where each row of `N`
@@ -218,61 +197,57 @@ per-face normals:
 * *Uniform averaging.*
 The normal at each vertex is the average of all the normals of faces
 that contain the vertex.
-In gptoolbox it is computed using
-```MATLAB
->> N = per_vertex_normals(V, F, 'Weighting','uniform');
-```
-
-* *Area-weighted averaging*
-The normal at each vertex is the average of all the normals of faces 
-containing the vertex, where each normal
-is weighted by the area of the triangle it corresponds to before averaging
-(this is also the default choice if no weighting is specified at all).
-In gptoolbox it is computed using
-```MATLAB
->> N = per_vertex_normals(V, F, 'Weighting','area');
-```
 
 * *Angle-weighted averaging*
 The normal at each vertex is the average of all the normals of faces containing
 the vertex, where each normal is weighted by the _tip angle_, the angle at the
 vertex in the normal's face.
-In gptoolbox it is computed using
-```MATLAB
->> N = per_vertex_normals(V, F, 'Weighting','angle');
+
+* *Area-weighted averaging*
+The normal at each vertex is the average of all the normals of faces 
+containing the vertex, where each normal
+is weighted by the area of the triangle it corresponds to before averaging.
+This is the one that Gpytoolbox uses:
+```python
+>>> N = gpy.per_vertex_normals(V,F)
 ```
 
 Here is an image of spot with area-weighted per-vertex normals.
 If you are not sure which weighting to use, area weighted normals are probably
 a reasonable choice.
 
-```MATLAB
->> N = per_vertex_normals(V, F, 'Weighting','area');
->> t = tsurf(F,V, 'CData',u);
->> hold on;
->> qvr(V, N);
+```python
+>>> N = gpy.per_face_normals(V,F)
+>>> ps.init()
+>>> ps_spot = ps.register_surface_mesh("spot", V, F, smooth_shade=True)
+>>> ps_spot.add_vector_quantity("per-vertex normals", N, defined_on='vertices', enabled=True)
+>>> ps.show()
 ```
 ![spot, with per-vertex normals](assets/spot_with_per_vert_normals.png)
+
 
 
 ## Exercises
 
 If you are learning geometry processing, try writing the following functions:
-* `my_normals`, which matches the behavior of `gptoolbox`'s `normals` function.
-* `my_per_vertex_normals`, which matches the behavior of `gptoolbox`'s
+* `my_per_face_normals`, which matches the behavior of `Gpytoolbox`'s `per_face_normals` function.
+* `my_per_vertex_normals`, which matches the behavior of `Gpytoolbox`'s
 `per_vertex_normals` function.
-Use gptoolbox's `doublearea` function, which returns double the area for each
+Use Gpytoolbox's `doublearea` function, which returns double the area for each
 triangle in the mesh.
 
 If you already know geometry processing well and are familiar with the concept
 of normals of (or have already completed above exercise),
 try writing the following functions which tests your mastery of normals:
-* `flipped_normals`, which returns the flipped normals of a triangle mesh.
+* `flipped_normals`, which returns the flipped normals of a triangle mesh (make sure to set Polyscope to plot only the wireframe of the surface, so you can see inside it and look at the flipped normals!).
 * `tangents`, which returns two perpendicular, oriented tangent vectors for each
 face of a triangle mesh.
-HINT: use MATLAB's `dot(U,V,2)` function, which can perform row-wise scalar
-products.
+_HINT: Use `np.sum(A*B, axis=-1)` to compute the row-wise dot product of two
+matrices._
+Olga has kindly provided us with an example of what the tangents should look
+like:
 
+![tangents](assets/tangents.png)
 
 As usual, the skeleton for these functions, ready for you to fill in, can be
 found in `exercise/`.

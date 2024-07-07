@@ -11,93 +11,104 @@ One example of such a function is the squared norm:
 
 ![f(x) = ||x||^2](assets/fct.png)
 
-MATLAB and gptoolbox offer a very easy way to plot functions, either per-vertex
+Polyscope offers a very easy way to plot functions, either per-vertex
 or per-face.
 This is done using colormaps, where each part of a mesh is colored according to
 the function value.
 
 To plot a per-vertex function, define a vector of length `n`, where `n` is
 the number of vertices that holds the function value for each vertex:
-```MATLAB
->> f = V(:,1).^2 + V(:,2).^2 + V(:,3).^2;
-
+```python
+>>> f = V[:,0]**2 + V[:,1]**2 + V[:,2]**2
 ```
 
-We plot this function using the same `tsurf` command as before, but adding an
-addition argument `CData`.
-We also make sure to plot with `shading interp`, which interpolates per-vertex
-data over the entire mesh.
-This is almost always the correct way to display per-vertex data:
-MATLAB's default display method can be misleading.
-```MATLAB
->> tsurf(F,V, 'CData',f); axis equal;
->> shading interp;
+_NOTE: `**` in NumPy is a componentwise exponentiation.
+So, the function above computes x^2 + y^2 + z^2._
+
+We plot this function using Polyscope with a `register_surface_mesh` as before,
+and additionally issue `add_scalar_quantity` to plot a function
+("scalar" is a math term that refers to a function that only returns a real
+number, and not something like a vector).
+```python
+>>> V,F = gpy.read_mesh("data/spot.obj")
+>>> f = V[:,0]**2 + V[:,1]**2 + V[:,2]**2
+>>> ps.init()
+>>> ps_spot = ps.register_surface_mesh("spot", V, F)
+>>> ps_spot.add_scalar_quantity("f", f, enabled=True)
+>>> ps.show()
 ```
+
 ![per-vertex plot of f](assets/per_vert_spot.png)
+
+_NOTE: Remember to always set `enabled=True`, otherwise your function will not
+show up in Polyscope!_
 
 To plot a per-face function, define a vector of length `m`, where `m` is the
 number of faces that holds the function value for each face:
-```MATLAB
->> centers = (V(F(:,1),:) + V(F(:,2),:) + V(F(:,3),:)) / 3;
->> f = centers(:,1).^2 + centers(:,2).^2 + centers(:,3).^2;
+```python
+>>> centers = (V[F[:,0],:] + V[F[:,1],:] + V[F[:,2],:]) / 3.
+>>> f = centers[:,0]**2 + centers[:,1]**2 + centers[:,2]**2
 ```
 
-We plot this function with the same command as before.
-MATLAB checks automatically if the dimension of `f` corresponds to the number
-of vertices or the number of faces, and plots accordingly.
-In this example, we turn off the display of mesh edges, but do _not_ set the
-shading to interpolated.
-Per-face constant colors are almost always the correct way to display per-vertex
-data.
+We plot this function with the same command as before, but now add
+`defined_on="faces"` to tell Polyscope that this is a per-face function and not
+a per-vertex function:
+```python
+>>> ps.init()
+>>> ps_spot = ps.register_surface_mesh("spot", V, F)
+>>> ps_spot.add_scalar_quantity("f", f, defined_on="faces", enabled=True)
+>>> ps.show()
+```
+
 ![per-face plot of f](assets/per_face_spot.png)
-
-
-## Colorbar
-
-In many plots it can be helpful to know what the colormap is (the method which
-assigns function values to a color).
-This is achieved by using the `colorbar` command that automatically adds a bar
-with units that shows the colormap to the plot:
-```MATLAB
->> colorbar;
-```
-![colorbar](assets/colorbar.png)
 
 
 ## Colormaps
 
+Spot the cow from the last two plots plotted the function using a _colormap_ -
+a method to assign a color to each number in an interval.
+But what colormap is it using?
 
-MATLAB's default colormap is the
-[parula colormap](https://www.mathworks.com/help/matlab/ref/parula.html).
-You might want to employ different colormaps for a variety of reasons.
-This can be easily done by specifying a matrix where each row corresponds to
-a different RGB value of a colormap and then invoking the `colormap` commamd.
-```MATLAB
->> colormap(CM);
+By default, Polyscope uses the [viridis](https://matplotlib.org/stable/users/explain/colors/colormaps.html) colormap:
+
+![viridis colormap](assets/viridis.png)
+
+We can easily use a different colormap in Polyscope by using the `cmap` argument
+of the `add_scalar_quantity` function.
+For example, to use the `reds` color map:
+```python
+>>> ps.init()
+>>> ps_spot = ps.register_surface_mesh("spot", V, F)
+>>> ps_spot.add_scalar_quantity("f", f,
+    defined_on="faces", cmap="reds", enabled=True)
+>>> ps.show()
 ```
+
+![per-face reds plot of f](assets/per_face_reds_spot.png)
 
 [Cynthia Brewer's colorbrewer colormaps](https://colorbrewer2.org) are a
 particularly great resource for varied, colorful and easily legible colormaps.
-They can be automatically generated in MATLAB with the integrated `cbrewer`
-command:
+To use them (or any other) custom color map in Polyscope, you need an image of
+the color map going from the left to the right side of the screen.
+Here is ColorBrewer's `PuBu` color map:
 
-```MATLAB
->> colormap(cbrewer('Blues',50));
+![The PuBu color map](data/PuBu.png)
+
+Then this image can be used as a custom color map using Polyscope's
+`load_color_map` function:
+
+```python
+>>> ps.init()
+>>> ps_spot = ps.register_surface_mesh("spot", V, F)
+>>> ps.load_color_map("PuBu", "assets/PuBu.png")
+>>> ps_spot.add_scalar_quantity("f", f,
+    defined_on="faces", cmap="PuBu", enabled=True)
+>>> ps.show()
 ```
-![cbrewer color map](assets/cbrewermap.png)
 
-`50` here specifies the number of discrete color values we want in our color
-map.
-To plot continuous functions, we usually want a number there that is as large
-as possible.
-To plot discrete functions with discrete color intervals, you can change the
-number appropriately.
-gptoolbox also has the ability to add explicit isolines to your plot via the
-`isolines` command.
+This plots:
 
-A full list of all available colormaps can be seen by typing `help cbrewer`.
-The colormaps correspond to the ones on
-[Cynthia Brewer's website](https://colorbrewer2.org) (where they are also visualized).
+![per-face PuBu plot of f](assets/per_face_PuBu_spot.png)
 
 
 ## Try plotting a function of your own
