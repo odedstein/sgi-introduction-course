@@ -21,13 +21,13 @@ $$\sum\_{j \in N\_i} w\_{ij}\mathbf{u}\_i - \sum\_{j \in N\_i/B\_i} w\_{ij}\math
 
 To write this in matrix form, we need to define our sparse matrix "Laplacian".
 
-$$\mathbf{L}\_{ij} = \left\{
-    \begin{array}{ll}
+$$\mathbf{L}\_{ij} =
+    \begin{cases}
     -w\_{ij} & i \neq j \text{ and } \exists \{i,j\} \in \mathbf{E} \\
     -\sum\_{l\neq i} L\_{il} & i = j \\
     0 & \text{otherwise}
-    \end{array}
-\right.$$
+    \end{cases}
+$$
 
 From this matrix, we can derive the matrices corresponding to the left-hand and right-hand sides of the linear system. Let $\mathbf{L}\_{F} \in \mathbb{R}^{n \times n}$ denote $\mathbf{L}$ with the columns corresponding to the fixed boundary vertices set to 0 (except for the diagonal elements). Let $\mathbf{L}\_B \in \mathbb{R}^{n \times b}$ (b = # boundary vertices) denote $-\mathbf{L}$ with just the columns corresponding to the boundary vertices, and $\mathbf{L}\_{B\_{ii}} = 0$ if $i$ is a boundary vertex. Now we can write our system in matrix form as
 
