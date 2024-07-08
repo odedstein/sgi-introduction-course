@@ -1,5 +1,18 @@
 # Parameterization Fundamentals
 
+To access the Python notebook, you will need [jupyter notebook](https://jupyter.org/install) installed. You can install it by calling
+```bash
+pip install notebook
+```
+or if you have conda
+```bash
+conda install notebook -c conda-forge
+```
+Once installed, make sure you are in the same directory as this README in the terminal, and launch the notebook server using
+```bash
+jupyter notebook
+```
+
 Exercise 101 consists of the follow-along Python notebook [101_parameterization_fundamentals.ipynb](101_parameterization_fundamentals.ipynb), in which you will be shown step-by-step how to compute a mesh parameterization through code, analyze the mapping distortion, and visualize the quantities.
 
 You will first compute a trivial parameterization (local basis projection) of a single triangle, then set up the mass-spring system described in the lecture and solve it using NumPy.
