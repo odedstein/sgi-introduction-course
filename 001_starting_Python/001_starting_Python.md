@@ -75,6 +75,10 @@ You can install them into your venv using the console command
 python -m pip install numpy==1.26.4 scipy==1.13.1 gpytoolbox==0.2.0 polyscope==2.2.1
 ```
 
+_NOTE: Some of you might have trouble installing Gpytoolbox 0.2.0.
+If this happens to you, just change the "0.2.0" to "0.3.1" to install a
+different version of Gpytoolbox._
+
 ## Starting Python and verifying that it runs correctly.
 
 Let's now start Python to see whether all packages installed correctly.
