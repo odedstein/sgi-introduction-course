@@ -1,4 +1,4 @@
-# Robustness Puzzle 1: A Broken Mesh Reader
+# Debugging Puzzle 1: A Broken Mesh Reader
 
 Note: unlike the other exercises, there are no specific notes associated with these puzzles. Your job is to practice debugging, and figure out what is going wrong!
 
