@@ -8,26 +8,26 @@ def compute_total_curvature(V, F):
     Computes the sum of the (signed) Gaussian curvature at every vertex of the mesh
     '''
 
-    # [V,3,3] tensor of corner positions for each triangle
+    # [F,3,3] tensor of corner positions for each triangle
     corner_pos = V[F,:]
 
-    # [V,3,3] tensors of the two edge-vectors emanating from each corner
+    # [F,3,3] tensors of the two edge-vectors emanating from each corner
     vecA = np.roll(corner_pos, 1, axis=1) - corner_pos
     vecB = np.roll(corner_pos, 2, axis=1) - corner_pos
 
     # "cosine rule" to compute corner angles
     # A dot B = |A||B|cos(theta) --> theta = arccos((A dot B) / |A||B|)
-    normA = np.linalg.norm(vecA, axis=-1) # [V,3]
-    normB = np.linalg.norm(vecB, axis=-1) # [V,3]
-    dot_prod = np.sum(vecA * vecB, axis=-1) # [V,3]
+    normA = np.linalg.norm(vecA, axis=-1) # [F,3]
+    normB = np.linalg.norm(vecB, axis=-1) # [F,3]
+    dot_prod = np.sum(vecA * vecB, axis=-1) # [F,3]
 
     # SOLUTION:
-    # One possible fix: add a very small "epsilon" to the demoninator, so the expression does not 
+    # One possible fix: add a very small "epsilon" to the denominator, so the expression does not 
     # "blow up" and divide by zero
     # WARNING: this is not a perfect fix for every situation! It is possible to construct meshes where 
     # this function will break, or give an inaccurate answer
     EPS = 1e-12
-    corner_angles = np.arccos(dot_prod / (normA * normB + EPS)) # [V,3] tensor of corner angles in radians for each triangle
+    corner_angles = np.arccos(dot_prod / (normA * normB + EPS)) # [F,3] tensor of corner angles in radians for each triangle
 
     # compute the total curvature
     num_verts = V.shape[0]

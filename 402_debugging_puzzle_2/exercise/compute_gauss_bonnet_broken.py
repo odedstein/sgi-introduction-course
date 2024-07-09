@@ -8,19 +8,19 @@ def compute_total_curvature(V, F):
     Computes the sum of the (signed) Gaussian curvature at every vertex of the mesh
     '''
 
-    # [V,3,3] tensor of corner positions for each triangle
+    # [F,3,3] tensor of corner positions for each triangle
     corner_pos = V[F,:]
 
-    # [V,3,3] tensors of the two edge-vectors emanating from each corner
+    # [F,3,3] tensors of the two edge-vectors emanating from each corner
     vecA = np.roll(corner_pos, 1, axis=1) - corner_pos
     vecB = np.roll(corner_pos, 2, axis=1) - corner_pos
 
     # "cosine rule" to compute corner angles
     # A dot B = |A||B|cos(theta) --> theta = arccos((A dot B) / |A||B|)
-    normA = np.linalg.norm(vecA, axis=-1) # [V,3]
-    normB = np.linalg.norm(vecB, axis=-1) # [V,3]
-    dot_prod = np.sum(vecA * vecB, axis=-1) # [V,3]
-    corner_angles = np.arccos(dot_prod / (normA * normB)) # [V,3] tensor of corner angles in radians for each triangle
+    normA = np.linalg.norm(vecA, axis=-1) # [F,3]
+    normB = np.linalg.norm(vecB, axis=-1) # [F,3]
+    dot_prod = np.sum(vecA * vecB, axis=-1) # [F,3]
+    corner_angles = np.arccos(dot_prod / (normA * normB)) # [F,3] tensor of corner angles in radians for each triangle
 
     # compute the total curvature
     num_verts = V.shape[0]

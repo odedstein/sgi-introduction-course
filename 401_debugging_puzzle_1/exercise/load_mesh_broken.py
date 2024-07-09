@@ -30,7 +30,7 @@ def my_read_mesh_from_obj_file(obj_filename):
                 # add this vertex to the list of vertices
                 vertices.append(vertex)
 
-            # if it starts with 'f', read a vertex
+            # if it starts with 'f', read a face
             elif line.startswith('f '):
 
                 # parse the line, discard the 'f', then read it into a list of 3 indices
