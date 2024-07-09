@@ -35,6 +35,10 @@ Our old nemesis [NaN](https://en.wikipedia.org/wiki/NaN), spotted in the wild. T
 
 Food for thought: if you come up with a solution (2), do you think your solution always works in general? Why or why not? Writing robust geometric routines like this which provably _always_ work in _all_ cases is actually very, very, hard!
 
+Tips:
+- Try visualizing the loaded mesh
+- Once you find one problem, follow it backwards to understand its source
+- If you see any error messages, follow-up on them
 
 [exercise](exercise)
 
