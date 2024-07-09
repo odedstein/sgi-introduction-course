@@ -1,3 +1,4 @@
+import os
 import numpy as np
 import gpytoolbox as gpy
 
@@ -50,9 +51,13 @@ def process_mesh(filename):
     print(f"  total curvature {total_curvature:.2f} = {total_curvature / np.pi:.2f} π")
     print(f"  Gauss-Bonnet Theorem says the genus is {genus_computed:.2f} (valid for closed triangle meshes only)")
 
+# manage paths 
+THIS_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_DIR = os.path.join(THIS_DIR, "..", "data")
 
-process_mesh("data/sphere_good.obj")
-process_mesh("data/spot_good.obj")
-process_mesh("data/torus_good.obj")
-process_mesh("data/triple_torus_good.obj")
-process_mesh("data/sphere_bad.obj")
+# call the function on several meshes
+process_mesh(os.path.join(DATA_DIR, "sphere_good.obj"))
+process_mesh(os.path.join(DATA_DIR, "spot_good.obj"))
+process_mesh(os.path.join(DATA_DIR, "torus_good.obj"))
+process_mesh(os.path.join(DATA_DIR, "triple_torus_good.obj"))
+process_mesh(os.path.join(DATA_DIR, "sphere_bad.obj"))

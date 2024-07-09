@@ -48,8 +48,12 @@ def my_read_mesh_from_obj_file(obj_filename):
 
     return vertices, faces
 
-# Call the function on the mesh file sitting in this directory.
+
+# manage paths 
+THIS_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_DIR = os.path.join(THIS_DIR, "..", "data")
+
+# Call the function a mesh file
 # Something is wrong with the resulting V,F!
 # We promise nothing is wrong with this file itself.
-V, F = my_read_mesh_from_obj_file("data/fox.obj")
-
+V, F = my_read_mesh_from_obj_file(os.path.join(DATA_DIR, "fox.obj"))
