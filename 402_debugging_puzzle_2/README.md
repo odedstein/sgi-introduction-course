@@ -2,11 +2,11 @@
 
 Note: unlike the other exercises, there are no specific notes associated with these puzzles. Your job is to practice debugging, and figure out what is going wrong!
 
-In this second puzzle, we will write a simple routine that uses the [Gauss-Bonnet Theorem](https://en.wikipedia.org/wiki/Gauss%E2%80%93Bonnet_theorem) to compute the [genus](https://en.wikipedia.org/wiki/Genus_(mathematics)) of a triangle mesh via an expression involving the corner angles (the corner angles actually encode Gaussian curvature, which you saw in a previous tutorial). The _genus_ is a topological property, which is roughly how many 'handles' the shape has: a sphere has 0, a torus has 1, a pretzel has 3, etc. 
+In this second puzzle, we will debug a routine that uses the [Gauss-Bonnet Theorem](https://en.wikipedia.org/wiki/Gauss%E2%80%93Bonnet_theorem) to compute the [genus](https://en.wikipedia.org/wiki/Genus_(mathematics)) of a triangle mesh via an expression involving the corner angles (the corner angles actually encode Gaussian curvature, which you saw in a previous tutorial). The _genus_ is a topological property, which is roughly how many 'handles' the shape has: a sphere has 0, a torus has 1, a pretzel has 3, etc. 
 
 The Gauss-Bonnet Theorem is a beautiful relationship involving many key ideas in surface geometry. If you are interested to learn more, one good resource is Chapter 5 of the [Discrete Differential Geometry textbook](https://www.cs.cmu.edu/~kmcrane/Projects/DDG/paper.pdf).
 
-However, here don't necessarily need to know all the details of the underlying theorem. We have some simple geometric code which works, and outputs correct values on most meshes, but on one mesh we give it is it going to fail! We're going to debug he code to understand what is happening.
+However, here don't necessarily need to know all the details of the underlying theorem. We have some simple geometric code which works, and outputs correct values on most meshes, but on one mesh we give it is it going to fail! We're going to debug the code to understand what is happening.
 
 The provided code in `exercises/compute_gauss_bonnet_broken.py` contains the implementation of the function, and runs it on a handful of meshes in the data directory. For each it should produce output like:
 
