@@ -230,7 +230,7 @@ _ = plt.axis('equal')
     
 
 
-A way of getting around this bad performance without resorting to approximations is to use an AABB tree to represent the polyline. An AABB tree a [hierarchical data structure](https://en.wikipedia.org/wiki/Bounding_volume_hierarchy) that tells `squared_distance` not to waste time checking edges that are very far from the query point. We can tell `squared_distance` to do this by passing the argument `use_aabb`.
+A way of getting around this bad performance without resorting to approximations is to use an Axis Aligned Bounding Box (AABB) tree to represent the polyline. An AABB tree a [hierarchical data structure](https://en.wikipedia.org/wiki/Bounding_volume_hierarchy) that tells `squared_distance` not to waste time checking edges that are very far from the query point. We can tell `squared_distance` to do this by passing the argument `use_aabb`.
 
 
 ```python
