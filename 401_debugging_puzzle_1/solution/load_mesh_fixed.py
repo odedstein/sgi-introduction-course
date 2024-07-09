@@ -1,7 +1,9 @@
 import os
 import numpy as np
 
-# This is a simple .obj file format parser. It does not handle all features of the format, just the absolute most basic features. For real code, you use should use `gpytoolbox.read_mesh()` or other libraries instead, this is just a basic example.
+# This is a simple .obj file format parser. It does not handle all features of the format, 
+# just the absolute most basic features. For real code, you use should use 
+# `gpytoolbox.read_mesh()` or other libraries instead, this is just a basic example.
 
 # THIS FUNCTION IS BROKEN! It has a small bug, your job is to find it and fix it.
 #
@@ -44,7 +46,8 @@ def my_read_mesh_from_obj_file(obj_filename):
     vertices = np.array(vertices)
     faces = np.array(faces)
 
-    # Uncomment this line to fix the function
+    # SOLUTION 
+    # this line fixes the function
     # faces = faces - 1 # shift from 1-based to 0-based indexing
 
     return vertices, faces
@@ -67,6 +70,7 @@ ps.show()
 
 
 # Now let's try printing some values
+# (delete/comment-out the lines above so the code goes past them)
 print(V)
 print(F) # these all seeeeem to be reasonable
 
@@ -80,4 +84,5 @@ print(F.max())
 # The problem is that F uses 1-based indices starting at 1, rather than 0-based indices!
 # The underlying cause is that .obj files use 1 based indices, but Python uses 0-based. We forgot to take that into account in the parser.
 # We can subtract 1 from the indices in the paser like
-# faces = faces - 1
+# `faces = faces - 1`
+# As implemented above

@@ -1,7 +1,9 @@
 import os
 import numpy as np
 
-# This is a simple .obj file format parser. It does not handle all features of the format, just the absolute most basic features. For real code, you use should use `gpytoolbox.read_mesh()` or other libraries instead, this is just a basic example.
+# This is a simple .obj file format parser. It does not handle all features of the format, 
+# just the absolute most basic features. For real code, you use should use 
+# `gpytoolbox.read_mesh()` or other libraries instead, this is just a basic example.
 
 # THIS FUNCTION IS BROKEN! It has a small bug, your job is to find it and fix it.
 #
