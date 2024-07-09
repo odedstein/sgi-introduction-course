@@ -330,7 +330,7 @@ ps.show()
 
 ![](assets/cube-no-slice.png)
 
-Now, we click on "View > Slice Planes > Add plane" and, on the options that appear under "Add Plane", we click on "Inspect > cube". We can now see the slice planes of the SDF of the sphere:
+Now, we click on "View > Slice Planes > Add plane" and, on the options that appear under "Add Plane", we **click on "Inspect > cube"** (this last part's important!). We can now see the slice planes of the SDF of the sphere:
 
 ![](assets/cube-slice.png)
 
@@ -433,7 +433,7 @@ ps.show()
 
 ![](assets/bunny-mc-high-res.png)
 
-We could also visualize the bunny using slice planes (often, I do this at the same time as I plot the zero levelset!). You can even use the polyscope UI to tell the bunny to not be affected by the slice plane
+We could also visualize the bunny using slice planes (often, I do this at the same time as I plot the zero levelset!). You can even use the polyscope UI to tell the bunny to not be affected by the slice plane (note the option that is highlighted in the UI in the screenshot below).
 
 ```python
 import numpy as np
