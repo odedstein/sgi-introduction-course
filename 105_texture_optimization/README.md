@@ -1,4 +1,4 @@
-# NumPy for geometry processing
+# Texture Optimization
 
 [writeup / notes](105_texture_optimization.md)
 
