@@ -10,7 +10,7 @@ Source: https://metalbyexample.com/textures-and-samplers/
 ### Additional Installations
 Before we start, let's install Matplotlib to help us visualize our parameterizations. Make sure your SGI environment is activated before installing.
 <!-- ```
-python -m pip install numpy==1.26.4 scipy==1.13.1 gpytoolbox==0.2.0 polyscope==2.2.1
+python -m pip install numpy==1.26.4 scipy==1.13.1 gpytoolbox==0.2.0 polyscope
 pip install torch==2.1.1 torchvision==0.16.1 torchaudio==2.1.1
 pip install libigl==2.5.1
 pip install matplotlib==3.9.1

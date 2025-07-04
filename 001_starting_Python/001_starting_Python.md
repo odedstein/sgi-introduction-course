@@ -72,7 +72,7 @@ and [_SciPy_](https://scipy.org).
 
 You can install them into your venv using the console command
 ```console
-python -m pip install numpy==1.26.4 scipy==1.13.1 gpytoolbox==0.2.0 polyscope==2.2.1
+python -m pip install numpy==1.26.4 scipy==1.13.1 gpytoolbox==0.2.0 polyscope
 ```
 
 ## Starting Python and verifying that it runs correctly.
