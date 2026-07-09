@@ -8,7 +8,7 @@ from common.mesh import Mesh, compute_uv_map
 from common.get_target_renders import get_target_renders
 from common.utils import get_texels, load_texture_image
 from common.optimize_texture import optimize_texture
-from solution.inverse_map import inverse_map
+from exercise.inverse_map import inverse_map
 
 
 # Set up some global variables

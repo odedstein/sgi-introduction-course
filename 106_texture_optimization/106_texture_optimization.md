@@ -12,7 +12,7 @@ Complete `inverse_map()` in [inverse_map.py](exercise/inverse_map.py). This func
 ## Task 3: Setup Google Colab
 If you have a GPU on your computer, you can skip this step. Instead run `install_environment.sh` and `main.py`. Otherwise...
 - Ensure you have a Google account (we will need this to run google Colab). If not, make one [here](https://support.google.com/accounts/answer/27441?hl=en).
-- Open the google Colab notebook ([link](https://colab.research.google.com/drive/1j9u6gfDsW2W7pze3lQg2JIhW0CblJ1Ot?usp=sharing))
+- Open the google Colab notebook ([link](https://drive.google.com/file/d/1B3hE0aRLD1PT6ALLupjq3lwRvQf4G9f7/view?usp=sharing))
 - You will not have editing permissions so navigate to `file` --> `save a copy in drive`.
 - If the copy does not open automatically, click "open in new tab" on the popup window. If no popup appears, you may also search up `"Copy of texture_optimization.ipynb"` in your Google Drive and access it from there. Alternatively, you can upload [texture_optimization.ipynb](texture_optimization.ipynb) to Colab yourself.
 - Upload your completed `106_texture_optimization` directory to your Google Drive. Make sure that this `106_texture_optimization` folder is at the top level of your Google Drive.
@@ -20,7 +20,7 @@ If you have a GPU on your computer, you can skip this step. Instead run `install
 ## Step 4: Running Code
 Instructions for running the code:
 - In the Colab top menu bar, navigate to `Runtime` --> `Change runtime type` --> select `T4 GPU` --> click `save`
-- Run the first cell to install all the required packages
+- Run the first cell to install all the required packages (you will be prompted to restart the runtime twice, do this each time and restart the first cell again).
 - Run the second cell to mount your Google Drive to this Colab session
     - This will spawn a popup window, click continue/allow for all questions
     - When it finishes, if it was successful, you should see a green check mark next to the cell and the cell output should say:
@@ -31,9 +31,9 @@ Instructions for running the code:
 - Run the fourth cell to perform the texture optimization
     - As this cell runs, it should print out loading bars at the bottom of the cell. These will tell you what iteration the optimization is on.
 - You can also navigate to the `files` tab on the left Colab menu bar to view the results of this optimization. Navigate to `files` --> `drive` --> `My Drive` --> `106_texture_optimization`.
-As the texture is being optimized, you can view intermediate results within the `results` folder. Once the optimization finishes, it will save a final renders image and texture image to the `106_texture_optimization` folder. Double-click a file to view it in Colab.
+As the texture is being optimized, you can view intermediate results within the `results` folder (at top-level colab dir, not within 106_texture_optimization). Once the optimization finishes, it will save a final renders image and texture image to the `106_texture_optimization` folder. Double-click a file to view it in Colab.
 
-Once you are familiar with the Colab notebook, you can try out swapping in different meshes in cell three. The default mesh is Spot, but we also provide the cube mesh. To optimize the cube mesh, switch the `MESH_PATH` to `"/content/drive/My Drive/106_texture_optimization/data/cube.obj"`, the `TEXTURE_IMAGE_PATH` to `"/content/drive/My Drive/106_texture_optimization/data/spot_texture.png"`, `TARGET_UVS` to `"None"`, and `TOLERANCE` to `1e-6`.
+Once you are familiar with the Colab notebook, you can try out swapping in different meshes in cell three. The default mesh is Spot, but we also provide the cube mesh. To optimize the cube mesh, switch the `MESH_PATH` to `"/content/drive/My Drive/106_texture_optimization/data/cube.obj"`, the `TEXTURE_IMAGE_PATH` to `"/content/drive/My Drive/106_texture_optimization/data/spot_texture.png"`, `TARGET_UVS` to `None`, and `TOLERANCE` to `1e-6`.
 
 ## Step 5: Testing/Debugging
 To see if your optimization ran as expected, you can compare your results to those shown below.
