@@ -18,7 +18,7 @@ If you have any difficulty at all, reach out immediately and we would be happy t
 
 If you get stuck on any exercise for a while, that means it's probably a good idea to ask a question! In the meantime, you can also try to skip ahead to exercises that you can do without needing the answer to the exercise you're stuck on. We'll also go over the solutions together.
 
-If you are able to execute the program succesfully, a GUI should appear. At first, clicking in the buttons in the menu will do nothing. But they will do something interesting once you've completed the exercises below -- keep reading to find out...
+If you are able to execute the program successfully, a GUI should appear. At first, clicking in the buttons in the menu will do nothing. But they will do something interesting once you've completed the exercises below -- keep reading to find out...
 
 **Some advice:** Don't worry about writing the most optimized code. First get it right, and you can always optimize later if needed.
 
